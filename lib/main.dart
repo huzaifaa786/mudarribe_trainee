@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:mudarribe_trainee/views/onboardings/onbaoarding_view.dart';
+import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_controller.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
 

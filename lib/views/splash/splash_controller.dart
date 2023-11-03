@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:mudarribe_trainee/views/onboardings/intro.dart';
+import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
 
 class SplashController extends GetxController {
   static SplashController instance = Get.find();
@@ -10,6 +10,6 @@ class SplashController extends GetxController {
   }
 
   Future checkFirstSeen() async {
-    Get.off(() => const IntroScreen());
+    Get.off(() => const OnBoardingScreen());
   }
 }
