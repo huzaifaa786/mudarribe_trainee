@@ -4,3 +4,4 @@ import 'package:flutter/material.dart';
 
 const borderTop = Color(4285693389);
 const borderDown = Color(4278253801);
+const white =Colors.white;
