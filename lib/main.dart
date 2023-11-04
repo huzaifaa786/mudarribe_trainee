@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:mudarribe_trainee/views/authentication/signup/signup_controller.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_view.dart';
 import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_controller.dart';
@@ -11,6 +12,7 @@ import 'package:mudarribe_trainee/views/splash/splash_view.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Get.put(SplashController());
+  Get.put(SignUpController());
   await GetStorage.init();
   runApp(const MyApp());
 }

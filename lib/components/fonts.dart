@@ -7,21 +7,25 @@ class Fonts26 extends StatelessWidget {
       {super.key,
       this.title,
       this.fontweight = FontWeight.w600,
+      this.fontFamily = 'Poppins',
+      this.align = TextAlign.center,
       this.color = Colors.white});
   final title;
   final fontweight;
+  final fontFamily;
   final color;
+  final align;
   @override
   Widget build(BuildContext context) {
     return Text(
       title,
       style: TextStyle(
-        fontFamily: "Poppins",
+        fontFamily: fontFamily,
         fontSize: 26,
         fontWeight: fontweight,
         color: color,
       ),
-      textAlign: TextAlign.left,
+      textAlign: align,
     );
   }
 }
