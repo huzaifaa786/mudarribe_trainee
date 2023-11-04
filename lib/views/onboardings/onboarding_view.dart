@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:mudarribe_trainee/components/color_button.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
+import 'package:mudarribe_trainee/utils/ui_utils.dart';
 import 'package:mudarribe_trainee/views/onboardings/fragments/fragment_1.dart';
 import 'package:mudarribe_trainee/views/onboardings/fragments/fragment_2.dart';
 import 'package:mudarribe_trainee/views/onboardings/fragments/fragment_3.dart';
@@ -86,6 +87,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         child: GradientButton(
                           title: 'Get Started',
                           onPressed: () {
+                            // UiUtilites.successSnackbar('fyuuiu','sdasdsafd');
                             // Get.to(() => PlansScreen());
                           },
                         ),
