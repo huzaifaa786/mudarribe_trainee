@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:mudarribe_trainee/views/onboardings/intro.dart';
 
+
 class SplashController extends GetxController {
   static SplashController instance = Get.find();
   void initscreen() async {
