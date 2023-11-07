@@ -58,24 +58,23 @@ class _SignUpViewState extends State<SignUpView> {
                           child: Column(children: [
                             InputField(
                               lable: 'Username',
-                              controller: signUpController.usernameController,
+                              controller: controller.usernameController,
                             ),
                             InputField(
                               lable: 'Email',
-                              controller: signUpController.emailController,
+                              controller: controller.emailController,
                             ),
                             PasswordInputField(
-                              obscure: signUpController.obscureTextPassword,
-                              toggle: signUpController.toggle,
+                              obscure: controller.obscureTextPassword,
+                              toggle: controller.toggle,
                               lable: 'Password',
-                              controller: signUpController.passwordController,
+                              controller: controller.passwordController,
                             ),
                             PasswordInputField(
-                              obscure: signUpController.obscureTextCPassword,
-                              toggle: signUpController.toggle1,
+                              obscure: controller.obscureTextCPassword,
+                              toggle: controller.toggle1,
                               lable: 'Confirm Password',
-                              controller:
-                                  signUpController.confirmPasswordController,
+                              controller: controller.confirmPasswordController,
                             ),
                           ]),
                         ),
