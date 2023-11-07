@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
@@ -8,52 +8,43 @@ class GradientButton extends StatelessWidget {
     Key? key,
     @required this.title,
     @required this.onPressed,
-    this.text,
-    this.textcolor,
-    this.icon,
-    this.buttonWidth = 0.8,
-    this.sreenRatio = 1,
-    this.gradientColors = const [borderTop, borderDown],
+    this.selected = false,
   }) : super(key: key);
 
   final title;
   final onPressed;
-  final sreenRatio;
-  final List<Color> gradientColors;
-  final text;
-  final textcolor;
-  final icon;
-  final buttonWidth;
+  final bool selected;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onPressed,
       child: SizedBox(
-        width: MediaQuery.of(context).size.width * sreenRatio,
+        width: MediaQuery.of(context).size.width,
         height: 60,
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: gradientColors,
+              colors: selected
+                  ? [borderTop, borderDown]
+                  : [
+                      const Color.fromARGB(255, 26, 25, 25),
+                      const Color.fromARGB(255, 26, 25, 25)
+                    ],
               begin: Alignment.topLeft,
               end: Alignment.topRight,
             ),
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            borderRadius: BorderRadius.all(Radius.circular(5)),
           ),
           child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
+            child: Text(
+              title,
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ),
