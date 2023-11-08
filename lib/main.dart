@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mudarribe_trainee/routes/app_pages.dart';
 import 'package:mudarribe_trainee/views/events/myEvents/myEvents_view.dart';
+import 'package:mudarribe_trainee/views/home/home_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
 
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Mudarribe",
       initialBinding: SplashBinding(),
-      home: SplashView(),
+      home: HomeView(),
       getPages: AppPages.pages,
     );
   }
