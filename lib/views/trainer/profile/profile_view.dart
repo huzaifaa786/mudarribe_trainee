@@ -31,7 +31,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
       body: SafeArea(
           child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(left: 15, right: 15),
+          padding: const EdgeInsets.only(left: 10, right: 10),
           child: Container(
             width: MediaQuery.of(context).size.width * 1,
             decoration: BoxDecoration(
@@ -43,7 +43,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    // mainAxisAlignment: MainAxisAlignment.spaceE0venly,
                     children: [
                       Column(
                         children: [
@@ -144,11 +144,11 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                         ),
                       ),
                     ),
-                    // SvgPicture.asset(
-                    //   'assets/images/ph_chat-dots-fill.svg',
-                    //   width: 32,
-                    //   height: 33,
-                    // ),
+                    SvgPicture.asset(
+                      'assets/images/chat.svg',
+                      width: 32,
+                      height: 33,
+                    ),
                   ],
                 )
               ],

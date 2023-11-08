@@ -50,10 +50,6 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
-<<<<<<< HEAD
-
-=======
->>>>>>> 5fefc25e80bddbc3741d63d53bc0557ee4f62ac4
     }
 
     buildTypes {
