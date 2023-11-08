@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mudarribe_trainee/routes/app_pages.dart';
-import 'package:mudarribe_trainee/views/home/home_view.dart';
+import 'package:mudarribe_trainee/views/events/myEvents/myEvents_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
+import 'package:mudarribe_trainee/views/splash/splash_view.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
@@ -24,12 +26,11 @@ class MyApp extends StatelessWidget {
           cursorColor: Colors.white,
         ),
         useMaterial3: true,
-        fontFamily: 'Montserrat',
       ),
       debugShowCheckedModeBanner: false,
       title: "Mudarribe",
       initialBinding: SplashBinding(),
-      home: HomeView(),
+      home: MyEvents(),
       getPages: AppPages.pages,
     );
   }
