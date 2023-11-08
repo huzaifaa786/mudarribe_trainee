@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mudarribe_trainee/routes/app_pages.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
-import 'package:mudarribe_trainee/views/splash/splash_view.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mudarribe_trainee/views/splash/splash_view.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
           cursorColor: Colors.white,
         ),
         useMaterial3: true,
+        fontFamily: 'Montserrat',
       ),
       debugShowCheckedModeBanner: false,
       title: "Mudarribe",

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:gradient_borders/gradient_borders.dart';
 import 'package:mudarribe_trainee/components/searchInput.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 
@@ -31,44 +31,32 @@ class HomeView extends StatelessWidget {
                 ),
               ),
             ),
-            // Container(
-            //     width: double.infinity,
-            //     height: 300,
-            //     child: GridView.count(
-            //       // scrollDirection: Axis.horizontal,
-            //       physics: ScrollPhysics(),
-            //       shrinkWrap: true,
-            //       primary: true,
-            //       padding: EdgeInsets.only(top: 15.0),
-            //       //Screensize grid count
-            //       childAspectRatio: 0.60, //1.0
-            //       mainAxisSpacing: 0.2, //1.0
-            //       crossAxisSpacing: 4.0, //1.0
-            //       crossAxisCount: 3,
-            //       children: [
-            //         Container(
-            //           height: 200,
-            //           width: 200,
-            //           color: Colors.green,
-            //         ),
-            //         Container(
-            //           height: 200,
-            //           width: 200,
-            //           color: Colors.red,
-            //         ),
-            //         Container(
-            //           height: 200,
-            //           width: 200,
-            //           color: Colors.orange,
-            //         ),
-            //         Container(
-            //           height: 200,
-            //           width: 200,
-            //           color: Colors.indigo,
-            //         ),
-            //       ],
-            //     ))
-          
+            Container(
+                margin: const EdgeInsets.symmetric(vertical: 20),
+                height: 70,
+                child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: List.generate(
+                        10,
+                        (index) => Container(
+                              height: 70,
+                              width: 80,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: const GradientBoxBorder(
+                                  gradient: LinearGradient(colors: [
+                                    Color(4290773187),
+                                    Color(4285693389),
+                                    Color(4278253801)
+                                  ]),
+                                  width: 2,
+                                ),
+                                image: DecorationImage(
+                                  image: AssetImage("assets/images/user.jpg"),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ))))
           ],
         ),
       )),
