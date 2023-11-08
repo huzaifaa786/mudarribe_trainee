@@ -27,6 +27,11 @@ class AppPages {
       binding: SignupBinding(),
     ),
     GetPage(
+      name: AppRoutes.myevents,
+      page: () => const MyEvents(),
+      // binding: SignupBinding(),
+    ),
+    GetPage(
       name: AppRoutes.trainerprounf,
       page: () => const TrainerprounfView(),
       // binding: Trainerprounfbinding(),
