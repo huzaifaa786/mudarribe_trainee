@@ -7,11 +7,7 @@ import 'package:mudarribe_trainee/routes/app_pages.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
-<<<<<<< HEAD
-import 'package:mudarribe_trainee/views/trainer/profile/profile_view.dart';
-=======
 import 'firebase_options.dart';
->>>>>>> 5fefc25e80bddbc3741d63d53bc0557ee4f62ac4
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,13 +34,8 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: "Mudarribe",
-<<<<<<< HEAD
-      // initialBinding: SplashBinding(),
-      home: TrainerprofileView(),
-=======
       initialBinding: SplashBinding(),
       home: SplashView(),
->>>>>>> 5fefc25e80bddbc3741d63d53bc0557ee4f62ac4
       getPages: AppPages.pages,
     );
   }
