@@ -7,6 +7,7 @@ import 'package:mudarribe_trainee/routes/app_pages.dart';
 import 'package:mudarribe_trainee/views/events/myEvents/myEvents_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
+import 'package:mudarribe_trainee/views/trainer/profile/profile_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,8 +30,8 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: "Mudarribe",
-      initialBinding: SplashBinding(),
-      home: MyEvents(),
+      // initialBinding: SplashBinding(),
+      home: TrainerprofileView(),
       getPages: AppPages.pages,
     );
   }
