@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mudarribe_trainee/utils/colors.dart';
 
 class MyEvents extends StatefulWidget {
   const MyEvents({super.key});
@@ -11,8 +12,6 @@ class MyEvents extends StatefulWidget {
 }
 
 class _MyEventsState extends State<MyEvents> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +21,6 @@ class _MyEventsState extends State<MyEvents> {
             Container(
               height: 110,
               width: MediaQuery.sizeOf(context).width,
-              color: Colors.black,
               child: Row(
                 children: [
                   Padding(
@@ -43,7 +41,17 @@ class _MyEventsState extends State<MyEvents> {
                 ],
               ),
             ),
-          
+            Padding(
+              padding: const EdgeInsets.only(top: 28),
+              child: Container(
+                height: 143,
+                width: 368,
+                decoration: BoxDecoration(
+                  color: bgContainer,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ),
           ],
         ),
       ),
