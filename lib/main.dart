@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
           cursorColor: Colors.white,
         ),
         useMaterial3: true,
+        fontFamily: 'Montserrat',
       ),
       debugShowCheckedModeBanner: false,
       title: "Mudarribe",
