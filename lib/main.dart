@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Mudarribe",
       initialBinding: SplashBinding(),
-      home: MyEvents(),
+      home: SplashView(),
       getPages: AppPages.pages,
     );
   }
