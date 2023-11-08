@@ -7,6 +7,8 @@ import 'package:mudarribe_trainee/views/events/myevents/myEvents_view.dart';
 import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
+import 'package:mudarribe_trainee/views/trainer%20pro%20un%20f/trainerprounf_view.dart';
+import 'package:mudarribe_trainee/views/trainer%20pro%20un%20f/trainerprounf_binding.dart';
 
 class AppPages {
   static final List<GetPage> pages = [
@@ -25,9 +27,9 @@ class AppPages {
       binding: SignupBinding(),
     ),
     GetPage(
-      name: AppRoutes.myevents,
-      page: () => const MyEvents(),
-      binding: SignupBinding(),
+      name: AppRoutes.trainerprounf,
+      page: () => const TrainerprounfView(),
+      // binding: Trainerprounfbinding(),
     ),
   ];
 }
