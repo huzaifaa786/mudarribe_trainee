@@ -1,21 +1,23 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:mudarribe_trainee/components/color_button.dart';
+import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 import 'package:mudarribe_trainee/views/onboardings/fragments/fragment_1.dart';
 import 'package:mudarribe_trainee/views/onboardings/fragments/fragment_2.dart';
 import 'package:mudarribe_trainee/views/onboardings/fragments/fragment_3.dart';
 
-class OnBoardingScreen extends StatefulWidget {
-  const OnBoardingScreen({super.key});
+class OnBoardingView extends StatefulWidget {
+  const OnBoardingView({super.key});
 
   @override
-  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
+  State<OnBoardingView> createState() => _OnBoardingViewState();
 }
 
-class _OnBoardingScreenState extends State<OnBoardingScreen> {
+class _OnBoardingViewState extends State<OnBoardingView> {
   int slideIndex = 0;
   PageController? controller;
 
@@ -87,7 +89,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           title: 'Get Started',
                           onPressed: () {
                             // UiUtilites.successSnackbar('fyuuiu','sdasdsafd');
-                            // Get.to(() => PlansScreen());
+                            Get.toNamed(AppRoutes.signup);
                           },
                         ),
                       )

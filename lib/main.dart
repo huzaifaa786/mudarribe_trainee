@@ -3,16 +3,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:mudarribe_trainee/views/authentication/signup/signup_controller.dart';
-import 'package:mudarribe_trainee/views/authentication/signup/signup_view.dart';
-import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
-import 'package:mudarribe_trainee/views/splash/splash_controller.dart';
+import 'package:mudarribe_trainee/routes/app_pages.dart';
+import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
+import 'package:mudarribe_trainee/views/trainer/profile/profile_view.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Get.put(SplashController());
-  Get.put(SignUpController());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await GetStorage.init();
   runApp(const MyApp());
 }
@@ -29,15 +31,13 @@ class MyApp extends StatelessWidget {
           cursorColor: Colors.white,
         ),
         useMaterial3: true,
+        fontFamily: 'Montserrat',
       ),
       debugShowCheckedModeBanner: false,
       title: "Mudarribe",
-      initialRoute: 'Signup',
-      routes: {
-        'onBoarding': (_) => OnBoardingScreen(),
-        'splash': (_) => SplashView(),
-        'Signup': (_) => SignUpView(),
-      },
+      initialBinding: SplashBinding(),
+      home: SplashView(),
+      getPages: AppPages.pages,
     );
   }
 }

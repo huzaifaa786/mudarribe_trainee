@@ -3,3 +3,4 @@ import 'package:mudarribe_trainee/views/splash/splash_controller.dart';
 
 SplashController splashController = SplashController.instance;
 SignUpController signUpController = SignUpController.instance;
+// TrainerprounfController trainerprounfController = TrainerprounfController.instance;
