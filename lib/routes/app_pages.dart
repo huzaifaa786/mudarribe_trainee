@@ -2,11 +2,12 @@ import 'package:get/get.dart';
 import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_binding.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_view.dart';
+import 'package:mudarribe_trainee/views/events/eventsdetail/eventsDetail_view.dart';
 import 'package:mudarribe_trainee/views/events/myevents/myEvents_view.dart';
 import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
-import 'package:mudarribe_trainee/views/trainer%20pro%20un%20f/trainerprounf_view.dart';
+import 'package:mudarribe_trainee/views/trainer/profile/profile_view.dart';
 
 class AppPages {
   static final List<GetPage> pages = [
@@ -25,13 +26,13 @@ class AppPages {
       binding: SignupBinding(),
     ),
     GetPage(
-      name: AppRoutes.myevents,
-      page: () => const MyEvents(),
-      // binding: SignupBinding(),
+      name: AppRoutes.trainerprofile,
+      page: () => const TrainerprofileView(),
+      // binding: Trainerprounfbinding(),
     ),
     GetPage(
-      name: AppRoutes.trainerprounf,
-      page: () => const TrainerprounfView(),
+      name: AppRoutes.eventsDetails,
+      page: () => const EventsDetails(),
       // binding: Trainerprounfbinding(),
     ),
   ];
