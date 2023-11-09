@@ -8,4 +8,6 @@ const white = Colors.white;
 const bgContainer = Color.fromARGB(255, 15, 15, 15);
 const appbarbckground = Color(4279175686);
 const profilesubheading = Color.fromRGBO(255, 255, 255, 0.6);
+const shadowBlack = Color.fromARGB(147, 52, 52, 52);
+
 // const dividercolor = Colors.white.withOpacity(0.2);
