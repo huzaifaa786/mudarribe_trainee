@@ -1,7 +1,6 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
-import 'package:mudarribe_trainee/components/color_button.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 // import 'package:klicks_app/values/colors.dart';
 
@@ -29,11 +28,12 @@ class _FragmentOneState extends State<FragmentOne> {
                 image: AssetImage(
                   'assets/images/onboard1.png',
                 ),
-                height: MediaQuery.of(context).size.height * 0.5,
+                fit: BoxFit.cover,
+                height: MediaQuery.of(context).size.height * 0.45,
               ),
               Container(
                   padding:
-                      EdgeInsets.only(top: 8, right: 8, left: 8, bottom: 10),
+                      EdgeInsets.only(top: 30, right: 8, left: 8, bottom: 50),
                   child: Text(
                     "Find The best Personal\nTrainer",
                     style: const TextStyle(
@@ -45,10 +45,6 @@ class _FragmentOneState extends State<FragmentOne> {
                     ),
                     textAlign: TextAlign.center,
                   )),
-             GradientButton(
-              onPressed: (){},
-              title: 'Next',
-             )
             ],
           ),
         ),

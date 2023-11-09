@@ -30,7 +30,8 @@ class InputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+        // height: 65,
         padding: const EdgeInsets.only(top: 15, left: 0, right: 0),
         child: TextFormField(
             readOnly: readOnly,
@@ -47,7 +48,7 @@ class InputField extends StatelessWidget {
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 fillColor: Colors.white,
                 border: GradientOutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(0),
                   gradient: const LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomLeft,
@@ -61,7 +62,7 @@ class InputField extends StatelessWidget {
                 labelStyle: TextStyle(
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w500,
-                    fontSize: 16,
+                    fontSize: 14,
                     foreground: Paint()
                       ..shader = LinearGradient(
                               begin: Alignment.topLeft,
