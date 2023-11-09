@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gradient_borders/gradient_borders.dart';
 import 'package:mudarribe_trainee/components/searchInput.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 
@@ -30,26 +31,32 @@ class HomeView extends StatelessWidget {
                 ),
               ),
             ),
-           Container(
-            margin: const EdgeInsets.symmetric(vertical: 20),
-            height: 200,
-             child:ListView(
-               // This next line does the trick.
-               scrollDirection: Axis.horizontal,
-               children: <Widget>[
-                 Container(
-                   width: 50,
-                   color: Colors.red,
-                 ),
-                 Container(
-                   width: 50,
-                   color: Colors.blue,
-                 ),
-                 
-               ],
-             )
-          
-           )
+            Container(
+                margin: const EdgeInsets.symmetric(vertical: 20),
+                height: 70,
+                child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: List.generate(
+                        10,
+                        (index) => Container(
+                              height: 70,
+                              width: 80,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: const GradientBoxBorder(
+                                  gradient: LinearGradient(colors: [
+                                    Color(4290773187),
+                                    Color(4285693389),
+                                    Color(4278253801)
+                                  ]),
+                                  width: 2,
+                                ),
+                                image: DecorationImage(
+                                  image: AssetImage("assets/images/user.jpg"),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ))))
           ],
         ),
       )),
