@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:mudarribe_trainee/utils/colors.dart';
+import 'package:mudarribe_trainee/components/appbar.dart';
+import 'package:mudarribe_trainee/components/eventContainer.dart';
+
 
 class MyEvents extends StatefulWidget {
   const MyEvents({super.key});
@@ -18,40 +19,20 @@ class _MyEventsState extends State<MyEvents> {
       body: SafeArea(
         child: Column(
           children: [
-            Container(
-              height: 110,
-              width: MediaQuery.sizeOf(context).width,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 30, right: 20),
-                    child: SvgPicture.asset(
-                      'assets/images/arrowleft.svg',
-                    ),
-                  ),
-                  Text(
-                    'My Events',
-                    style: TextStyle(
-                      fontFamily: "Poppins",
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
-              ),
+            TopScreenBar(
+              mytext: "My Events",
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 28),
-              child: Container(
-                height: 143,
-                width: 368,
-                decoration: BoxDecoration(
-                  color: bgContainer,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-            ),
+                padding: const EdgeInsets.only(top: 28),
+                child: Column(
+                  children: [
+                    EventsContainer(),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: EventsContainer(),
+                    ),
+                  ],
+                )),
           ],
         ),
       ),
