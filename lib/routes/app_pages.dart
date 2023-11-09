@@ -2,11 +2,8 @@ import 'package:get/get.dart';
 import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_binding.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_view.dart';
-<<<<<<< HEAD
 import 'package:mudarribe_trainee/views/events/eventsdetail/eventsDetail_view.dart';
 import 'package:mudarribe_trainee/views/events/myevents/myEvents_view.dart';
-=======
->>>>>>> 6623f9926592f60d6fea5c4e64eeda01ddd3242c
 import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
