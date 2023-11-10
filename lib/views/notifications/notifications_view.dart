@@ -18,6 +18,7 @@ class _NotificationsViewState extends State<NotificationsView> {
         child: Column(
           children: [
             TopScreenBar(mytext: 'Notifications'),
+            
           ],
         ),
       ),
