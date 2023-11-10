@@ -265,6 +265,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                           },
                         ),
                       ),
+                      Text('asdfg'),
                     ],
                   ),
                 ),
