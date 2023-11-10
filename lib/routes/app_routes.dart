@@ -4,7 +4,6 @@ class AppRoutes {
   static const signup = '/signup';
   static const signin = '/signin';
   static const myevents = '/myevents';
-  static const trainerprounf = '/trainerprounf';
   static const eventsDetails = '/eventsDetails';
   static const trainerprofile = '/trainerprofile';
 }
