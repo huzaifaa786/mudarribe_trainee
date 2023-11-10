@@ -8,6 +8,7 @@ import 'package:mudarribe_trainee/components/color_button.dart';
 import 'package:mudarribe_trainee/components/inputfield.dart';
 import 'package:mudarribe_trainee/components/password_inputField.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
+import 'package:mudarribe_trainee/utils/controller_initlization.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_controller.dart';
 
 class SignUpView extends StatefulWidget {
@@ -119,111 +120,110 @@ class _SignUpViewState extends State<SignUpView> {
                     ),
                   ),
                 ),
-                Positioned(
-                  bottom: 20,
-                  child: Column(
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        padding: const EdgeInsets.only(
-                            top: 10.0, right: 15, left: 15),
-                        child: Obx(() {
-                          return GradientButton(
-                            title: 'Next',
-                            onPressed:
-                                controller.areFieldsFilled.value ? () {} : null,
-                            selected: controller.areFieldsFilled.value,
-                          );
-                        }),
-                        //  GradientButton(title: 'Next', onPressed: () {}),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(top: 15),
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        child: Text(
-                          "By clicking “Next”,you confirm that you have read and agreed to the ",
-                          style: const TextStyle(
-                            fontFamily: "Poppins",
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: white,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(top: 10, bottom: 10),
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        child: RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Privacy Policy',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: "Poppins",
-                                    fontWeight: FontWeight.w400,
-                                    decoration: TextDecoration.underline,
-                                    color: white),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {},
-                              ),
-                              TextSpan(
-                                text: '  and  ',
-                                style: TextStyle(
-                                    fontSize: 12, color: Colors.white),
-                              ),
-                              TextSpan(
-                                text: 'Terms & Conditions',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    decoration: TextDecoration.underline,
-                                    color: Colors.white),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {},
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(bottom: 20),
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        child: RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Already have account ?   ',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: "Poppins",
-                                    fontWeight: FontWeight.w500,
-                                    color: white),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {},
-                              ),
-                              TextSpan(
-                                text: 'Sign in',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: borderDown),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {},
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
               ],
             ),
           ),
+        ),
+        bottomNavigationBar: Wrap(
+          clipBehavior: Clip.antiAlias,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.only(right: 15, left: 15),
+              child: Obx(() {
+                return GradientButton(
+                  title: 'Next',
+                  onPressed: controller.areFieldsFilled.value ? () {} : null,
+                  selected: controller.areFieldsFilled.value,
+                );
+              }),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                padding: EdgeInsets.only(top: 15),
+                width: MediaQuery.of(context).size.width * 0.85,
+                child: Text(
+                  "By clicking “Next”,you confirm that you have read and agreed to the ",
+                  style: const TextStyle(
+                    fontFamily: "Poppins",
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                padding: EdgeInsets.only(top: 10, bottom: 10),
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Privacy Policy',
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.w400,
+                            decoration: TextDecoration.underline,
+                            color: white),
+                        recognizer: TapGestureRecognizer()..onTap = () {},
+                      ),
+                      TextSpan(
+                        text: '  and  ',
+                        style: TextStyle(fontSize: 12, color: Colors.white),
+                      ),
+                      TextSpan(
+                        text: 'Terms & Conditions',
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            decoration: TextDecoration.underline,
+                            color: Colors.white),
+                        recognizer: TapGestureRecognizer()..onTap = () {},
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                padding: EdgeInsets.only(bottom: 20),
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Already have account ?   ',
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.w500,
+                            color: white),
+                        recognizer: TapGestureRecognizer()..onTap = () {},
+                      ),
+                      TextSpan(
+                        text: 'Sign in',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: borderDown),
+                        recognizer: TapGestureRecognizer()..onTap = () {},
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -6,8 +6,8 @@ import 'package:mudarribe_trainee/exceptions/auth_api_exception.dart';
 import 'package:mudarribe_trainee/models/app_user.dart';
 import 'package:mudarribe_trainee/services/user_service.dart';
 
-class SignUpController extends GetxController {
-  static SignUpController instance = Get.find();
+class SignInController extends GetxController {
+  static SignInController instance = Get.find();
   final _authApi = AuthApi();
   final _userService = UserService();
 
@@ -24,18 +24,13 @@ class SignUpController extends GetxController {
     update();
   }
 
-  TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
 
   RxBool areFieldsFilled = false.obs;
 
   void checkFields() {
-    if (usernameController.text.isNotEmpty &&
-        emailController.text.isNotEmpty &&
-        passwordController.text.isNotEmpty &&
-        confirmPasswordController.text.isNotEmpty) {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
       areFieldsFilled.value = true;
     } else {
       areFieldsFilled.value = false;
@@ -45,39 +40,32 @@ class SignUpController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    usernameController.addListener(() {
-      checkFields();
-    });
     emailController.addListener(() {
       checkFields();
     });
     passwordController.addListener(() {
       checkFields();
     });
-    confirmPasswordController.addListener(() {
-      checkFields();
-    });
   }
 
-  Future signUpTrainee() async {
-    try {
-      final User user = await _authApi.signUpWithEmail(
-        email: emailController.text,
-        password: passwordController.text,
-      );
+  // Future signUpTrainee() async {
+  //   try {
+  //     final User user = await _authApi.signUpWithEmail(
+  //       email: emailController.text,
+  //       password: passwordController.text,
+  //     );
 
-      if (user.uid.isNotEmpty) {
-        await _userService.syncOrCreateUser(
-          user: AppUser(
-            id: user.uid,
-            userType: 'trainee',
-            email: user.email,
-            name: usernameController.text
-          ),
-        );
-      }
-    } on AuthApiException catch (e) {
-      print(e);
-    }
-  }
+  //     if (user.uid.isNotEmpty) {
+  //       await _userService.syncOrCreateUser(
+  //         user: AppUser(
+  //             id: user.uid,
+  //             userType: 'trainee',
+  //             email: user.email,
+  //             name: usernameController.text),
+  //       );
+  //     }
+  //   } on AuthApiException catch (e) {
+  //     print(e);
+  //   }
+  // }
 }
