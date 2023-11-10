@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mudarribe_trainee/routes/app_pages.dart';
+import 'package:mudarribe_trainee/views/events/myevents/myEvents_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Mudarribe",
       initialBinding: SplashBinding(),
-      home: SplashView(),
+      home: MyEvents(),
       getPages: AppPages.pages,
     );
   }
