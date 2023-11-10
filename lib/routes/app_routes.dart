@@ -3,5 +3,7 @@ class AppRoutes {
   static const onBoarding = '/onBoarding';
   static const signup = '/signup';
   static const myevents = '/myevents';
+  static const trainerprounf = '/trainerprounf';
+  static const eventsDetails = '/eventsDetails';
   static const trainerprofile = '/trainerprofile';
 }
