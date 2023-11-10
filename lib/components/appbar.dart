@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 class TopScreenBar extends StatelessWidget {
   const TopScreenBar({
     super.key,
-    required this.mytext,
+    this.mytext,
   });
 
   final mytext;

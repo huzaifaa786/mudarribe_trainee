@@ -124,8 +124,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Obx(
-                      () => GestureDetector(
+                    Obx(() => GestureDetector(
                         onTap: () {
                           controller.toggleFollow();
                         },
@@ -153,9 +152,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                        ),
-                      ),
-                    ),
+                        ))),
                     SvgPicture.asset(
                       'assets/images/chat.svg',
                       width: 32,
@@ -242,7 +239,6 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                     isSelected: controller.selections,
                     onPressed: (int index) {
                       controller.handleToggleButtons(index);
-                      
                     },
                     color: Colors.grey,
                     selectedColor: Colors.white,
