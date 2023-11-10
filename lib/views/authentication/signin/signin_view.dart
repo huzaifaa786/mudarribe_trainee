@@ -10,6 +10,7 @@ import 'package:mudarribe_trainee/components/password_inputField.dart';
 import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 import 'package:mudarribe_trainee/views/authentication/signin/signin_controller.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({super.key});
@@ -63,8 +64,7 @@ class _SignInViewState extends State<SignInView> {
                         ),
                         Container(
                           height: 300,
-                          padding:
-                              EdgeInsets.only(left: 15, right: 15, bottom: 40),
+                          padding: EdgeInsets.only(left: 15, right: 15),
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                               color: Color.fromARGB(255, 15, 15, 15),
@@ -81,6 +81,22 @@ class _SignInViewState extends State<SignInView> {
                                   toggle: controller.toggle,
                                   lable: 'Password',
                                   controller: controller.passwordController,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: InkWell(
+                                      onTap: () {
+                                        Get.toNamed(AppRoutes.forgot);
+                                      },
+                                      child: GradientText('Forget password?',
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              fontFamily: "Poppins"),
+                                          colors: [borderDown, borderTop]),
+                                    ),
+                                  ),
                                 ),
                               ]),
                         ),

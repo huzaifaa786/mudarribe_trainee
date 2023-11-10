@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:mudarribe_trainee/routes/app_routes.dart';
+import 'package:mudarribe_trainee/views/authentication/forgot_password/forgot_password_binding.dart';
+import 'package:mudarribe_trainee/views/authentication/forgot_password/forgot_password_view.dart';
 import 'package:mudarribe_trainee/views/authentication/signin/signin_binding.dart';
 import 'package:mudarribe_trainee/views/authentication/signin/signin_view.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_binding.dart';
@@ -40,6 +42,11 @@ class AppPages {
       name: AppRoutes.signin,
       page: () => const SignInView(),
       binding: SignInBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.forgot,
+      page: () => const ForgotPasswordView(),
+      binding: ForgotPasswordBinding(),
     ),
   ];
 }
