@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mudarribe_trainee/components/appbar.dart';
-import 'package:mudarribe_trainee/components/text.dart';
+
 import 'package:mudarribe_trainee/utils/colors.dart';
 
 class NotificationsView extends StatefulWidget {
