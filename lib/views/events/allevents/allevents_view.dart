@@ -16,7 +16,7 @@ class _AllEventsState extends State<AllEvents> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        EventCard(),
+        
       ],
     );
   }
