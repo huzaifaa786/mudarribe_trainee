@@ -2,17 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:mudarribe_trainee/components/appbar.dart';
-import 'package:mudarribe_trainee/components/eventContainer.dart';
+import 'package:mudarribe_trainee/components/myEventContainer.dart';
 
-
-class MyEvents extends StatefulWidget {
-  const MyEvents({super.key});
+class MyEventsView extends StatefulWidget {
+  const MyEventsView({super.key});
 
   @override
-  State<MyEvents> createState() => _MyEventsState();
+  State<MyEventsView> createState() => _MyEventsViewState();
 }
 
-class _MyEventsState extends State<MyEvents> {
+class _MyEventsViewState extends State<MyEventsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,10 +25,10 @@ class _MyEventsState extends State<MyEvents> {
                 padding: const EdgeInsets.only(top: 28),
                 child: Column(
                   children: [
-                    EventsContainer(),
+                    MyEventsContainer(),
                     Padding(
                       padding: const EdgeInsets.only(top: 20),
-                      child: EventsContainer(),
+                      child: MyEventsContainer(),
                     ),
                   ],
                 )),

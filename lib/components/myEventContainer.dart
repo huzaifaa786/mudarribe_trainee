@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 
-class EventsContainer extends StatelessWidget {
-  const EventsContainer({super.key});
+class MyEventsContainer extends StatelessWidget {
+  const MyEventsContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,6 @@ class EventsContainer extends StatelessWidget {
               ],
             ),
           ),
-        
           Padding(
             padding: const EdgeInsets.only(left: 19, top: 4),
             child: Row(
@@ -136,11 +135,9 @@ class EventsContainer extends StatelessWidget {
                     ],
                   ),
                 ),
-              
               ],
             ),
           ),
-        
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
