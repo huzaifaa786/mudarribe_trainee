@@ -35,7 +35,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.eventsDetails,
-      page: () => const EventsDetails(),
+      page: () => const EventsDetailsView(),
       // binding: Trainerprounfbinding(),
     ),
     GetPage(
