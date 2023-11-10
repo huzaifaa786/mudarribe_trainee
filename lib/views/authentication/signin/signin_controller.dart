@@ -1,34 +1,26 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mudarribe_trainee/api/auth_api.dart';
-import 'package:mudarribe_trainee/exceptions/auth_api_exception.dart';
-import 'package:mudarribe_trainee/models/app_user.dart';
 import 'package:mudarribe_trainee/services/user_service.dart';
 
 class SignInController extends GetxController {
   static SignInController instance = Get.find();
   final _authApi = AuthApi();
   final _userService = UserService();
-
-  //
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  RxBool areFieldsFilled = false.obs;
   bool obscureTextPassword = true;
-  bool obscureTextCPassword = true;
+
+  // Input Toggle button function
   void toggle() {
     obscureTextPassword = !obscureTextPassword;
     update();
   }
 
-  void toggle1() {
-    obscureTextCPassword = !obscureTextCPassword;
-    update();
-  }
-
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-
-  RxBool areFieldsFilled = false.obs;
-
+  // Check all inputs are filled or not
   void checkFields() {
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
       areFieldsFilled.value = true;

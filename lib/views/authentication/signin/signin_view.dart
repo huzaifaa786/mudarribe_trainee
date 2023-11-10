@@ -7,8 +7,9 @@ import 'package:mudarribe_trainee/components/IconButton.dart';
 import 'package:mudarribe_trainee/components/color_button.dart';
 import 'package:mudarribe_trainee/components/inputfield.dart';
 import 'package:mudarribe_trainee/components/password_inputField.dart';
+import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
-import 'package:mudarribe_trainee/views/authentication/signup/signup_controller.dart';
+import 'package:mudarribe_trainee/views/authentication/signin/signin_controller.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({super.key});
@@ -20,7 +21,7 @@ class SignInView extends StatefulWidget {
 class _SignInViewState extends State<SignInView> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SignUpController>(
+    return GetBuilder<SignInController>(
       builder: (controller) => Scaffold(
         body: SafeArea(
           child: SizedBox(
@@ -35,9 +36,9 @@ class _SignInViewState extends State<SignInView> {
                     child: Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(top: 50, bottom: 30),
+                          padding: EdgeInsets.only(top: 50, bottom: 15),
                           child: Text(
-                            "Create Your account",
+                            "Sign in to Your account",
                             style: const TextStyle(
                               fontFamily: "Poppins",
                               fontSize: 26,
@@ -47,35 +48,41 @@ class _SignInViewState extends State<SignInView> {
                             textAlign: TextAlign.center,
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 20.0),
+                          child: Text(
+                            "Enter your registred email and\npassword to sign in!",
+                            style: TextStyle(
+                              fontFamily: "Poppins",
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: white.withOpacity(0.45),
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                         Container(
+                          height: 300,
                           padding:
                               EdgeInsets.only(left: 15, right: 15, bottom: 40),
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                               color: Color.fromARGB(255, 15, 15, 15),
-                              borderRadius: BorderRadius.circular(10)), 
-                          child: Column(children: [
-                            InputField(
-                              lable: 'Username',
-                              controller: controller.usernameController,
-                            ),
-                            InputField(
-                              lable: 'Email',
-                              controller: controller.emailController,
-                            ),
-                            PasswordInputField(
-                              obscure: controller.obscureTextPassword,
-                              toggle: controller.toggle,
-                              lable: 'Password',
-                              controller: controller.passwordController,
-                            ),
-                            PasswordInputField(
-                              obscure: controller.obscureTextCPassword,
-                              toggle: controller.toggle1,
-                              lable: 'Confirm Password',
-                              controller: controller.confirmPasswordController,
-                            ),
-                          ]),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                InputField(
+                                  lable: 'Email',
+                                  controller: controller.emailController,
+                                ),
+                                PasswordInputField(
+                                  obscure: controller.obscureTextPassword,
+                                  toggle: controller.toggle,
+                                  lable: 'Password',
+                                  controller: controller.passwordController,
+                                ),
+                              ]),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 15, bottom: 15),
@@ -201,7 +208,7 @@ class _SignInViewState extends State<SignInView> {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: 'Already have account ?   ',
+                        text: 'Create a new account ?   ',
                         style: TextStyle(
                             fontSize: 12,
                             fontFamily: "Poppins",
@@ -210,12 +217,15 @@ class _SignInViewState extends State<SignInView> {
                         recognizer: TapGestureRecognizer()..onTap = () {},
                       ),
                       TextSpan(
-                        text: 'Sign in',
+                        text: 'Sign Up',
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
                             color: borderDown),
-                        recognizer: TapGestureRecognizer()..onTap = () {},
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Get.toNamed(AppRoutes.signup);
+                          },
                       ),
                     ],
                   ),
