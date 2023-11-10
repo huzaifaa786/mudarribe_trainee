@@ -1,10 +1,13 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, unused_import
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:mudarribe_trainee/components/appbar.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
+import 'package:mudarribe_trainee/components/textgradient.dart';
+import 'package:mudarribe_trainee/utils/colors.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class EventDetailsCard extends StatelessWidget {
   const EventDetailsCard({super.key});
@@ -209,15 +212,9 @@ class EventDetailsCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(
-                          'Join Event',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Montserrat',
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        )
+                        GradientText1(
+                          text: 'Join Event',
+                        ),
                       ],
                     ),
                   )
