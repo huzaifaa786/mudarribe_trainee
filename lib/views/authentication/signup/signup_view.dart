@@ -53,7 +53,7 @@ class _SignUpViewState extends State<SignUpView> {
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                               color: Color.fromARGB(255, 15, 15, 15),
-                              borderRadius: BorderRadius.circular(10)),
+                              borderRadius: BorderRadius.circular(10)), 
                           child: Column(children: [
                             InputField(
                               lable: 'Username',
