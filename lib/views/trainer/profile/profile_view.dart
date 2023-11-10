@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradient_borders/gradient_borders.dart';
+import 'package:mudarribe_trainee/components/eventDetailsCard.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mudarribe_trainee/views/trainer/profile/profile_controller.dart';
@@ -162,7 +163,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 30),
+                  padding: const EdgeInsets.only(top: 30, bottom: 30),
                   child: ToggleButtons(
                     children: [
                       Row(
@@ -261,6 +262,19 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                               fit: BoxFit.cover,
                             );
                           },
+                        ),
+                      )
+                    : Container(),
+                controller.indexs == 1
+                    ? Container(
+                        height: MediaQuery.of(context).size.height * 0.44,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              EventDetailsCard(),
+                              EventDetailsCard(),
+                            ],
+                          ),
                         ),
                       )
                     : Container(),

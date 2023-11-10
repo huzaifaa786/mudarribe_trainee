@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:mudarribe_trainee/components/appbar.dart';
+import 'package:mudarribe_trainee/utils/colors.dart';
 
 class EventDetailsCard extends StatelessWidget {
   const EventDetailsCard({super.key});
@@ -11,14 +12,14 @@ class EventDetailsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.black,
+      color: bgContainer,
       child: Container(
-        height: 437,
         width: MediaQuery.sizeOf(context).width * 0.86,
+        padding: EdgeInsets.only(bottom: 20, top: 20),
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 19, top: 21),
+              padding: const EdgeInsets.only(left: 19),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +88,8 @@ class EventDetailsCard extends StatelessWidget {
             ),
             Container(
               height: 200,
-              width: MediaQuery.sizeOf(context).height * 0.35,
+              padding: EdgeInsets.only(left: 20,right: 20),
+              width: MediaQuery.sizeOf(context).width,
               child: Image.asset(
                 'assets/images/cardImage.png',
               ),
@@ -102,7 +104,7 @@ class EventDetailsCard extends StatelessWidget {
                     children: [
                       SvgPicture.asset('assets/images/location.svg'),
                       Padding(
-                        padding: const EdgeInsets.only(left: 5),
+                        padding: const EdgeInsets.only(left: 5,bottom: 5),
                         child: Text(
                           'Dubai',
                           style: TextStyle(
@@ -132,7 +134,7 @@ class EventDetailsCard extends StatelessWidget {
                     children: [
                       SvgPicture.asset('assets/images/timeline.svg'),
                       Padding(
-                        padding: const EdgeInsets.only(left: 6),
+                        padding: const EdgeInsets.only(left: 6,bottom: 4),
                         child: Text(
                           'from 3 : 00 to 05 : 00 pm',
                           style: TextStyle(
@@ -149,7 +151,7 @@ class EventDetailsCard extends StatelessWidget {
                     children: [
                       SvgPicture.asset('assets/images/calender1.svg'),
                       Padding(
-                        padding: const EdgeInsets.only(left: 10),
+                        padding: const EdgeInsets.only(left: 10,bottom: 4),
                         child: Text(
                           '23/11/2023',
                           style: TextStyle(
@@ -167,7 +169,7 @@ class EventDetailsCard extends StatelessWidget {
                     children: [
                       SvgPicture.asset('assets/images/peoplesharp.svg'),
                       Padding(
-                        padding: const EdgeInsets.only(left: 10),
+                        padding: const EdgeInsets.only(left: 10,bottom: 4),
                         child: Text(
                           'Total People amount: 3/34',
                           style: TextStyle(
