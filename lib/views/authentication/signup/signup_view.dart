@@ -202,7 +202,7 @@ class _SignUpViewState extends State<SignUpView> {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: 'Already have account ???   ',
+                        text: 'Already have account ?   ',
                         style: TextStyle(
                             fontSize: 12,
                             fontFamily: "Poppins",
