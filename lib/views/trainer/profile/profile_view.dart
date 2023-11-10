@@ -119,7 +119,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                             left: 15, right: 15, bottom: 10, top: 35),
                         child: Divider(
                           thickness: 1,
-                          color: dividercolor,
+                          // color: dividercolor,
                         ),
                       ),
                       Row(
