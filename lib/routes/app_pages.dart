@@ -32,14 +32,9 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.catigories,
-<<<<<<< HEAD
       page: () => const CategoriesResultView(),
         ),
      
-=======
-      page: () => const CatigoriesResultScreen(),
-    ),
->>>>>>> abd5c44d0350f1565abdd1e3114139deeaa6235d
     GetPage(
       name: AppRoutes.trainerprofile,
       page: () => const TrainerprofileView(),
