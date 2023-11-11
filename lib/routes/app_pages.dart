@@ -6,7 +6,7 @@ import 'package:mudarribe_trainee/views/authentication/signin/signin_binding.dar
 import 'package:mudarribe_trainee/views/authentication/signin/signin_view.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_binding.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_view.dart';
-import 'package:mudarribe_trainee/views/catigories/catigories_result_screen.dart';
+import 'package:mudarribe_trainee/views/catigories/categories_result_view.dart';
 import 'package:mudarribe_trainee/views/events/eventsdetail/eventsDetail_view.dart';
 import 'package:mudarribe_trainee/views/footer/footer_view.dart';
 import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
@@ -33,8 +33,9 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.catigories,
-      page: () => const CatigoriesResultScreen(),
-    ),
+      page: () => const CategoriesResultView(),
+        ),
+     
     GetPage(
       name: AppRoutes.trainerprofile,
       page: () => const TrainerprofileView(),
