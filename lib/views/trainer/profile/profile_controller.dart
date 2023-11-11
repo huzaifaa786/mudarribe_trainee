@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class TrainerprounfController extends GetxController {
-  static TrainerprounfController instance = Get.find();
+class TrainerprofileController extends GetxController {
+  static TrainerprofileController instance = Get.find();
 
   RxList<bool> selections = [true, false, false].obs;
   int indexs = 0;

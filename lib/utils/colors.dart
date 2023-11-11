@@ -13,3 +13,4 @@ const shadowBlack = Color.fromARGB(147, 52, 52, 52);
 
 // const dividercolor = Colors.white.withOpacity(0.2);
 const dividercolor = Color.fromRGBO(255, 255, 255, 0.2);
+const packageplancolor = Color.fromRGBO(255, 255, 255, 1);
