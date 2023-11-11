@@ -5,14 +5,16 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mudarribe_trainee/routes/app_pages.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
-import 'package:mudarribe_trainee/views/catigories/catigories_result_screen.dart';
+import 'package:mudarribe_trainee/views/catigories/categories_result_view.dart';
 import 'package:mudarribe_trainee/views/events/allevents/allevents_view.dart';
 import 'package:mudarribe_trainee/views/events/eventsdetail/eventsDetail_view.dart';
 import 'package:mudarribe_trainee/views/events/myevents/myEvents_view.dart';
+import 'package:mudarribe_trainee/views/footer/footer_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mudarribe_trainee/views/trainee_profile/profile/profile_view.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -40,8 +42,8 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: "Mudarribe",
-      initialBinding: SplashBinding(),
-      home: SplashView(),
+      // initialBinding: SplashBinding(),
+      home: TraineeProfileView(),
       getPages: AppPages.pages,
     );
   }

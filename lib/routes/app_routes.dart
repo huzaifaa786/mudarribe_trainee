@@ -1,3 +1,5 @@
+import 'package:mudarribe_trainee/views/footer/footer_view.dart';
+
 class AppRoutes {
   static const splash = '/splash';
   static const onBoarding = '/onBoarding';
@@ -11,4 +13,6 @@ class AppRoutes {
   static const myevents = '/myevents';
   static const eventsDetails = '/eventsDetails';
   static const trainerprofile = '/trainerprofile';
+  static const footer = '/footer';
+  static const profile = '/profile';
 }
