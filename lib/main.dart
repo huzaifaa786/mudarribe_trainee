@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mudarribe_trainee/routes/app_pages.dart';
+import 'package:mudarribe_trainee/utils/colors.dart';
+import 'package:mudarribe_trainee/views/catigories/catigories_result_screen.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,14 +25,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.black,
         textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: Colors.white,
+          cursorColor:white,
         ),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
       title: "Mudarribe",
       initialBinding: SplashBinding(),
-      home: SplashView(),
+      home: CatigoriesResultScreen(),
       getPages: AppPages.pages,
     );
   }
