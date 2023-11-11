@@ -9,6 +9,7 @@ import 'package:mudarribe_trainee/views/catigories/categories_result_view.dart';
 import 'package:mudarribe_trainee/views/events/allevents/allevents_view.dart';
 import 'package:mudarribe_trainee/views/events/eventsdetail/eventsDetail_view.dart';
 import 'package:mudarribe_trainee/views/events/myevents/myEvents_view.dart';
+import 'package:mudarribe_trainee/views/footer/footer_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
@@ -33,15 +34,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.black,
         textSelectionTheme: const TextSelectionThemeData(
-          cursorColor:white,
+          cursorColor: white,
         ),
         useMaterial3: true,
         fontFamily: 'Montserrat',
       ),
       debugShowCheckedModeBanner: false,
       title: "Mudarribe",
-      initialBinding: SplashBinding(),
-      home: SplashView(),
+      // initialBinding: SplashBinding(),
+      home: FooterView(),
       getPages: AppPages.pages,
     );
   }

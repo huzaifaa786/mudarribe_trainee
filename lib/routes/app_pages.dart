@@ -8,6 +8,7 @@ import 'package:mudarribe_trainee/views/authentication/signup/signup_binding.dar
 import 'package:mudarribe_trainee/views/authentication/signup/signup_view.dart';
 import 'package:mudarribe_trainee/views/catigories/categories_result_view.dart';
 import 'package:mudarribe_trainee/views/events/eventsdetail/eventsDetail_view.dart';
+import 'package:mudarribe_trainee/views/footer/footer_view.dart';
 import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
@@ -29,11 +30,16 @@ class AppPages {
       page: () => const SignUpView(),
       binding: SignupBinding(),
     ),
-        GetPage(
+    GetPage(
       name: AppRoutes.catigories,
+<<<<<<< HEAD
       page: () => const CategoriesResultView(),
         ),
      
+=======
+      page: () => const CatigoriesResultScreen(),
+    ),
+>>>>>>> abd5c44d0350f1565abdd1e3114139deeaa6235d
     GetPage(
       name: AppRoutes.trainerprofile,
       page: () => const TrainerprofileView(),
@@ -53,6 +59,10 @@ class AppPages {
       name: AppRoutes.forgot,
       page: () => const ForgotPasswordView(),
       binding: ForgotPasswordBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.footer,
+      page: () => const FooterView(),
     ),
   ];
 }
