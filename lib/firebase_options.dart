@@ -23,9 +23,15 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -45,37 +51,19 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyDyewWr90xxjAihsyyLaN1rk-GSHH8SSPs',
-    appId: '1:955870033341:web:fbd125cf3d4bf4d08c4ed4',
+    appId: '1:955870033341:web:09a30b920fa3c0428c4ed4',
     messagingSenderId: '955870033341',
     projectId: 'mudarribe-fitness',
     authDomain: 'mudarribe-fitness.firebaseapp.com',
     storageBucket: 'mudarribe-fitness.appspot.com',
-    measurementId: 'G-15J78P7340',
+    measurementId: 'G-B48SWEBHX0',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAbTtOQ1czNPWEljEtx9gn62vJbXrCxzsQ',
-    appId: '1:955870033341:android:6b7fe5f2238ac8148c4ed4',
+    appId: '1:955870033341:android:fe98f77eaf6e5d6c8c4ed4',
     messagingSenderId: '955870033341',
     projectId: 'mudarribe-fitness',
     storageBucket: 'mudarribe-fitness.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBZBr4yqaRrWHq_VXDlr0RcHLxCZRSiiCo',
-    appId: '1:955870033341:ios:b794ee95809a21428c4ed4',
-    messagingSenderId: '955870033341',
-    projectId: 'mudarribe-fitness',
-    storageBucket: 'mudarribe-fitness.appspot.com',
-    iosBundleId: 'com.mudarribe.trainee.mudarribeTrainee',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBZBr4yqaRrWHq_VXDlr0RcHLxCZRSiiCo',
-    appId: '1:955870033341:ios:7fc4f2e1531e50b18c4ed4',
-    messagingSenderId: '955870033341',
-    projectId: 'mudarribe-fitness',
-    storageBucket: 'mudarribe-fitness.appspot.com',
-    iosBundleId: 'com.mudarribe.trainee.mudarribeTrainee.RunnerTests',
   );
 }

@@ -1,4 +1,4 @@
-package com.mudarribe.trainee.mudarribe_trainee
+package com.mudarribe.trainee
 
 import io.flutter.embedding.android.FlutterActivity
 

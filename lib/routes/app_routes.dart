@@ -1,7 +1,9 @@
 class AppRoutes {
   static const splash = '/splash';
   static const onBoarding = '/onBoarding';
-  static const signup = '/signup';    
+  static const signup = '/signup';
+  static const catigories = '/catigories';
+
   static const signin = '/signin';
   static const forgot = '/forgot';
   static const myevents = '/myevents';

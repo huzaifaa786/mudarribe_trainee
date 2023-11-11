@@ -6,6 +6,7 @@ import 'package:mudarribe_trainee/views/authentication/signin/signin_binding.dar
 import 'package:mudarribe_trainee/views/authentication/signin/signin_view.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_binding.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_view.dart';
+import 'package:mudarribe_trainee/views/catigories/catigories_result_screen.dart';
 import 'package:mudarribe_trainee/views/events/eventsdetail/eventsDetail_view.dart';
 import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
@@ -28,6 +29,11 @@ class AppPages {
       page: () => const SignUpView(),
       binding: SignupBinding(),
     ),
+        GetPage(
+      name: AppRoutes.catigories,
+      page: () => const CatigoriesResultScreen(),
+        ),
+     
     GetPage(
       name: AppRoutes.trainerprofile,
       page: () => const TrainerprofileView(),
