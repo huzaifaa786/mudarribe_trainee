@@ -138,6 +138,7 @@ class _FooterViewState extends State<FooterView> with RouteAware {
                                       fit: BoxFit.scaleDown,
                                       height: 16,
                                       width: 16,
+                                      color: borderDown,
                                     )
                                   : SvgPicture.asset(
                                       'assets/images/plansunselected.svg',
@@ -183,6 +184,7 @@ class _FooterViewState extends State<FooterView> with RouteAware {
                                       fit: BoxFit.scaleDown,
                                       height: 16,
                                       width: 16,
+                                      color: borderDown,
                                     )
                                   : SvgPicture.asset(
                                       'assets/images/eventunselected.svg',
@@ -191,15 +193,18 @@ class _FooterViewState extends State<FooterView> with RouteAware {
                                       width: 16,
                                     ),
                                     const Gap(4),
-                              Text(
+                              GradientText(
                                 'Events',
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: _navigationMenuIndex == 2
-                                      ? borderDown
-                                      : white,
+                                style: const TextStyle(
+                                  fontSize: 10.0,
                                 ),
-                              )
+                                colors: _navigationMenuIndex == 2
+                                    ? [
+                                        borderDown,
+                                        borderTop
+                                      ]
+                                    : [white,white],
+                              ),
                             ],
                           ),
                         ),
@@ -233,15 +238,18 @@ class _FooterViewState extends State<FooterView> with RouteAware {
                                       width: 16,
                                     ),
                                     const Gap(4),
-                              Text(
+                              GradientText(
                                 'Me',
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: _navigationMenuIndex == 3
-                                      ? borderDown
-                                      : white,
+                                style: const TextStyle(
+                                  fontSize: 10.0,
                                 ),
-                              )
+                                colors: _navigationMenuIndex == 3
+                                    ? [
+                                        borderDown,
+                                        borderTop
+                                      ]
+                                    : [white,white],
+                              ),
                             ],
                           ),
                         ),
