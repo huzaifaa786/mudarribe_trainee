@@ -71,6 +71,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                           padding: const EdgeInsets.only(left: 20, right: 20),
                           child: GradientButton(
                             title: 'Next',
+                            selected: true,
                             onPressed: () {
                               setState(() {
                                 slideIndex++;
@@ -87,9 +88,10 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                         padding: const EdgeInsets.only(left: 20, right: 20),
                         child: GradientButton(
                           title: 'Get Started',
+                          selected: true,
                           onPressed: () {
                             // UiUtilites.successSnackbar('fyuuiu','sdasdsafd');
-                            Get.toNamed(AppRoutes.signup);
+                            Get.offNamed(AppRoutes.signup);
                           },
                         ),
                       )

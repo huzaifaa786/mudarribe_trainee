@@ -1,9 +1,15 @@
 <svg width="25" height="23" viewBox="0 0 25 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+<<<<<<< HEAD
+<path d="M16.6667 2.875H8.33333C7.7808 2.875 7.25089 3.07693 6.86019 3.43638C6.46949 3.79582 6.25 4.28334 6.25 4.79167V20.125L12.5 17.25L18.75 20.125V4.79167C18.75 4.28334 18.5305 3.79582 18.1398 3.43638C17.7491 3.07693 17.2192 2.875 16.6667 2.875Z" stroke="url(#paint0_linear_160_2777)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<defs>
+<linearGradient id="paint0_linear_160_2777" x1="12.5" y1="2.875" x2="12.5" y2="20.125" gradientUnits="userSpaceOnUse">
+=======
 <g id="iconamoon:bookmark-light">
 <path id="Vector" d="M16.4167 2H8.08333C7.5308 2 7.00089 2.20193 6.61019 2.56138C6.21949 2.92082 6 3.40834 6 3.91667V19.25L12.25 16.375L18.5 19.25V3.91667C18.5 3.40834 18.2805 2.92082 17.8898 2.56138C17.4991 2.20193 16.9692 2 16.4167 2Z" stroke="url(#paint0_linear_174_6203)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <defs>
 <linearGradient id="paint0_linear_174_6203" x1="12.25" y1="2" x2="12.25" y2="19.25" gradientUnits="userSpaceOnUse">
+>>>>>>> 5faf5a8ed9f0029bb877469ac3580fc7665c9a37
 <stop stop-color="#58E1FF"/>
 <stop offset="1" stop-color="#727DCD"/>
 </linearGradient>

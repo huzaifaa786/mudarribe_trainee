@@ -9,6 +9,7 @@ import 'package:mudarribe_trainee/components/inputfield.dart';
 import 'package:mudarribe_trainee/components/password_inputField.dart';
 import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
+import 'package:mudarribe_trainee/utils/controller_initlization.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_controller.dart';
 
 class SignUpView extends StatefulWidget {
@@ -133,7 +134,9 @@ class _SignUpViewState extends State<SignUpView> {
               child: Obx(() {
                 return GradientButton(
                   title: 'Next',
-                  onPressed: controller.areFieldsFilled.value ? () {} : null,
+                  onPressed: controller.areFieldsFilled.value ? () {
+                  
+                  } : null,
                   selected: controller.areFieldsFilled.value,
                 );
               }),
