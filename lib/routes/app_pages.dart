@@ -8,7 +8,7 @@ import 'package:mudarribe_trainee/views/authentication/signup/signup_binding.dar
 import 'package:mudarribe_trainee/views/authentication/signup/signup_view.dart';
 import 'package:mudarribe_trainee/views/catigories/catigories_result_screen.dart';
 import 'package:mudarribe_trainee/views/events/eventsdetail/eventsDetail_view.dart';
-import 'package:mudarribe_trainee/views/footer.dart/footer_view.dart';
+import 'package:mudarribe_trainee/views/footer/footer_view.dart';
 import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';

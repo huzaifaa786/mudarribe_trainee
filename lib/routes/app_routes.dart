@@ -1,4 +1,4 @@
-import 'package:mudarribe_trainee/views/footer.dart/footer_view.dart';
+import 'package:mudarribe_trainee/views/footer/footer_view.dart';
 
 class AppRoutes {
   static const splash = '/splash';
