@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gap/gap.dart';
+import 'package:mudarribe_trainee/utils/colors.dart';
 
 class TopScreenBar extends StatelessWidget {
   const TopScreenBar({
@@ -14,16 +16,14 @@ class TopScreenBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 110,
+      padding: EdgeInsets.only(left: 15,right: 15,bottom: 15,top: 15),
       width: MediaQuery.sizeOf(context).width,
       child: Row(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 30, right: 20),
-            child: SvgPicture.asset(
-              'assets/images/arrowleft.svg',
-            ),
+          SvgPicture.asset(
+            'assets/images/arrowleft.svg',
           ),
+          MaxGap(20),
           Text(
             mytext,
             style: TextStyle(
