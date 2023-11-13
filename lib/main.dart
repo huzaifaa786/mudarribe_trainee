@@ -45,8 +45,8 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: "Mudarribe",
-      // initialBinding: SplashBinding(),
-      home: TraineeEditProfileView(),
+      initialBinding: SplashBinding(),
+      home: SplashView(),
       getPages: AppPages.pages,
     );
   }
