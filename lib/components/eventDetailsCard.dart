@@ -8,7 +8,6 @@ import 'package:mudarribe_trainee/components/appbar.dart';
 import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 import 'package:mudarribe_trainee/components/textgradient.dart';
-import 'package:mudarribe_trainee/utils/colors.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class EventDetailsCard extends StatelessWidget {

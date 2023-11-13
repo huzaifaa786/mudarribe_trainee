@@ -8,14 +8,14 @@ import 'package:mudarribe_trainee/utils/colors.dart';
 
 // import 'package:mudarribe_trainee/components/topbar.dart';
 
-class CatigoriesResultScreen extends StatefulWidget {
-  const CatigoriesResultScreen({super.key});
+class CategoriesResultView extends StatefulWidget {
+  const CategoriesResultView({super.key});
 
   @override
-  State<CatigoriesResultScreen> createState() => _CatigoriesResultScreenState();
+  State<CategoriesResultView> createState() => _CatigoriesResultScreenState();
 }
 
-class _CatigoriesResultScreenState extends State<CatigoriesResultScreen> {
+class _CatigoriesResultScreenState extends State<CategoriesResultView> {
   String title = 'Ahmed Khaled';
   String description = 'Full Body Energy';
   String imgpath1 = 'assets/images/cardimg1.png';

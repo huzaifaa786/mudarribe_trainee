@@ -1,10 +1,13 @@
-import 'package:mudarribe_trainee/views/footer.dart/footer_view.dart';
+import 'package:mudarribe_trainee/views/footer/footer_view.dart';
 
 class AppRoutes {
   static const splash = '/splash';
   static const onBoarding = '/onBoarding';
   static const signup = '/signup';
   static const catigories = '/catigories';
+  static const home = '/home';
+
+
   static const signin = '/signin';
   static const forgot = '/forgot';
   static const myevents = '/myevents';
@@ -12,5 +15,7 @@ class AppRoutes {
   static const trainerprofile = '/trainerprofile';
   static const footer = '/footer';
   static const eventcheckout = '/eventcheckout';
+  static const profile = '/profile';
+  static const editProfile = '/editProfile';
 
 }
