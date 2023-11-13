@@ -9,6 +9,8 @@ import 'package:mudarribe_trainee/components/inputfield.dart';
 import 'package:mudarribe_trainee/components/password_inputField.dart';
 import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
+import 'package:mudarribe_trainee/utils/controller_initlization.dart';
+import 'package:mudarribe_trainee/utils/ui_utils.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_controller.dart';
 
 class SignUpView extends StatefulWidget {
@@ -54,7 +56,7 @@ class _SignUpViewState extends State<SignUpView> {
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                               color: Color.fromARGB(255, 15, 15, 15),
-                              borderRadius: BorderRadius.circular(10)), 
+                              borderRadius: BorderRadius.circular(10)),
                           child: Column(children: [
                             InputField(
                               lable: 'Username',
@@ -133,9 +135,13 @@ class _SignUpViewState extends State<SignUpView> {
               child: Obx(() {
                 return GradientButton(
                   title: 'Next',
-                  onPressed: controller.areFieldsFilled.value ? () {
-                  
-                  } : null,
+                  onPressed: controller.areFieldsFilled.value
+                      ? () {
+                          signUpController.signUpTrainee();
+                        }
+                      : (){
+                         UiUtilites.errorSnackbar('Fill out all fields','Please fill all above fields');
+                      },
                   selected: controller.areFieldsFilled.value,
                 );
               }),
@@ -218,10 +224,10 @@ class _SignUpViewState extends State<SignUpView> {
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
                             color: borderDown),
-                        recognizer: TapGestureRecognizer()..onTap = () {
-                          Get.toNamed(AppRoutes.signin);
-
-                        },
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Get.toNamed(AppRoutes.signin);
+                          },
                       ),
                     ],
                   ),

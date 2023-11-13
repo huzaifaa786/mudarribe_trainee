@@ -5,6 +5,9 @@ class AppRoutes {
   static const onBoarding = '/onBoarding';
   static const signup = '/signup';
   static const catigories = '/catigories';
+  static const home = '/home';
+
+
   static const signin = '/signin';
   static const forgot = '/forgot';
   static const myevents = '/myevents';

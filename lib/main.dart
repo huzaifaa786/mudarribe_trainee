@@ -44,8 +44,8 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: "Mudarribe",
-      initialBinding: SignInBinding(),
-      home: SignInView(),
+      initialBinding: SplashBinding(),
+      home: SplashView(),
       getPages: AppPages.pages,
     );
   }
