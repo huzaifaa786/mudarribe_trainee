@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:mudarribe_trainee/components/appbar.dart';
+import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 import 'package:mudarribe_trainee/components/textgradient.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
@@ -212,8 +214,13 @@ class EventDetailsCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        GradientText1(
-                          text: 'Join Event',
+                        GestureDetector(
+                          onTap: (){
+                             Get.toNamed(AppRoutes.eventcheckout);
+                          },
+                          child: GradientText1(
+                            text: 'Join Event',
+                          ),
                         ),
                       ],
                     ),

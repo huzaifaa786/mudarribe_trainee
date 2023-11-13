@@ -20,6 +20,8 @@ class EventcheckoutView extends StatefulWidget {
 enum PaymentMethod { visa, googlePay, applePay }
 
 class _EventcheckoutViewState extends State<EventcheckoutView> {
+
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<EventcheckoutController>(
@@ -191,6 +193,7 @@ class _EventcheckoutViewState extends State<EventcheckoutView> {
                       ],
                     ),
                   ),
+
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 35, left: 5, bottom: 20),
@@ -235,7 +238,6 @@ class _EventcheckoutViewState extends State<EventcheckoutView> {
                               value: PaymentMethod.visa,
                               onchaged: () async {
                                 await controller.toggleplan(PaymentMethod.visa);
-                                setState(() {});
                               },
                             ),
                           ),
@@ -260,7 +262,6 @@ class _EventcheckoutViewState extends State<EventcheckoutView> {
                                 onchaged: () async {
                                   await controller
                                       .toggleplan(PaymentMethod.applePay);
-                                  setState(() {});
                                 },
                               ),
                             ),
@@ -274,7 +275,7 @@ class _EventcheckoutViewState extends State<EventcheckoutView> {
                                 border: Border.all(
                                   color:
                                       controller.site == PaymentMethod.googlePay
-                                          ? Colors.white
+                                          ? white
                                           : dividercolor,
                                 )),
                             child: Checkedbox(
@@ -284,7 +285,6 @@ class _EventcheckoutViewState extends State<EventcheckoutView> {
                               onchaged: () async {
                                 await controller
                                     .toggleplan(PaymentMethod.googlePay);
-                                setState(() {});
                               },
                             ),
                           ),

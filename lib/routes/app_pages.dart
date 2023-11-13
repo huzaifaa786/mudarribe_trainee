@@ -12,6 +12,8 @@ import 'package:mudarribe_trainee/views/footer.dart/footer_view.dart';
 import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
+import 'package:mudarribe_trainee/views/trainer/event_checkout/event_checkout_binding.dart';
+import 'package:mudarribe_trainee/views/trainer/event_checkout/event_checkout_view.dart';
 import 'package:mudarribe_trainee/views/trainer/profile/profile_view.dart';
 
 class AppPages {
@@ -57,6 +59,11 @@ class AppPages {
     GetPage(
       name: AppRoutes.footer,
       page: () => const FooterView(),
+    ),
+    GetPage(
+      name: AppRoutes.eventcheckout,
+      page: () => const EventcheckoutView(),
+      binding: EventcheckoutBinding(),
     ),
   ];
 }
