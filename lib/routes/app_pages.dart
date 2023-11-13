@@ -14,6 +14,7 @@ import 'package:mudarribe_trainee/views/footer/footer_view.dart';
 import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
+import 'package:mudarribe_trainee/views/trainee_profile/edit_profile/edit_profile_view.dart';
 import 'package:mudarribe_trainee/views/trainee_profile/profile/profile_view.dart';
 import 'package:mudarribe_trainee/views/trainer/profile/profile_view.dart';
 
@@ -41,8 +42,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.catigories,
       page: () => const CategoriesResultView(),
-        ),
-     
+    ),
     GetPage(
       name: AppRoutes.trainerprofile,
       page: () => const TrainerprofileView(),
@@ -66,10 +66,17 @@ class AppPages {
     GetPage(
       name: AppRoutes.footer,
       page: () => const FooterView(),
+      bindings: [
+        HomeBinding(),
+      ],
     ),
     GetPage(
       name: AppRoutes.profile,
       page: () => const TraineeProfileView(),
+    ),
+    GetPage(
+      name: AppRoutes.editProfile,
+      page: () => const TraineeEditProfileView(),
     ),
   ];
 }

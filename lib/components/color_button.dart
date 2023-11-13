@@ -21,7 +21,7 @@ class GradientButton extends StatelessWidget {
       onTap: onPressed,
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
-        height: 60,
+        height: 53,
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -40,7 +40,7 @@ class GradientButton extends StatelessWidget {
             child: Text(
               title,
               style: TextStyle(
-                fontFamily: 'Poppins',
+                fontFamily: "Montserrat",
                 color: Colors.white,
                 fontSize: 20,
                 fontWeight: FontWeight.w600,

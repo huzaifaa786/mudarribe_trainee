@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mudarribe_trainee/routes/app_pages.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
+import 'package:mudarribe_trainee/views/authentication/signin/signin_binding.dart';
+import 'package:mudarribe_trainee/views/authentication/signin/signin_view.dart';
 import 'package:mudarribe_trainee/views/catigories/categories_result_view.dart';
 import 'package:mudarribe_trainee/views/events/allevents/allevents_view.dart';
 import 'package:mudarribe_trainee/views/events/eventsdetail/eventsDetail_view.dart';
