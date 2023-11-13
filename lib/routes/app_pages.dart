@@ -66,6 +66,9 @@ class AppPages {
     GetPage(
       name: AppRoutes.footer,
       page: () => const FooterView(),
+      bindings: [
+        HomeBinding(),
+      ],
     ),
     GetPage(
       name: AppRoutes.profile,
