@@ -69,6 +69,7 @@ class MyEventsContainer extends StatelessWidget {
                     ),
                   ),
                 ),
+              
                 Padding(
                   padding: const EdgeInsets.only(top: 2.0, left: 10.4),
                   child: Row(
