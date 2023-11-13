@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:gradient_borders/gradient_borders.dart';
+import 'package:mudarribe_trainee/utils/colors.dart';
 
 class PasswordInputField extends StatelessWidget {
   const PasswordInputField({
@@ -53,12 +54,13 @@ class PasswordInputField extends StatelessWidget {
               },
               child: obscure
                   ? SvgPicture.asset(
-                      'assets/images/emojione_monotone_eye_1.svg',
+                      'assets/images/emojione-monotone_eye-1.svg',
                       height: 24,
+                      color: white,
                       fit: BoxFit.scaleDown,
                     )
                   : SvgPicture.asset(
-                      'assets/images/emojione_monotone_eye.svg',
+                      'assets/images/emojione-monotone_eye.svg',
                       height: 24,
                       fit: BoxFit.scaleDown,
                     )
