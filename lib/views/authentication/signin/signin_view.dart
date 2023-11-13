@@ -9,6 +9,8 @@ import 'package:mudarribe_trainee/components/inputfield.dart';
 import 'package:mudarribe_trainee/components/password_inputField.dart';
 import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
+import 'package:mudarribe_trainee/utils/controller_initlization.dart';
+import 'package:mudarribe_trainee/utils/ui_utils.dart';
 import 'package:mudarribe_trainee/views/authentication/signin/signin_controller.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
@@ -134,7 +136,9 @@ class _SignInViewState extends State<SignInView> {
                         IconButtons(
                             title: 'Sign in with Google',
                             icon: 'assets/images/google.png',
-                            onPressed: () {},
+                            onPressed: () {
+                              signInController.signInGoogle();
+                            },
                             textcolor: Colors.black,
                             gradientColors: [white, white]),
                         SizedBox(height: 30)
@@ -155,7 +159,14 @@ class _SignInViewState extends State<SignInView> {
               child: Obx(() {
                 return GradientButton(
                   title: 'Next',
-                  onPressed: controller.areFieldsFilled.value ? () {} : null,
+                  onPressed: controller.areFieldsFilled.value
+                      ? () {
+                          signInController.signInTrainee();
+                        }
+                      : () {
+                          UiUtilites.errorSnackbar('Fill out all fields',
+                              'Please fill all above fields');
+                        },
                   selected: controller.areFieldsFilled.value,
                 );
               }),

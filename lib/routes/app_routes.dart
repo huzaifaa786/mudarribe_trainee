@@ -14,6 +14,7 @@ class AppRoutes {
   static const eventsDetails = '/eventsDetails';
   static const trainerprofile = '/trainerprofile';
   static const footer = '/footer';
+  static const eventcheckout = '/eventcheckout';
   static const profile = '/profile';
   static const editProfile = '/editProfile';
 

@@ -2,10 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:gradient_borders/gradient_borders.dart';
 import 'package:mudarribe_trainee/components/appbar.dart';
 import 'package:mudarribe_trainee/components/color_button.dart';
 import 'package:mudarribe_trainee/components/underline_input.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
+import 'package:mudarribe_trainee/utils/ui_utils.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class TraineeEditProfileView extends StatelessWidget {
@@ -101,7 +103,9 @@ class TraineeEditProfileView extends StatelessWidget {
                             Gap(40),
                             GradientButton(
                                 title: 'Save',
-                                onPressed: () {},
+                                onPressed: () {
+                                 UiUtilites.successAlert(context);
+                                },
                                 selected: true),
                             Gap(15)
                           ],
@@ -118,3 +122,5 @@ class TraineeEditProfileView extends StatelessWidget {
     );
   }
 }
+
+

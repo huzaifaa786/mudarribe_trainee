@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mudarribe_trainee/exceptions/auth_api_exception.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthApi {
   final _firebaseAuth = FirebaseAuth.instance;
 
   /// Fetch the current Firebase User
   User? get currentUser => _firebaseAuth.currentUser;
- 
 
   /// Signup the user using Email and Password
   Future<User> signUpWithEmail({
@@ -52,6 +52,37 @@ class AuthApi {
 
       final User? user = userCredential.user;
 
+      if (user != null) {
+        return user;
+      } else {
+        throw AuthApiException(
+          title: 'Server Error',
+          message: 'Failed to Login, please try again later.',
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      throw AuthApiException(
+        title: 'Authentication Failed',
+        message: e.message,
+      );
+    }
+  }
+
+  Future<User> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      final UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+
+      final User? user = userCredential.user;
       if (user != null) {
         return user;
       } else {

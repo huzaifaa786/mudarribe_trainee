@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:mudarribe_trainee/components/color_button.dart';
 import 'package:mudarribe_trainee/components/inputfield.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
+import 'package:mudarribe_trainee/utils/ui_utils.dart';
 import 'package:mudarribe_trainee/views/authentication/forgot_password/forgot_password_controller.dart';
 
 class ForgotPasswordView extends StatelessWidget {
@@ -75,34 +76,17 @@ class ForgotPasswordView extends StatelessWidget {
                             ]),
                       ),
                       Gap(50),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.check_circle,
-                            color: Colors.green,
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(left: 8),
-                            width: MediaQuery.of(context).size.width * 0.6,
-                            child: Text(
-                              "the verification code has been sent to your email",
-                              style: const TextStyle(
-                                fontFamily: "Poppins",
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.green,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Gap(40),
+                   
                       GradientButton(
                         title: 'Next',
-                        onPressed: () {},
-                        selected: true,
+                        onPressed: controller.areFieldsFilled.value
+                      ? () {
+                          controller.forgotPassword();
+                        }
+                      : (){
+                         UiUtilites.errorSnackbar('Fill Email Field','Please fill above email field');
+                      },
+                        selected: controller.areFieldsFilled.value,
                       ),
                     ],
                   ),

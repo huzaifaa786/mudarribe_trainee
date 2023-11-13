@@ -16,6 +16,7 @@ import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mudarribe_trainee/views/trainee_profile/edit_profile/edit_profile_view.dart';
 import 'package:mudarribe_trainee/views/trainee_profile/profile/profile_view.dart';
 import 'firebase_options.dart';
 
