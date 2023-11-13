@@ -31,7 +31,6 @@ class InputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        // height: 65,
         padding: const EdgeInsets.only(top: 15, left: 0, right: 0),
         child: TextFormField(
             readOnly: readOnly,
@@ -44,7 +43,10 @@ class InputField extends StatelessWidget {
                     : AutovalidateMode.onUserInteraction),
             style: TextStyle(color: Colors.white),
             keyboardType: type,
+            
             decoration: InputDecoration(
+           contentPadding: EdgeInsets.symmetric(vertical: 14,horizontal: 10),
+
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 fillColor: Colors.white,
                 border: GradientOutlineInputBorder(
