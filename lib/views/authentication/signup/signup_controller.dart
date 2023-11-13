@@ -80,7 +80,7 @@ class SignUpController extends GetxController {
         Get.offNamed(AppRoutes.footer);
       }
     } on AuthApiException catch (e) {
-      UiUtilites.errorSnackbar('AuthException', e.toString());
+      UiUtilites.errorSnackbar('Signup Failed', e.toString());
     }
   }
 }
