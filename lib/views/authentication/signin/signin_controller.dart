@@ -3,7 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mudarribe_trainee/api/auth_api.dart';
+import 'package:mudarribe_trainee/exceptions/auth_api_exception.dart';
+import 'package:mudarribe_trainee/models/app_user.dart';
+import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/services/user_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mudarribe_trainee/utils/ui_utils.dart';
 
 class SignInController extends GetxController {
   static SignInController instance = Get.find();
@@ -40,24 +45,46 @@ class SignInController extends GetxController {
     });
   }
 
-  // Future signUpTrainee() async {
-  //   try {
-  //     final User user = await _authApi.signUpWithEmail(
-  //       email: emailController.text,
-  //       password: passwordController.text,
-  //     );
+  Future signInTrainee() async {
+    try {
+      final User user = await _authApi.loginWithEmail(
+        email: emailController.text,
+        password: passwordController.text,
+      );
 
-  //     if (user.uid.isNotEmpty) {
-  //       await _userService.syncOrCreateUser(
-  //         user: AppUser(
-  //             id: user.uid,
-  //             userType: 'trainee',
-  //             email: user.email,
-  //             name: usernameController.text),
-  //       );
-  //     }
-  //   } on AuthApiException catch (e) {
-  //     print(e);
-  //   }
-  // }
+      if (user.uid.isNotEmpty) {
+        await _userService.syncOrCreateUser(
+          user: AppUser(
+              id: user.uid,
+              userType: 'trainee',
+              email: user.email,
+              name: user.displayName),
+        );
+
+        Get.offNamed(AppRoutes.profile);
+      }
+    } on AuthApiException catch (e) {
+      UiUtilites.errorSnackbar('Signin Failed', e.toString());
+    }
+  }
+
+  Future signInGoogle() async {
+    try {
+      final User user = await _authApi.signInWithGoogle();
+
+      if (user.uid.isNotEmpty) {
+        await _userService.syncOrCreateUser(
+          user: AppUser(
+              id: user.uid,
+              userType: 'trainee',
+              email: user.email,
+              name: user.displayName),
+        );
+
+        Get.offNamed(AppRoutes.profile);
+      }
+    } on AuthApiException catch (e) {
+      UiUtilites.errorSnackbar('Signin Failed', e.toString());
+    }
+  }
 }

@@ -6,12 +6,21 @@ import 'package:mudarribe_trainee/views/authentication/signin/signin_binding.dar
 import 'package:mudarribe_trainee/views/authentication/signin/signin_view.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_binding.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_view.dart';
-import 'package:mudarribe_trainee/views/catigories/catigories_result_screen.dart';
+import 'package:mudarribe_trainee/views/catigories/categories_result_view.dart';
 import 'package:mudarribe_trainee/views/events/eventsdetail/eventsDetail_view.dart';
+import 'package:mudarribe_trainee/views/home/home_binding.dart';
+import 'package:mudarribe_trainee/views/home/home_view.dart';
 import 'package:mudarribe_trainee/views/footer/footer_view.dart';
 import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
+import 'package:mudarribe_trainee/views/trainee_profile/profile/profile_binding.dart';
+import 'package:mudarribe_trainee/views/trainer/event_checkout/event_checkout_binding.dart';
+import 'package:mudarribe_trainee/views/trainer/event_checkout/event_checkout_view.dart';
+import 'package:mudarribe_trainee/views/trainee_profile/edit_profile/edit_profile_view.dart';
+import 'package:mudarribe_trainee/views/trainee_profile/profile/profile_view.dart';
+import 'package:mudarribe_trainee/views/trainer/packages_checkout/package_checkout_binding.dart';
+import 'package:mudarribe_trainee/views/trainer/packages_checkout/package_checkout_view.dart';
 import 'package:mudarribe_trainee/views/trainer/profile/profile_view.dart';
 
 class AppPages {
@@ -26,13 +35,18 @@ class AppPages {
       page: () => const OnBoardingView(),
     ),
     GetPage(
+      name: AppRoutes.home,
+      page: () => const HomeView(),
+      binding: HomeBinding(),
+    ),
+    GetPage(
       name: AppRoutes.signup,
       page: () => const SignUpView(),
       binding: SignupBinding(),
     ),
     GetPage(
       name: AppRoutes.catigories,
-      page: () => const CatigoriesResultScreen(),
+      page: () => const CategoriesResultView(),
     ),
     GetPage(
       name: AppRoutes.trainerprofile,
@@ -57,6 +71,28 @@ class AppPages {
     GetPage(
       name: AppRoutes.footer,
       page: () => const FooterView(),
+      bindings: [
+        HomeBinding(),
+      ],
+    ),
+    GetPage(
+      name: AppRoutes.profile,
+      page: () => const TraineeProfileView(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.editProfile,
+      page: () => const TraineeEditProfileView(),
+    ),
+    GetPage(
+      name: AppRoutes.eventcheckout,
+      page: () => const EventcheckoutView(),
+      binding: EventcheckoutBinding(),
+    ),
+     GetPage(
+      name: AppRoutes.packagecheckout,
+      page: () => const PackagecheckoutView(),
+      binding: PackagecheckoutBinding(),
     ),
   ];
 }

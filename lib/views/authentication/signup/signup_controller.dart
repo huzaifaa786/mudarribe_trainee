@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import 'package:mudarribe_trainee/api/auth_api.dart';
 import 'package:mudarribe_trainee/exceptions/auth_api_exception.dart';
 import 'package:mudarribe_trainee/models/app_user.dart';
+import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/services/user_service.dart';
+import 'package:mudarribe_trainee/utils/ui_utils.dart';
 
 class SignUpController extends GetxController {
   static SignUpController instance = Get.find();
@@ -69,15 +71,16 @@ class SignUpController extends GetxController {
       if (user.uid.isNotEmpty) {
         await _userService.syncOrCreateUser(
           user: AppUser(
-            id: user.uid,
-            userType: 'trainee',
-            email: user.email,
-            name: usernameController.text
-          ),
+              id: user.uid,
+              userType: 'trainee',
+              email: user.email,
+              name: usernameController.text),
         );
+        UiUtilites.successSnackbar('Register User', 'User registered successfully');
+        Get.offNamed(AppRoutes.footer);
       }
     } on AuthApiException catch (e) {
-      print(e);
+      UiUtilites.errorSnackbar('Signup Failed', e.toString());
     }
   }
 }

@@ -29,7 +29,7 @@ class IconButtons extends StatelessWidget {
       onTap: onPressed,
       child: SizedBox(
         width: MediaQuery.of(context).size.width * sreenRatio,
-        height: 60,
+        height: 53,
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -51,6 +51,7 @@ class IconButtons extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
+                    fontFamily: 'Montserrat',
                     color: textcolor,
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
