@@ -14,6 +14,7 @@ import 'package:mudarribe_trainee/views/footer/footer_view.dart';
 import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
+import 'package:mudarribe_trainee/views/trainee_profile/profile/profile_binding.dart';
 import 'package:mudarribe_trainee/views/trainer/event_checkout/event_checkout_binding.dart';
 import 'package:mudarribe_trainee/views/trainer/event_checkout/event_checkout_view.dart';
 import 'package:mudarribe_trainee/views/trainee_profile/edit_profile/edit_profile_view.dart';
@@ -75,6 +76,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.profile,
       page: () => const TraineeProfileView(),
+      binding: ProfileBinding(),
     ),
     GetPage(
       name: AppRoutes.editProfile,
