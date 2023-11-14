@@ -17,5 +17,6 @@ class AppRoutes {
   static const eventcheckout = '/eventcheckout';
   static const profile = '/profile';
   static const editProfile = '/editProfile';
+  static const packagecheckout = '/packagecheckout';
 
 }

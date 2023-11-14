@@ -18,6 +18,8 @@ import 'package:mudarribe_trainee/views/trainer/event_checkout/event_checkout_bi
 import 'package:mudarribe_trainee/views/trainer/event_checkout/event_checkout_view.dart';
 import 'package:mudarribe_trainee/views/trainee_profile/edit_profile/edit_profile_view.dart';
 import 'package:mudarribe_trainee/views/trainee_profile/profile/profile_view.dart';
+import 'package:mudarribe_trainee/views/trainer/packages_checkout/package_checkout_binding.dart';
+import 'package:mudarribe_trainee/views/trainer/packages_checkout/package_checkout_view.dart';
 import 'package:mudarribe_trainee/views/trainer/profile/profile_view.dart';
 
 class AppPages {
@@ -84,6 +86,11 @@ class AppPages {
       name: AppRoutes.eventcheckout,
       page: () => const EventcheckoutView(),
       binding: EventcheckoutBinding(),
+    ),
+     GetPage(
+      name: AppRoutes.packagecheckout,
+      page: () => const PackagecheckoutView(),
+      binding: PackagecheckoutBinding(),
     ),
   ];
 }
