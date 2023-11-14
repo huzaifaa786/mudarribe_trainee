@@ -15,13 +15,27 @@ class AllEventsView extends StatefulWidget {
 class _AllEventsViewState extends State<AllEventsView> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-         TopScreenBar(
-          mytext: "New Events",
-         ),
-        EventDetailsCard(),
-      ],
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TopScreenBar(
+                mytext: "New Events",
+              ),
+              EventDetailsCard(),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: EventDetailsCard(),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: EventDetailsCard(),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

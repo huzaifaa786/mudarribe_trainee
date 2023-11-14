@@ -24,16 +24,39 @@ class _FragmentOneState extends State<FragmentOne> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image(
-                image: AssetImage(
-                  'assets/images/onboard1.png',
-                ),
-                fit: BoxFit.cover,
-                height: MediaQuery.of(context).size.height * 0.45,
+              Stack(
+                children: [
+                  Image(
+                    image: AssetImage(
+                      'assets/images/onboard1.png',
+                    ),
+                    fit: BoxFit.cover,
+                    height: MediaQuery.of(context).size.height * 0.45,
+                  ),
+                  Positioned(
+                      bottom: 0.1,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.9),
+                            boxShadow: const [
+                              BoxShadow(
+                                  blurRadius: 40,
+                                  spreadRadius: 30,
+                                  color: Colors.black)
+                            ]),
+                        height: 40,
+                        child: Text(
+                          'sadsoirweruewuroiewuioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooiwueroiwueoiruwe',
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(0.9),
+                          ),
+                        ),
+                      ))
+                ],
               ),
               Container(
                   padding:
-                      EdgeInsets.only(top: 30, right: 8, left: 8, bottom: 50),
+                      EdgeInsets.only(top: 10, right: 8, left: 8, bottom: 40),
                   child: Text(
                     "Find The best Personal\nTrainer",
                     style: const TextStyle(

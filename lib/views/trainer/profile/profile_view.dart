@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradient_borders/gradient_borders.dart';
+import 'package:mudarribe_trainee/components/eventDetailsCard.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mudarribe_trainee/views/trainer/profile/profile_controller.dart';
@@ -15,11 +16,11 @@ class TrainerprofileView extends StatefulWidget {
 }
 
 class _TrainerprofileViewState extends State<TrainerprofileView> {
-  final TrainerprounfController controller = TrainerprounfController.instance;
+  final TrainerprofileController controller = TrainerprofileController.instance;
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<TrainerprounfController>(
+    return GetBuilder<TrainerprofileController>(
       builder: (controller) => Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
@@ -162,7 +163,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 30),
+                  padding: const EdgeInsets.only(top: 30, bottom: 30),
                   child: ToggleButtons(
                     children: [
                       Row(
@@ -263,7 +264,87 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                           },
                         ),
                       )
-                    : Container(),
+                    : controller.indexs == 1
+                        ? Container(
+                            height: MediaQuery.of(context).size.height * 0.44,
+                            child: ListView(
+                              children: [
+                                EventDetailsCard(),
+                                EventDetailsCard(),
+                              ],
+                            ),
+                          )
+                        : Container(
+                            height: MediaQuery.of(context).size.height * 0.44,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Container(
+                                      height: 118,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Colors.black),
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 20,left: 70,right: 30),
+                                            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(top: 10),
+                                                  child: Row(
+                                                    children: [
+                                                      Image.asset(
+                                                          'assets/images/packageplanimage.png',height: 19,width: 20,),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 5,right: 5),
+                                                        child: Text(
+                                                          '+',
+                                                          style: TextStyle(
+                                                              color: white,
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight.w700),
+                                                        ),
+                                                      ),
+                                                      Image.asset(
+                                                          'assets/images/packageplanimage1.png',height: 18,width: 20),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      '150.44',
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight: FontWeight.w700,
+                                                          color: packageplancolor),
+                                                    ),
+                                                    Padding(padding: EdgeInsets.only(top: 10,left: 6),
+                                                      child: Text(
+                                                        'AED',
+                                                        style: TextStyle(
+                                                            fontSize: 12,
+                                                            fontWeight: FontWeight.w700,
+                                                            color: packageplancolor),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              
+                                              ],
+                                            ),
+                                            
+                                          )
+                                        ],
+                                      ))
+                                ],
+                              ),
+                            ),
+                          ),
               ],
             ),
           ),
