@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mudarribe_trainee/components/ordercard.dart';
 import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/views/authentication/forgot_password/forgot_password_binding.dart';
 import 'package:mudarribe_trainee/views/authentication/forgot_password/forgot_password_view.dart';
@@ -91,6 +92,11 @@ class AppPages {
       name: AppRoutes.packagecheckout,
       page: () => const PackagecheckoutView(),
       binding: PackagecheckoutBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.ordercard,
+      page: () => const OrderCard(),
+      // binding: PackagecheckoutBinding(),
     ),
   ];
 }
