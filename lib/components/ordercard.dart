@@ -93,7 +93,7 @@ class OrderCard extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.only(top: 15),
                           height: 50,
-                          width: MediaQuery.sizeOf(context).width * 0.3,
+                          width: MediaQuery.sizeOf(context).width * 0.31,
                           decoration: BoxDecoration(
                               border: Border(
                             bottom: BorderSide(width: 1, color: dividercolor),
@@ -110,7 +110,7 @@ class OrderCard extends StatelessWidget {
                         ),
                         Container(
                           height: 149,
-                          width: MediaQuery.sizeOf(context).width * 0.3,
+                          width: MediaQuery.sizeOf(context).width * 0.31,
                           decoration: BoxDecoration(
                               border: Border(
                             bottom: BorderSide(width: 1, color: dividercolor),
@@ -174,7 +174,7 @@ class OrderCard extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.only(top: 15),
                           height: 50,
-                          width: MediaQuery.sizeOf(context).width * 0.29,
+                          width: MediaQuery.sizeOf(context).width * 0.31,
                           decoration: BoxDecoration(
                               border: Border(
                             bottom: BorderSide(width: 1, color: dividercolor),
@@ -191,7 +191,7 @@ class OrderCard extends StatelessWidget {
                         ),
                         Container(
                           height: 149,
-                          width: MediaQuery.sizeOf(context).width * 0.29,
+                          width: MediaQuery.sizeOf(context).width * 0.31,
                           decoration: BoxDecoration(
                               border: Border(
                             bottom: BorderSide(width: 1, color: dividercolor),
@@ -215,7 +215,7 @@ class OrderCard extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.only(top: 15),
                           height: 50,
-                          width: MediaQuery.sizeOf(context).width * 0.283,
+                          width: MediaQuery.sizeOf(context).width * 0.281,
                           decoration: BoxDecoration(
                               border: Border(
                             bottom: BorderSide(width: 1, color: dividercolor),
@@ -231,7 +231,7 @@ class OrderCard extends StatelessWidget {
                         ),
                         Container(
                           height: 149,
-                          width: MediaQuery.sizeOf(context).width * 0.283,
+                          width: MediaQuery.sizeOf(context).width * 0.281,
                           decoration: BoxDecoration(
                               border: Border(
                             bottom: BorderSide(width: 1, color: dividercolor),
