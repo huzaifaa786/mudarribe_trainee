@@ -18,5 +18,11 @@ class AppRoutes {
   static const profile = '/profile';
   static const editProfile = '/editProfile';
   static const packagecheckout = '/packagecheckout';
+  static const exercises = '/exercises';
+  static const exercises2 = '/exercises2';
+
+  
+
+  
 
 }
