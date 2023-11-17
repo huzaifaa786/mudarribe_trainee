@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:is_first_run/is_first_run.dart';
 
+
 class SplashController extends GetxController {
   static SplashController instance = Get.find();
 

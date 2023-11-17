@@ -3,9 +3,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 
 class BoxingTrainersCard extends StatelessWidget {
-  const BoxingTrainersCard({super.key,required this.title,
+  const BoxingTrainersCard({
+    super.key,
+    required this.title,
     required this.description,
-    required this.imgpath1,});
+    required this.imgpath1,
+  });
 
   final String title;
   final String description;
@@ -17,7 +20,7 @@ class BoxingTrainersCard extends StatelessWidget {
       margin: EdgeInsets.only(top: 10),
       padding: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-          color: Color(0x872C2723), borderRadius: BorderRadius.circular(10)),
+          color: bgContainer, borderRadius: BorderRadius.circular(10)),
       child: Row(
         children: [
           Column(
@@ -67,12 +70,11 @@ class BoxingTrainersCard extends StatelessWidget {
             ],
           ),
           Column(
-            
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 45, bottom: 50),
                 child: SvgPicture.asset('assets/images/bookmark.svg'),
-             ),
+              ),
               Container(
                 width: 80,
                 height: 29,
