@@ -378,7 +378,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                                                                             FontWeight
                                                                                 .w700,
                                                                         color:
-                                                                            packageplancolor),
+                                                                            whitewithopacity1),
                                                                   ),
                                                                   Padding(
                                                                     padding: EdgeInsets
@@ -396,7 +396,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                                                                               FontWeight
                                                                                   .w700,
                                                                           color:
-                                                                              packageplancolor),
+                                                                              whitewithopacity1),
                                                                     ),
                                                                   ),
                                                                 ],
@@ -417,7 +417,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                                                                       FontWeight
                                                                           .w600,
                                                                   color:
-                                                                      packageplancolor),
+                                                                      whitewithopacity1),
                                                             ),
                                                           ),
                                                           Text(
@@ -428,7 +428,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                                                                       FontWeight
                                                                           .w600,
                                                                   color:
-                                                                      packageplancolor)),
+                                                                      whitewithopacity1)),
                                                         ],
                                                       ),
                                                     )),
@@ -500,7 +500,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                                                                           FontWeight
                                                                               .w700,
                                                                       color:
-                                                                          packageplancolor),
+                                                                          whitewithopacity1),
                                                                 ),
                                                                 Padding(
                                                                   padding: EdgeInsets
@@ -517,7 +517,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                                                                             FontWeight
                                                                                 .w700,
                                                                         color:
-                                                                            packageplancolor),
+                                                                            whitewithopacity1),
                                                                   ),
                                                                 ),
                                                               ],
@@ -550,7 +550,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                                                                               FontWeight
                                                                                   .w600,
                                                                           color:
-                                                                              packageplancolor),
+                                                                              whitewithopacity1),
                                                                     ),
                                                                   ),
                                                                 ],
@@ -564,7 +564,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                                                                         FontWeight
                                                                             .w600,
                                                                     color:
-                                                                        packageplancolor)),
+                                                                        whitewithopacity1)),
                                                           ],
                                                         ),
                                                       )),
@@ -630,7 +630,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                                                                         FontWeight
                                                                             .w700,
                                                                     color:
-                                                                        packageplancolor),
+                                                                        whitewithopacity1),
                                                               ),
                                                               Padding(
                                                                 padding: EdgeInsets
@@ -646,7 +646,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                                                                           FontWeight
                                                                               .w700,
                                                                       color:
-                                                                          packageplancolor),
+                                                                          whitewithopacity1),
                                                                 ),
                                                               ),
                                                             ],
@@ -678,7 +678,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                                                                             FontWeight
                                                                                 .w600,
                                                                         color:
-                                                                            packageplancolor),
+                                                                            whitewithopacity1),
                                                                   ),
                                                                 ),
                                                               ],
@@ -692,7 +692,7 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                                                                       FontWeight
                                                                           .w600,
                                                                   color:
-                                                                      packageplancolor)),
+                                                                      whitewithopacity1)),
                                                         ],
                                                       ),
                                                     )),

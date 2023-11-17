@@ -152,7 +152,7 @@ class _PackagecheckoutViewState extends State<PackagecheckoutView> {
                                                 style: TextStyle(
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w700,
-                                                    color: packageplancolor),
+                                                    color: whitewithopacity1),
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.only(top: 5,bottom: 10),
@@ -162,7 +162,7 @@ class _PackagecheckoutViewState extends State<PackagecheckoutView> {
                                                         fontSize: 12,
                                                         fontWeight:
                                                             FontWeight.w600,
-                                                        color: packageplancolor)),
+                                                        color: whitewithopacity1)),
                                               ),
                                             ],
                                           ),

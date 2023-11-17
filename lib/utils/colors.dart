@@ -16,4 +16,4 @@ const shadowBlack = Color(0x92343434);
 // const dividercolor = Colors.white.withOpacity(0.2);
 const dividercolor = Color(0x33FFFFFF);
 
-const packageplancolor = Color.fromRGBO(255, 255, 255, 1);
+const whitewithopacity1 = Color.fromRGBO(255, 255, 255, 1);
