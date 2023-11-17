@@ -6,7 +6,7 @@ import 'package:mudarribe_trainee/views/authentication/signin/signin_binding.dar
 import 'package:mudarribe_trainee/views/authentication/signin/signin_view.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_binding.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_view.dart';
-import 'package:mudarribe_trainee/views/catigories/categories_result_view.dart';
+import 'package:mudarribe_trainee/views/categories/categories_result_view.dart';
 import 'package:mudarribe_trainee/views/events/eventsdetail/eventsDetail_view.dart';
 import 'package:mudarribe_trainee/views/home/home_binding.dart';
 import 'package:mudarribe_trainee/views/home/home_view.dart';
@@ -14,6 +14,8 @@ import 'package:mudarribe_trainee/views/footer/footer_view.dart';
 import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
+import 'package:mudarribe_trainee/views/trainee_profile/saved/saved_binding.dart';
+import 'package:mudarribe_trainee/views/trainee_profile/saved/saved_view.dart';
 import 'package:mudarribe_trainee/views/trainer/event_checkout/event_checkout_binding.dart';
 import 'package:mudarribe_trainee/views/trainer/event_checkout/event_checkout_view.dart';
 import 'package:mudarribe_trainee/views/trainee_profile/edit_profile/edit_profile_view.dart';
@@ -84,6 +86,11 @@ class AppPages {
       name: AppRoutes.eventcheckout,
       page: () => const EventcheckoutView(),
       binding: EventcheckoutBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.saved,
+      page: () => const SavedViews(),
+      binding: SavedBinding(),
     ),
   ];
 }

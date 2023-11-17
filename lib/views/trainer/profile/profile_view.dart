@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradient_borders/gradient_borders.dart';
-import 'package:mudarribe_trainee/components/checkbox.dart';
 import 'package:mudarribe_trainee/components/eventDetailsCard.dart';
 import 'package:mudarribe_trainee/components/packagecheckbox.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
@@ -721,7 +720,8 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                                       width: MediaQuery.of(context).size.width,
                                       decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadiusDirectional.circular(5),
+                                              BorderRadiusDirectional.circular(
+                                                  5),
                                           gradient: LinearGradient(
                                             begin: Alignment(1.00, -0.03),
                                             end: Alignment(-1, 0.03),
