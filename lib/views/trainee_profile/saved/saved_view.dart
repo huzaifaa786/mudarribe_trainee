@@ -102,39 +102,31 @@ class _SavedViewsState extends State<SavedViews> {
                     child: TabBarView(
                       children: [
                         Container(
-                            child: Column(
-                          children: [
-                            SingleChildScrollView(
-                              child: Column(
+                            child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Column(
                                 children: [
                                   BoxingTrainersCard(
                                       title: title,
-                                      description: description,
+                                      description: 'Boxing Trainer',
                                       imgpath1: imgpath1),
                                   BoxingTrainersCard(
                                       title: title,
-                                      description: description,
+                                      description: 'Boxing Trainer',
                                       imgpath1: imgpath1),
                                   BoxingTrainersCard(
                                       title: title,
-                                      description: description,
+                                      description: 'Boxing Trainer',
                                       imgpath1: imgpath1),
                                   BoxingTrainersCard(
                                       title: title,
-                                      description: description,
-                                      imgpath1: imgpath1),
-                                  BoxingTrainersCard(
-                                      title: title,
-                                      description: description,
-                                      imgpath1: imgpath1),
-                                  BoxingTrainersCard(
-                                      title: title,
-                                      description: description,
+                                      description: 'Boxing Trainer',
                                       imgpath1: imgpath1),
                                 ],
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         )),
                         Container(
                             child: SingleChildScrollView(
