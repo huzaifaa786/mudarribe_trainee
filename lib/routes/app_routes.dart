@@ -1,3 +1,6 @@
+import 'package:mudarribe_trainee/components/ordercard.dart';
+import 'package:mudarribe_trainee/views/footer/footer_view.dart';
+
 class AppRoutes {
   static const splash = '/splash';
   static const onBoarding = '/onBoarding';
@@ -15,4 +18,9 @@ class AppRoutes {
   static const profile = '/profile';
   static const editProfile = '/editProfile';
   static const saved = '/saved';
+  static const packagecheckout = '/packagecheckout';
+  static const ordercard = '/ordercard';
+  static const Mornningworkout = '/Mornningworkout';
+  static const Nutritionplan = '/Nutritionplan';
+
 }

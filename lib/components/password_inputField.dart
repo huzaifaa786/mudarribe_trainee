@@ -1,9 +1,9 @@
 // ignore_for_file: use_full_hex_values_for_flutter_colors, prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:gradient_borders/gradient_borders.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 
 class PasswordInputField extends StatelessWidget {
