@@ -151,7 +151,7 @@ class OrderCard extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w700,
-                                    color: packageplancolor),
+                                    color: whitewithopacity1),
                               ),
                               Padding(
                                 padding:
@@ -162,7 +162,7 @@ class OrderCard extends StatelessWidget {
                                     style: TextStyle(
                                         fontSize: 11,
                                         fontWeight: FontWeight.w500,
-                                        color: packageplancolor)),
+                                        color: whitewithopacity1)),
                               ),
                             ],
                           ),
@@ -204,7 +204,7 @@ class OrderCard extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w700,
-                                  color: packageplancolor),
+                                  color: whitewithopacity1),
                             ),
                           ),
                         ),
@@ -257,7 +257,7 @@ class OrderCard extends StatelessWidget {
                                   style: TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w700,
-                                      color: packageplancolor),
+                                      color: whitewithopacity1),
                                 ),
                               ),
                             ],

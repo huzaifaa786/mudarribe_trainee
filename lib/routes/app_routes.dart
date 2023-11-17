@@ -20,5 +20,7 @@ class AppRoutes {
   static const editProfile = '/editProfile';
   static const packagecheckout = '/packagecheckout';
   static const ordercard = '/ordercard';
+  static const Mornningworkout = '/Mornningworkout';
+  static const Nutritionplan = '/Nutritionplan';
 
 }

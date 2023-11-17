@@ -3,7 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 class Bodyworkplan extends StatelessWidget {
-  const Bodyworkplan({super.key});
+  const Bodyworkplan({
+    super.key,
+     this.mytext,
+   
+  });
+  final mytext;
+
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +50,12 @@ class Bodyworkplan extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Full Body work plan',
+                                mytext,
                                 style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
                                     fontFamily: 'Poppins',
-                                    color: white),
+                                    color: whitewithopacity1),
                               ),
                               Image.asset(
                                 'assets/images/workplan1.png',

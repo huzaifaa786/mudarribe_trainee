@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:mudarribe_trainee/components/plancontainer.dart';
+import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 import 'package:mudarribe_trainee/views/trainer/profile/profile_view.dart';
 
@@ -83,13 +84,13 @@ class _MyplansViewState extends State<MyplansView> {
         ),
         body: TabBarView(
           children: [
-            Plancontainer(
+            Plancontainer(viewcontent: AppRoutes.Mornningworkout,
               planimage: Image.asset(
                 'assets/images/exerciseplans.png',
                 fit: BoxFit.fill,
               ),mytext: 'Exercis Plan',
             ),
-             Plancontainer(
+             Plancontainer(viewcontent: AppRoutes.Nutritionplan,
               planimage: Image.asset(
                 'assets/images/nutritionplan.png',
                 fit: BoxFit.fill,

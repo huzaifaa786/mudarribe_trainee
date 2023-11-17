@@ -1,23 +1,23 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 
-class Workoutvideocard extends StatelessWidget {
-  const Workoutvideocard({
+class Nutritionworkoutvideocard extends StatelessWidget {
+  const Nutritionworkoutvideocard({
     Key? key,
-    this.videono,
+    this.mytitle,
     this.thumbnailimage,
   }) : super(key: key);
 
-  final videono;
+  final mytitle;
   final thumbnailimage;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 10),
-      height: 105,
+      height: 125,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: bgContainer,
@@ -27,8 +27,8 @@ class Workoutvideocard extends StatelessWidget {
         children: [
           Stack(children: [
             Container(
-              height: 77,
-              width: 123,
+              height: 101,
+              width: 106,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   gradient: LinearGradient(
@@ -36,37 +36,36 @@ class Workoutvideocard extends StatelessWidget {
                     end: Alignment(-1, 0.03),
                     colors: [Color(0xFF58E0FF), Color(0xFF727DCD)],
                   )),
-              child: Image.asset('assets/images/body work plan.png'),
+              child: thumbnailimage,
             ),
-            Positioned(left: 50, top: 24, child: thumbnailimage)
+            Positioned(
+                left: 37,
+                top: 32,
+                child: Image.asset(
+                  'assets/images/playbutton.png',
+                  height: 32,
+                  width: 32,
+                ))
           ]),
           Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  videono,
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Color.fromRGBO(255, 255, 255, 0.6),
-                      fontFamily: 'Poppins'),
-                ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 5, bottom: 5),
+                  padding: const EdgeInsets.only(top: 23, bottom: 20),
                   child: Text(
-                    'Full Body Energy',
+                    mytitle,
                     style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: whitewithopacity1,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: Color.fromRGBO(255, 255, 255, 1),
                         fontFamily: 'Poppins'),
                   ),
                 ),
                 Text(
-                  '17 min/45kcal/L2 Beginner',
+                  'Video',
                   style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w600,
