@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:is_first_run/is_first_run.dart';
 
+
 class SplashController extends GetxController {
   static SplashController instance = Get.find();
 
@@ -20,7 +21,7 @@ class SplashController extends GetxController {
     else {
       final User? user = FirebaseAuth.instance.currentUser;
      
-      if (user!.uid.isNotEmpty) {
+      if (user != null) {
         Get.offNamed(AppRoutes.profile);
       } else {
         Get.offNamed(AppRoutes.signin);

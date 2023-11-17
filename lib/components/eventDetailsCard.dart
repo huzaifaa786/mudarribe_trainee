@@ -18,81 +18,84 @@ class EventDetailsCard extends StatelessWidget {
     return Card(
       color: bgContainer,
       child: Container(
-        width: MediaQuery.sizeOf(context).width * 0.86,
+        width: MediaQuery.sizeOf(context).width,
         padding: EdgeInsets.only(bottom: 20, top: 20),
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 19),
+              padding: const EdgeInsets.only(left: 20, right: 20),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ClipOval(
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: const GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: [
-                              Color.fromARGB(255, 184, 66, 186),
-                              Color.fromARGB(255, 111, 127, 247),
-                            ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipOval(
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: const GradientBoxBorder(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color.fromARGB(255, 184, 66, 186),
+                                  Color.fromARGB(255, 111, 127, 247),
+                                ],
+                              ),
+                              width: 2,
+                            ),
+                            image: DecorationImage(
+                              image: AssetImage('assets/images/profile.jpg'),
+                              fit: BoxFit.contain,
+                            ),
                           ),
-                          width: 2,
-                        ),
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/profile.jpg'),
-                          fit: BoxFit.contain,
                         ),
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 2.0, left: 10.4),
-                    child: Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Salim Ahmed',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 2.0, left: 10, right: 10),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Salim Ahmed',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                            Text(
-                              'Body Building& lifting trainer',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white
-                                    .withOpacity(0.6000000238418579),
+                              Text(
+                                'Body Building& lifting trainer',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white
+                                      .withOpacity(0.6000000238418579),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 35),
-                    child: SvgPicture.asset(
-                      'assets/images/bookmark.svg',
-                    ),
+                  Image.asset(
+                    'assets/images/bookmark1.png',
                   ),
                 ],
               ),
             ),
             Container(
               height: 200,
-              padding: EdgeInsets.only(left: 20,right: 20),
+              padding: EdgeInsets.only(left: 20, right: 20),
               width: MediaQuery.sizeOf(context).width,
               child: Image.asset(
                 'assets/images/cardImage.png',
@@ -106,9 +109,10 @@ class EventDetailsCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      SvgPicture.asset('assets/images/location.svg'),
+                      SvgPicture.asset('assets/images/location.svg',
+                          fit: BoxFit.scaleDown, height: 24, width: 24),
                       Padding(
-                        padding: const EdgeInsets.only(left: 5,bottom: 5),
+                        padding: const EdgeInsets.only(left: 8, bottom: 6),
                         child: Text(
                           'Dubai',
                           style: TextStyle(
@@ -136,9 +140,10 @@ class EventDetailsCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SvgPicture.asset('assets/images/timeline.svg'),
+                      SvgPicture.asset('assets/images/timeline.svg',
+                          fit: BoxFit.scaleDown, height: 24, width: 24),
                       Padding(
-                        padding: const EdgeInsets.only(left: 6,bottom: 4),
+                        padding: const EdgeInsets.only(left: 8, bottom: 6),
                         child: Text(
                           'from 3 : 00 to 05 : 00 pm',
                           style: TextStyle(
@@ -153,9 +158,10 @@ class EventDetailsCard extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      SvgPicture.asset('assets/images/calender1.svg'),
+                      SvgPicture.asset('assets/images/calender1.svg',
+                          fit: BoxFit.scaleDown, height: 24, width: 24),
                       Padding(
-                        padding: const EdgeInsets.only(left: 10,bottom: 4),
+                        padding: const EdgeInsets.only(left: 8, bottom: 6),
                         child: Text(
                           '23/11/2023',
                           style: TextStyle(
@@ -171,9 +177,10 @@ class EventDetailsCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SvgPicture.asset('assets/images/peoplesharp.svg'),
+                      SvgPicture.asset('assets/images/peoplesharp.svg',
+                          fit: BoxFit.scaleDown, height: 24, width: 24),
                       Padding(
-                        padding: const EdgeInsets.only(left: 10,bottom: 4),
+                        padding: const EdgeInsets.only(left: 8, bottom: 6),
                         child: Text(
                           'Total People amount: 3/34',
                           style: TextStyle(
@@ -214,8 +221,8 @@ class EventDetailsCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         GestureDetector(
-                          onTap: (){
-                             Get.toNamed(AppRoutes.eventcheckout);
+                          onTap: () {
+                            Get.toNamed(AppRoutes.eventcheckout);
                           },
                           child: GradientText1(
                             text: 'Join Event',
