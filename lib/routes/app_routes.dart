@@ -1,5 +1,3 @@
-import 'package:mudarribe_trainee/components/ordercard.dart';
-import 'package:mudarribe_trainee/views/footer/footer_view.dart';
 
 class AppRoutes {
   static const splash = '/splash';
