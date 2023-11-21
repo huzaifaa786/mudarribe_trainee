@@ -4,21 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:mudarribe_trainee/components/color_button.dart';
+import 'package:mudarribe_trainee/components/inputfield.dart';
 import 'package:mudarribe_trainee/components/password_inputField.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 import 'package:mudarribe_trainee/views/authentication/change_password/change_password_contoller.dart';
+import 'package:mudarribe_trainee/views/trainee_profile/report/report_problem_contoller.dart';
 
-class ChangePasswordView extends StatefulWidget {
-  const ChangePasswordView({super.key});
+class ReportProblemView extends StatefulWidget {
+  const ReportProblemView({super.key});
 
   @override
-  State<ChangePasswordView> createState() => _ChangePasswordViewState();
+  State<ReportProblemView> createState() => _ReportProblemViewState();
 }
 
-class _ChangePasswordViewState extends State<ChangePasswordView> {
+class _ReportProblemViewState extends State<ReportProblemView> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ChangepasswordController>(
+    return GetBuilder<ReportProblemController>(
       builder: (controller) => Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
@@ -56,7 +58,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                   Container(
                     // height: 300,
                     padding: EdgeInsets.only(
-                        left: 15, right: 15, top:40, bottom: 25),
+                        left: 15, right: 15, top: 40, bottom: 25),
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         color: Color.fromARGB(255, 15, 15, 15),
@@ -65,42 +67,8 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          PasswordInputField(
-                            lable: 'Old password',
-                            obscure: controller.obscureTextOldPassword,
-                            toggle: controller.toggle2,
-                          ),
-                          SizedBox(
-                            height: 18,
-                          ),
-                          PasswordInputField(
-                            lable: 'New password',
-                            obscure: controller.obscureTextPassword,
-                            toggle: controller.toggle,
-                          ),
-                          SizedBox(
-                            height: 18,
-                          ),
-                          PasswordInputField(
-                            lable: 'Confirm New Password',
-                            obscure: controller.obscureTextCPassword,
-                            toggle: controller.toggle1,
-                          ),
-                          SizedBox(
-                            height: 50,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset('assets/images/Vector (1).svg'),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                'Password Updated Successfully',
-                                style: TextStyle(color: Colors.green),
-                              ),
-                            ],
+                          InputField(
+                            maxlines: 5,
                           ),
                         ]),
                   ),
@@ -110,7 +78,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                   GradientButton(
                     title: 'Confirm',
                     onPressed: () {},
-                    selected: controller.selected == '' ? false : true,
+                    selected: true,
                   )
                 ],
               ),
