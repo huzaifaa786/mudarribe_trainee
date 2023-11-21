@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-import 'package:mudarribe_trainee/utils/colors.dart';
 
 class TopScreenBar extends StatelessWidget {
   const TopScreenBar({
@@ -16,7 +15,7 @@ class TopScreenBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 15,right: 15,bottom: 15,top: 15),
+      padding: EdgeInsets.only(left: 30, right: 30, top: 60),
       width: MediaQuery.sizeOf(context).width,
       child: Row(
         children: [

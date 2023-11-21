@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mudarribe_trainee/views/trainer/profile/profile_view.dart';
 
 class TrainerprofileController extends GetxController {
   static TrainerprofileController instance = Get.find();
@@ -31,5 +32,18 @@ class TrainerprofileController extends GetxController {
   RxBool isFollowing = false.obs;
   void toggleFollow() {
     isFollowing.value = !isFollowing.value;
+  }
+
+  PackageType? mytype;
+  toggleplan(PackageType value) {
+    mytype = value;
+    update();
+  }
+
+  @override
+  void onInit() {
+    mytype = PackageType.monthBoth;
+    update();
+    super.onInit();
   }
 }

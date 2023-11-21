@@ -51,7 +51,7 @@ class SignInController extends GetxController {
         email: emailController.text,
         password: passwordController.text,
       );
-      print(user);
+
       if (user.uid.isNotEmpty) {
         await _userService.syncOrCreateUser(
           user: AppUser(
@@ -61,7 +61,27 @@ class SignInController extends GetxController {
               name: user.displayName),
         );
 
-        Get.offNamed(AppRoutes.footer);
+        Get.offNamed(AppRoutes.profile);
+      }
+    } on AuthApiException catch (e) {
+      UiUtilites.errorSnackbar('Signin Failed', e.toString());
+    }
+  }
+
+  Future signInGoogle() async {
+    try {
+      final User user = await _authApi.signInWithGoogle();
+
+      if (user.uid.isNotEmpty) {
+        await _userService.syncOrCreateUser(
+          user: AppUser(
+              id: user.uid,
+              userType: 'trainee',
+              email: user.email,
+              name: user.displayName),
+        );
+
+        Get.offNamed(AppRoutes.profile);
       }
     } on AuthApiException catch (e) {
       UiUtilites.errorSnackbar('Signin Failed', e.toString());

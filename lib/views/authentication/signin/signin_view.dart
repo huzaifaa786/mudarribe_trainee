@@ -136,7 +136,9 @@ class _SignInViewState extends State<SignInView> {
                         IconButtons(
                             title: 'Sign in with Google',
                             icon: 'assets/images/google.png',
-                            onPressed: () {},
+                            onPressed: () {
+                              signInController.signInGoogle();
+                            },
                             textcolor: Colors.black,
                             gradientColors: [white, white]),
                         SizedBox(height: 30)
