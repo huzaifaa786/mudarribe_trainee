@@ -5,6 +5,8 @@ import 'package:mudarribe_trainee/views/Myplans/Morningworkout/morning_workout_b
 import 'package:mudarribe_trainee/views/Myplans/Morningworkout/morning_workout_view.dart';
 import 'package:mudarribe_trainee/views/Myplans/NutritionPlan/nutrition_plan_binding.dart';
 import 'package:mudarribe_trainee/views/Myplans/NutritionPlan/nutrition_plan_view.dart';
+import 'package:mudarribe_trainee/views/authentication/change_password/change_password_binding.dart';
+import 'package:mudarribe_trainee/views/authentication/change_password/change_password_view.dart';
 import 'package:mudarribe_trainee/views/authentication/forgot_password/forgot_password_binding.dart';
 import 'package:mudarribe_trainee/views/authentication/forgot_password/forgot_password_view.dart';
 import 'package:mudarribe_trainee/views/authentication/signin/signin_binding.dart';
@@ -132,6 +134,11 @@ class AppPages {
       name: AppRoutes.Nutritionplan,
       page: () => const NutritionplanView(),
       binding: NutritionplanBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.changepassword,
+      page: () => const ChangePasswordView(),
+      binding: ChangePasswordBinding(),
     ),
   ];
 }
