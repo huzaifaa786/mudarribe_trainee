@@ -9,10 +9,12 @@ import 'package:mudarribe_trainee/views/authentication/change_password/change_pa
 import 'package:mudarribe_trainee/views/authentication/change_password/change_password_view.dart';
 import 'package:mudarribe_trainee/views/authentication/signin/signin_binding.dart';
 import 'package:mudarribe_trainee/views/authentication/signin/signin_view.dart';
-import 'package:mudarribe_trainee/views/catigories/categories_result_view.dart';
+
 import 'package:mudarribe_trainee/views/events/allevents/allevents_view.dart';
 import 'package:mudarribe_trainee/views/events/eventsdetail/eventsDetail_view.dart';
 import 'package:mudarribe_trainee/views/events/myevents/myEvents_view.dart';
+import 'package:mudarribe_trainee/views/exesrcontent/exercises.dart';
+import 'package:mudarribe_trainee/views/exesrcontent/exercises2.dart';
 import 'package:mudarribe_trainee/views/footer/footer_view.dart';
 import 'package:mudarribe_trainee/views/home/home_binding.dart';
 import 'package:mudarribe_trainee/views/home/home_view.dart';
