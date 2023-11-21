@@ -16,12 +16,12 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      builder: (controller) =>Scaffold(
-      body: SafeArea(
-          child: Padding(
-        padding: EdgeInsets.only(left: 15.0, right: 15.0),
-        child: SingleChildScrollView(
-          child: Column(
+      builder: (controller) => Scaffold(
+          body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(left: 15.0, right: 15.0),
+          child: SingleChildScrollView(
+              child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Row(
@@ -38,7 +38,7 @@ class HomeView extends StatelessWidget {
                     fontSize: 20,
                     fontWeight: FontWeight.w800,
                   ),
-                ),  
+                ),
               ),
               Container(
                   margin: const EdgeInsets.symmetric(vertical: 20),
@@ -48,7 +48,8 @@ class HomeView extends StatelessWidget {
                       children: List.generate(
                           10,
                           (index) => Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Container(
                                     height: 70,
@@ -114,10 +115,10 @@ class HomeView extends StatelessWidget {
                   ),
                   GestureDetector(
                     onLongPress: () {
-              //         setState(() {
-              //   showAllCards = !showAllCards;
-              //   controller.updateDisplayedCards();
-              // });
+                      //         setState(() {
+                      //   showAllCards = !showAllCards;
+                      //   controller.updateDisplayedCards();
+                      // });
                     },
                     child: Text(
                       'View all',
@@ -130,33 +131,59 @@ class HomeView extends StatelessWidget {
                   ),
                 ],
               ),
-              CategoryCard(
-                title: 'Body Building\n',
-                image: "assets/images/tumble.png",
-                firstColor: Color(0xFF727DCD),
-                secondColor: Color(0xFF58E0FF),
-              ),
-              Expanded(
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, // Set the number of columns here
-                crossAxisSpacing: 8.0,
-                mainAxisSpacing: 8.0,
-              ),
-              itemCount: controller.displayedCards.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    title: Text(controller.displayedCards[index]),
+              // Column(
+              //   crossAxisAlignment: CrossAxisAlignment.center,
+              //   children: [
+              //     Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //       children:controller.allCards
+              //               .take(3)
+              //               .map((card) => CategoryCard(
+              //                     title: 'Body Building\n',
+              //                     image: "assets/images/tumble.png",
+              //                     firstColor: Color(0xFF727DCD),
+              //                     secondColor: Color(0xFF58E0FF),
+              //                   ))
+              //               .toList(),
+              //         ),
+              //       ],
+              //     ),
+
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.4,
+                child: GridView.builder(
+                  itemCount:
+                      !controller.showAllCards ? controller.cards.length : 6,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 8.0,
+                    mainAxisSpacing: 8.0,
                   ),
-                );
-              },
-            ),
-          ),
+                  itemBuilder: (context, index) {
+                    return CategoryCard(
+                      title: controller.cards[index]['title'],
+                      image: controller.cards[index]['image'],
+                      firstColor: Color(int.parse(controller.cards[index]['firstColor']!)),
+                      secondColor: Color(int.parse(controller.cards[index]['secondColor']!)),
+                      beginX:controller.cards[index]['beginX'],
+                      beginY:controller.cards[index]['beginY'],
+                      endX:controller.cards[index]['endX'],
+                      endY:controller.cards[index]['endY'],
+                    );
+                  },
+                ),
+              ),
+              
+              Container(
+                child: Text(
+                  'DSDSJD',
+                  style: TextStyle(color: white),
+                ),
+              )
             ],
-          ),
+          )),
         ),
       )),
-    ));
+    );
   }
 }
