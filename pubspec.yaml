@@ -47,6 +47,8 @@ dependencies:
   is_first_run: ^1.0.0
   change_app_package_name: ^1.1.0
   google_sign_in: ^6.1.6
+  video_player: ^2.8.1
+  lecle_yoyo_player: ^0.0.8
 
 dev_dependencies:
   flutter_test:

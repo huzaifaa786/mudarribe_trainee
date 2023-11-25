@@ -27,6 +27,8 @@ import 'package:mudarribe_trainee/views/trainee_profile/profile/profile_view.dar
 import 'package:mudarribe_trainee/views/trainer/packages_checkout/package_checkout_binding.dart';
 import 'package:mudarribe_trainee/views/trainer/packages_checkout/package_checkout_view.dart';
 import 'package:mudarribe_trainee/views/trainer/profile/profile_view.dart';
+import 'package:mudarribe_trainee/views/video/video_view.dart';
+import 'package:mudarribe_trainee/views/video/videoplay_binding.dart';
 
 class AppPages {
   static final List<GetPage> pages = [
@@ -113,6 +115,11 @@ class AppPages {
       name: AppRoutes.Nutritionplan,
       page: () => const NutritionplanView(),
       binding: NutritionplanBinding(),
+    ),
+     GetPage(
+      name: AppRoutes.Videoplay,
+      page: () => const VideoPlay(),
+      binding: VideoPlayBinding(),
     ),
   ];
 }
