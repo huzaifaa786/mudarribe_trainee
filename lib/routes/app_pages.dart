@@ -5,20 +5,26 @@ import 'package:mudarribe_trainee/views/Myplans/Morningworkout/morning_workout_b
 import 'package:mudarribe_trainee/views/Myplans/Morningworkout/morning_workout_view.dart';
 import 'package:mudarribe_trainee/views/Myplans/NutritionPlan/nutrition_plan_binding.dart';
 import 'package:mudarribe_trainee/views/Myplans/NutritionPlan/nutrition_plan_view.dart';
+import 'package:mudarribe_trainee/views/authentication/change_password/change_password_binding.dart';
+import 'package:mudarribe_trainee/views/authentication/change_password/change_password_view.dart';
 import 'package:mudarribe_trainee/views/authentication/forgot_password/forgot_password_binding.dart';
 import 'package:mudarribe_trainee/views/authentication/forgot_password/forgot_password_view.dart';
 import 'package:mudarribe_trainee/views/authentication/signin/signin_binding.dart';
 import 'package:mudarribe_trainee/views/authentication/signin/signin_view.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_binding.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_view.dart';
-import 'package:mudarribe_trainee/views/catigories/categories_result_view.dart';
+import 'package:mudarribe_trainee/views/categories/categories_result_view.dart';
 import 'package:mudarribe_trainee/views/events/eventsdetail/eventsDetail_view.dart';
+import 'package:mudarribe_trainee/views/exesrcontent/exercises.dart';
+import 'package:mudarribe_trainee/views/exesrcontent/exercises2.dart';
 import 'package:mudarribe_trainee/views/home/home_binding.dart';
 import 'package:mudarribe_trainee/views/home/home_view.dart';
 import 'package:mudarribe_trainee/views/footer/footer_view.dart';
 import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
+import 'package:mudarribe_trainee/views/trainee_profile/saved/saved_binding.dart';
+import 'package:mudarribe_trainee/views/trainee_profile/saved/saved_view.dart';
 import 'package:mudarribe_trainee/views/trainee_profile/profile/profile_binding.dart';
 import 'package:mudarribe_trainee/views/trainer/event_checkout/event_checkout_binding.dart';
 import 'package:mudarribe_trainee/views/trainer/event_checkout/event_checkout_view.dart';
@@ -96,11 +102,26 @@ class AppPages {
       page: () => const EventcheckoutView(),
       binding: EventcheckoutBinding(),
     ),
-     GetPage(
+    GetPage(
+      name: AppRoutes.saved,
+      page: () => const SavedViews(),
+      binding: SavedBinding(),
+    ),
+    GetPage(
       name: AppRoutes.packagecheckout,
       page: () => const PackagecheckoutView(),
       binding: PackagecheckoutBinding(),
     ),
+      GetPage(
+      name: AppRoutes.exercises,
+      page: () => const ExercisesScreen(),
+      binding: PackagecheckoutBinding(),
+    ),
+      GetPage(
+      name: AppRoutes.exercises2,
+      page: () => const ExercisesScreen2(),
+      binding: PackagecheckoutBinding(),
+      ),
     GetPage(
       name: AppRoutes.ordercard,
       page: () => const OrderCard(),
@@ -116,10 +137,17 @@ class AppPages {
       page: () => const NutritionplanView(),
       binding: NutritionplanBinding(),
     ),
+<<<<<<< HEAD
      GetPage(
       name: AppRoutes.Videoplay,
       page: () => const VideoPlay(),
       binding: VideoPlayBinding(),
+=======
+    GetPage(
+      name: AppRoutes.changepassword,
+      page: () => const ChangePasswordView(),
+      binding: ChangePasswordBinding(),
+>>>>>>> 4479153ec4782608fc496234e4c34fbc6d740835
     ),
   ];
 }

@@ -1,11 +1,15 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 
 class BoxingTrainersCard extends StatelessWidget {
-  const BoxingTrainersCard({super.key,    required this.title,
+  const BoxingTrainersCard({
+    super.key,
+    required this.title,
     required this.description,
-    required this.imgpath1,});
+    required this.imgpath1,
+  });
 
   final String title;
   final String description;
@@ -14,16 +18,17 @@ class BoxingTrainersCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
-      padding: EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-          color: Color(0x872C2723), borderRadius: BorderRadius.circular(10)),
-      child: Row(
-        children: [
+        height: 112,
+        width: 375,
+        margin: EdgeInsets.only(top: 10),
+        padding: EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+            color: bgContainer, borderRadius: BorderRadius.circular(10)),
+        child: Row(children: [
           Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(imgpath1),
-              // 'assets/images/cardimg1.png'
             ],
           ),
           SizedBox(
@@ -32,24 +37,28 @@ class BoxingTrainersCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Text(title,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                      )),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text('⭐ 4.5',
-                      style: TextStyle(
-                        color: Colors.amber,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500,
-                      ))
-                ],
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(title,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        )),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('⭐ 4.5',
+                        style: TextStyle(
+                          color: Colors.amber,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                        ))
+                  ],
+                ),
               ),
               SizedBox(
                 height: 5,
@@ -63,59 +72,47 @@ class BoxingTrainersCard extends StatelessWidget {
               SizedBox(
                 width: 10,
               ),
-              //Text('njjkkhhhh',style: TextStyle(color: Colors.red),)
             ],
           ),
           Column(
-            
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
+              Image.asset('assets/images/bookmark-light.png'),
               Padding(
-                padding: const EdgeInsets.only(left: 45, bottom: 50),
-                child: SvgPicture.asset('assets/images/bookmark.svg'),
-             ),
-              Container(
-                width: 80,
-                height: 29,
-                decoration: ShapeDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment(0.00, -1.00),
-                    end: Alignment(0, 1),
-                    colors: [Color(0xFF727DCD), Color(0xFF58E0FF)],
-                  ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)),
+                padding: const EdgeInsets.only(
+                  bottom: 7,
                 ),
-                child: Stack(
-                  children: [
-                    Container(
-                      width: 84,
-                      height: 24.17,
-                      decoration: ShapeDecoration(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
+                child: Container(
+                  width: 80,
+                  height: 29,
+                  decoration: ShapeDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment(0.00, -1.00),
+                      end: Alignment(0, 1),
+                      colors: [Color(0xFF727DCD), Color(0xFF58E0FF)],
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'View Profile',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w700,
+                        height: 0,
                       ),
                     ),
-                    Center(
-                      child: Text(
-                        'View Profile',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 10,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w700,
-                          height: 0,
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ],
-          ),
-        ],
-      ),
-    );
+          )
+        ]));
   }
 }
