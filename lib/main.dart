@@ -24,12 +24,9 @@ import 'package:mudarribe_trainee/views/splash/splash_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mudarribe_trainee/views/trainee_profile/edit_profile/edit_profile_view.dart';
 import 'package:mudarribe_trainee/views/trainee_profile/profile/profile_view.dart';
-<<<<<<< HEAD
 import 'package:mudarribe_trainee/views/video/video_view.dart';
-=======
 import 'package:mudarribe_trainee/views/trainee_profile/report/report_problem_binding.dart';
 import 'package:mudarribe_trainee/views/trainee_profile/report/report_problem_view.dart';
->>>>>>> 4479153ec4782608fc496234e4c34fbc6d740835
 import 'firebase_options.dart';
 
 void main() async {
@@ -57,13 +54,8 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: "Mudarribe",
-<<<<<<< HEAD
       initialBinding: SplashBinding(),
       home: VideoPlay(),
-=======
-      initialBinding: HomeBinding(),
-      home: HomeView(),
->>>>>>> 4479153ec4782608fc496234e4c34fbc6d740835
       getPages: AppPages.pages,
     );
   }

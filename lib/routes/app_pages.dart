@@ -137,17 +137,15 @@ class AppPages {
       page: () => const NutritionplanView(),
       binding: NutritionplanBinding(),
     ),
-<<<<<<< HEAD
      GetPage(
       name: AppRoutes.Videoplay,
       page: () => const VideoPlay(),
       binding: VideoPlayBinding(),
-=======
+     ),
     GetPage(
       name: AppRoutes.changepassword,
       page: () => const ChangePasswordView(),
       binding: ChangePasswordBinding(),
->>>>>>> 4479153ec4782608fc496234e4c34fbc6d740835
     ),
   ];
 }

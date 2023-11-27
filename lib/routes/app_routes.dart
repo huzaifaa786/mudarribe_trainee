@@ -26,10 +26,7 @@ class AppRoutes {
   static const ordercard = '/ordercard';
   static const Mornningworkout = '/Mornningworkout';
   static const Nutritionplan = '/Nutritionplan';
-<<<<<<< HEAD
   static const Videoplay = '/Videoplay';
-=======
   static const changepassword = '/changepassword';
->>>>>>> 4479153ec4782608fc496234e4c34fbc6d740835
 
 }
