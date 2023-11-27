@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Mudarribe",
       initialBinding: SplashBinding(),
-      home: VideoPlay(),
+      home: SplashView(),
       getPages: AppPages.pages,
     );
   }

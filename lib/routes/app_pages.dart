@@ -35,6 +35,7 @@ import 'package:mudarribe_trainee/views/trainer/packages_checkout/package_checko
 import 'package:mudarribe_trainee/views/trainer/profile/profile_view.dart';
 import 'package:mudarribe_trainee/views/video/video_view.dart';
 import 'package:mudarribe_trainee/views/video/videoplay_binding.dart';
+import 'package:mudarribe_trainee/views/trainee_profile/edit_profile/editprofile_binding.dart';
 
 class AppPages {
   static final List<GetPage> pages = [
@@ -96,6 +97,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.editProfile,
       page: () => const TraineeEditProfileView(),
+       binding: EditProfileBinding(),
     ),
     GetPage(
       name: AppRoutes.eventcheckout,
