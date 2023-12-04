@@ -1,11 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:mudarribe_trainee/components/boxing_trainers_card.dart';
 import 'package:mudarribe_trainee/components/topbar.dart';
-import 'package:mudarribe_trainee/components/userSelectionCard.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 
 // import 'package:mudarribe_trainee/components/topbar.dart';
