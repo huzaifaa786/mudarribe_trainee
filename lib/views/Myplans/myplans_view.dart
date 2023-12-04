@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:mudarribe_trainee/components/plancontainer.dart';
 import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
-import 'package:mudarribe_trainee/views/trainer/profile/profile_view.dart';
 
 class MyplansView extends StatefulWidget {
   const MyplansView({super.key});
@@ -84,17 +83,21 @@ class _MyplansViewState extends State<MyplansView> {
         ),
         body: TabBarView(
           children: [
-            Plancontainer(viewcontent: AppRoutes.Mornningworkout,
+            Plancontainer(
+              viewcontent: AppRoutes.mornningworkout,
               planimage: Image.asset(
                 'assets/images/exerciseplans.png',
                 fit: BoxFit.fill,
-              ),mytext: 'Exercis Plan',
+              ),
+              mytext: 'Exercis Plan',
             ),
-             Plancontainer(viewcontent: AppRoutes.Nutritionplan,
+            Plancontainer(
+              viewcontent: AppRoutes.nutritionplan,
               planimage: Image.asset(
                 'assets/images/nutritionplan.png',
                 fit: BoxFit.fill,
-              ),mytext: 'Nutrition Plan',
+              ),
+              mytext: 'Nutrition Plan',
             ),
           ],
         ),

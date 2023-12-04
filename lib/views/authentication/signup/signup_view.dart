@@ -137,7 +137,7 @@ class _SignUpViewState extends State<SignUpView> {
                   title: 'Next',
                   onPressed: controller.areFieldsFilled.value
                       ? () {
-                          signUpController.signUpTrainee();
+                          // signUpController.signUpTrainee();
                         }
                       : (){
                          UiUtilites.errorSnackbar('Fill out all fields','Please fill all above fields');

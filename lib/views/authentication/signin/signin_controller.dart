@@ -61,7 +61,7 @@ class SignInController extends GetxController {
               name: user.displayName),
         );
 
-        Get.offNamed(AppRoutes.profile);
+        Get.offNamed(AppRoutes.footer);
       }
     } on AuthApiException catch (e) {
       UiUtilites.errorSnackbar('Signin Failed', e.toString());
@@ -81,7 +81,7 @@ class SignInController extends GetxController {
               name: user.displayName),
         );
 
-        Get.offNamed(AppRoutes.profile);
+        Get.offNamed(AppRoutes.footer);
       }
     } on AuthApiException catch (e) {
       UiUtilites.errorSnackbar('Signin Failed', e.toString());

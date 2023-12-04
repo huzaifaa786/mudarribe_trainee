@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:is_first_run/is_first_run.dart';
+import 'package:mudarribe_trainee/views/chat/chat_page.dart';
+import 'package:mudarribe_trainee/views/chat/chat_view.dart';
 
 class SplashController extends GetxController {
   static SplashController instance = Get.find();
@@ -21,7 +24,7 @@ class SplashController extends GetxController {
       final User? user = FirebaseAuth.instance.currentUser;
 
       if (user != null) {
-        Get.offNamed(AppRoutes.profile);
+        Get.offNamed(AppRoutes.footer);
       } else {
         Get.offNamed(AppRoutes.signin);
       }
