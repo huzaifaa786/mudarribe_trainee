@@ -36,6 +36,9 @@ import 'package:mudarribe_trainee/views/trainee_profile/profile/profile_view.dar
 import 'package:mudarribe_trainee/views/trainer/packages_checkout/package_checkout_binding.dart';
 import 'package:mudarribe_trainee/views/trainer/packages_checkout/package_checkout_view.dart';
 import 'package:mudarribe_trainee/views/trainer/profile/profile_view.dart';
+import 'package:mudarribe_trainee/views/video/video_view.dart';
+import 'package:mudarribe_trainee/views/video/videoplay_binding.dart';
+import 'package:mudarribe_trainee/views/trainee_profile/edit_profile/editprofile_binding.dart';
 
 class AppPages {
   static final List<GetPage> pages = [
@@ -95,6 +98,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.editProfile,
       page: () => const TraineeEditProfileView(),
+       binding: EditProfileBinding(),
     ),
     GetPage(
       name: AppRoutes.eventcheckout,
@@ -136,6 +140,11 @@ class AppPages {
       page: () => const NutritionplanView(),
       binding: NutritionplanBinding(),
     ),
+     GetPage(
+      name: AppRoutes.Videoplay,
+      page: () => const VideoPlay(),
+      binding: VideoPlayBinding(),
+     ),
     GetPage(
       name: AppRoutes.changepassword,
       page: () => const ChangePasswordView(),

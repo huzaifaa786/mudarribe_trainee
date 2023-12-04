@@ -32,4 +32,14 @@ class UserService {
       } else {}
     });
   }
+    Future getAuthUser() async {
+    final userId = _authApi.currentUser!.uid;
+    final userAccount = await _databaseApi.getUserLogin(userId);
+
+    if (userAccount.id != '123') {
+      _currentUser = userAccount;
+      return _currentUser;
+    }
+    return null;
+  }
 }
