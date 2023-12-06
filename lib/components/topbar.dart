@@ -1,5 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class TopBar extends StatelessWidget {
   const TopBar({super.key, required this.text});
@@ -8,24 +11,27 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 15, left: 10, bottom: 10),
-        child: Row(
-          children: [
-            SvgPicture.asset(
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: (){
+              Get.back();
+            },
+            child: SvgPicture.asset(
               'assets/images/nevigate.svg',
             ),
-            SizedBox(
-              width: 15,
-            ),
-            Text(text,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                ))
-          ],
-        ),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          Text(text,
+              style: const TextStyle(
+                color: Colors.white,
+                fontFamily: "Poppins",
+fontSize: 20,
+fontWeight: FontWeight.w700,
+              ))
+        ],
       ),
     );
   }

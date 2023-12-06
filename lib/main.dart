@@ -9,6 +9,7 @@ import 'package:mudarribe_trainee/views/authentication/change_password/change_pa
 import 'package:mudarribe_trainee/views/authentication/change_password/change_password_view.dart';
 import 'package:mudarribe_trainee/views/authentication/signin/signin_binding.dart';
 import 'package:mudarribe_trainee/views/authentication/signin/signin_view.dart';
+import 'package:mudarribe_trainee/views/chat/controller.dart';
 
 import 'package:mudarribe_trainee/views/events/allevents/allevents_view.dart';
 import 'package:mudarribe_trainee/views/events/eventsdetail/eventsDetail_view.dart';
@@ -28,6 +29,7 @@ import 'package:mudarribe_trainee/views/video/video_view.dart';
 import 'package:mudarribe_trainee/views/trainee_profile/report/report_problem_binding.dart';
 import 'package:mudarribe_trainee/views/trainee_profile/report/report_problem_view.dart';
 import 'firebase_options.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,20 +45,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.black,
-        textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: white,
+    return MultiProvider(
+      providers: [
+        Provider<ChatProvider>(
+          create: (_) => ChatProvider(),
         ),
-        useMaterial3: true,
-        fontFamily: 'Montserrat',
+      ],
+      child: GetMaterialApp(
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.black,
+          textSelectionTheme: const TextSelectionThemeData(
+            cursorColor: white,
+          ),
+          useMaterial3: true,
+          fontFamily: 'Montserrat',
+        ),
+        debugShowCheckedModeBanner: false,
+        title: "Mudarribe",
+        initialBinding: SplashBinding(),
+        home: SplashView(),
+        getPages: AppPages.pages,
       ),
-      debugShowCheckedModeBanner: false,
-      title: "Mudarribe",
-      initialBinding: SplashBinding(),
-      home: SplashView(),
-      getPages: AppPages.pages,
     );
   }
 }

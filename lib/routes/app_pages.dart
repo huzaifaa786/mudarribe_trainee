@@ -17,6 +17,7 @@ import 'package:mudarribe_trainee/views/categories/categories_result_view.dart';
 import 'package:mudarribe_trainee/views/events/eventsdetail/eventsDetail_view.dart';
 import 'package:mudarribe_trainee/views/exesrcontent/exercises.dart';
 import 'package:mudarribe_trainee/views/exesrcontent/exercises2.dart';
+import 'package:mudarribe_trainee/views/footer/footer_binding.dart';
 import 'package:mudarribe_trainee/views/home/home_binding.dart';
 import 'package:mudarribe_trainee/views/home/home_view.dart';
 import 'package:mudarribe_trainee/views/footer/footer_view.dart';
@@ -87,9 +88,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.footer,
       page: () => const FooterView(),
-      bindings: [
-        HomeBinding(),
-      ],
+      binding: FooterBinding(),
     ),
     GetPage(
       name: AppRoutes.profile,
@@ -116,28 +115,28 @@ class AppPages {
       page: () => const PackagecheckoutView(),
       binding: PackagecheckoutBinding(),
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.exercises,
       page: () => const ExercisesScreen(),
       binding: PackagecheckoutBinding(),
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.exercises2,
       page: () => const ExercisesScreen2(),
       binding: PackagecheckoutBinding(),
-      ),
+    ),
     GetPage(
       name: AppRoutes.ordercard,
       page: () => const OrderCard(),
       // binding: PackagecheckoutBinding(),
     ),
     GetPage(
-      name: AppRoutes.Mornningworkout,
+      name: AppRoutes.mornningworkout,
       page: () => const MornningworkoutView(),
       binding: MornningworkoutBinding(),
     ),
     GetPage(
-      name: AppRoutes.Nutritionplan,
+      name: AppRoutes.nutritionplan,
       page: () => const NutritionplanView(),
       binding: NutritionplanBinding(),
     ),
@@ -156,5 +155,10 @@ class AppPages {
       page: () => const ReportProblemView(),
       binding: ReportProblemBinding(),
     ),
+    // GetPage(
+    //   name: AppRoutes.nutritionplan,
+    //   page: () => const MyplansView(),
+    //   binding: MyplansBinding(),
+    // ),
   ];
 }

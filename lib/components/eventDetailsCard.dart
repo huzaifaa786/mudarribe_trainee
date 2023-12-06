@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, unused_import
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, unused_import, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,14 +11,32 @@ import 'package:mudarribe_trainee/components/textgradient.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class EventDetailsCard extends StatelessWidget {
-  const EventDetailsCard({super.key});
-
+  const EventDetailsCard(
+      {super.key,
+      this.address,
+      this.capcity,
+      this.image,
+      this.date,
+      this.endTime,
+      this.price,
+      this.startTime,
+      this.category,
+      this.name});
+  final address;
+  final startTime;
+  final endTime;
+  final image;
+  final date;
+  final capcity;
+  final price;
+  final name;
+  final category;
   @override
   Widget build(BuildContext context) {
     return Card(
       color: bgContainer,
       child: Container(
-        width: MediaQuery.sizeOf(context).width,
+        width: MediaQuery.sizeOf(context).width * 0.9,
         padding: EdgeInsets.only(bottom: 20, top: 20),
         child: Column(
           children: [
@@ -43,12 +61,14 @@ class EventDetailsCard extends StatelessWidget {
                                 colors: [
                                   Color.fromARGB(255, 184, 66, 186),
                                   Color.fromARGB(255, 111, 127, 247),
+                                  borderDown,
+                                  borderDown
                                 ],
                               ),
-                              width: 2,
+                              width: 1,
                             ),
                             image: DecorationImage(
-                              image: AssetImage('assets/images/profile.jpg'),
+                              image: NetworkImage(image),
                               fit: BoxFit.contain,
                             ),
                           ),
@@ -63,7 +83,7 @@ class EventDetailsCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Salim Ahmed',
+                                name,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontFamily: 'Montserrat',
@@ -72,7 +92,7 @@ class EventDetailsCard extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                'Body Building& lifting trainer',
+                                category,
                                 style: TextStyle(
                                   fontSize: 12,
                                   fontFamily: 'Montserrat',
@@ -108,11 +128,12 @@ class EventDetailsCard extends StatelessWidget {
               child: Column(
                 children: [
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SvgPicture.asset('assets/images/location.svg',
                           fit: BoxFit.scaleDown, height: 24, width: 24),
                       Padding(
-                        padding: const EdgeInsets.only(left: 8, bottom: 6),
+                        padding: const EdgeInsets.only(left: 8, bottom: 3),
                         child: Text(
                           'Dubai',
                           style: TextStyle(
@@ -124,7 +145,7 @@ class EventDetailsCard extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 10),
+                        padding: const EdgeInsets.only(left: 10, bottom: 3),
                         child: Text(
                           'Street 2367, Zaied Hotiel',
                           style: TextStyle(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
+import 'package:mudarribe_trainee/views/Myplans/myplans_view.dart';
 import 'dart:ui' as ui;
 
 import 'package:mudarribe_trainee/views/home/home_view.dart';
@@ -54,7 +55,7 @@ class _FooterViewState extends State<FooterView> with RouteAware {
     // ignore: no_leading_underscores_for_local_identifiers
     var _fragments = [
       const HomeView(),
-      const HomeView(),
+      const MyplansView(),
       const HomeView(),
       const HomeView(),
     ];
@@ -67,6 +68,8 @@ class _FooterViewState extends State<FooterView> with RouteAware {
             child: _fragments[_navigationMenuIndex],
           ),
           bottomNavigationBar: BottomAppBar(
+            elevation: 50,
+            surfaceTintColor: Colors.black,
             color: Colors.black,
             child: SizedBox(
               height: 60,
@@ -74,11 +77,17 @@ class _FooterViewState extends State<FooterView> with RouteAware {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Expanded(
-                    child: Material(
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        _navigationMenuIndex = 0;
+                      });
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.2,
                       color: Colors.black,
                       child: Center(
-                        child: GestureDetector(
+                        child: InkWell(
                           onTap: () {
                             setState(() {
                               _navigationMenuIndex = 0;
@@ -100,18 +109,15 @@ class _FooterViewState extends State<FooterView> with RouteAware {
                                       height: 16,
                                       width: 16,
                                     ),
-                                    const Gap(4),
+                              const Gap(4),
                               GradientText(
                                 'Home',
                                 style: const TextStyle(
                                   fontSize: 10.0,
                                 ),
                                 colors: _navigationMenuIndex == 0
-                                    ? [
-                                        borderDown,
-                                        borderTop
-                                      ]
-                                    : [white,white],
+                                    ? [borderDown, borderTop]
+                                    : [white, white],
                               ),
                             ],
                           ),
@@ -119,54 +125,56 @@ class _FooterViewState extends State<FooterView> with RouteAware {
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: Material(
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        _navigationMenuIndex = 1;
+                      });
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.2,
                       color: Colors.black,
                       child: Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _navigationMenuIndex = 1;
-                            });
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              _navigationMenuIndex == 1
-                                  ? SvgPicture.asset(
-                                      'assets/images/plansunselected.svg',
-                                      fit: BoxFit.scaleDown,
-                                      height: 16,
-                                      width: 16,
-                                      color: borderDown,
-                                    )
-                                  : SvgPicture.asset(
-                                      'assets/images/plansunselected.svg',
-                                      fit: BoxFit.scaleDown,
-                                      height: 16,
-                                      width: 16,
-                                    ),
-                                    const Gap(4),
-                              GradientText(
-                                'My Plans',
-                                style: const TextStyle(
-                                  fontSize: 10.0,
-                                ),
-                                colors: _navigationMenuIndex == 1
-                                    ? [
-                                        borderDown,
-                                        borderTop
-                                      ]
-                                    : [white,white],
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            _navigationMenuIndex == 1
+                                ? SvgPicture.asset(
+                                    'assets/images/plansunselected.svg',
+                                    fit: BoxFit.scaleDown,
+                                    height: 16,
+                                    width: 16,
+                                    color: borderDown,
+                                  )
+                                : SvgPicture.asset(
+                                    'assets/images/plansunselected.svg',
+                                    fit: BoxFit.scaleDown,
+                                    height: 16,
+                                    width: 16,
+                                  ),
+                            const Gap(4),
+                            GradientText(
+                              'My Plans',
+                              style: const TextStyle(
+                                fontSize: 10.0,
                               ),
-                            ],
-                          ),
+                              colors: _navigationMenuIndex == 1
+                                  ? [borderDown, borderTop]
+                                  : [white, white],
+                            ),
+                          ],
                         ),
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: Material(
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        _navigationMenuIndex = 2;
+                      });
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.2,
                       color: Colors.black,
                       child: Center(
                         child: GestureDetector(
@@ -178,7 +186,7 @@ class _FooterViewState extends State<FooterView> with RouteAware {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                               _navigationMenuIndex == 2
+                              _navigationMenuIndex == 2
                                   ? SvgPicture.asset(
                                       'assets/images/eventunselected.svg',
                                       fit: BoxFit.scaleDown,
@@ -192,18 +200,15 @@ class _FooterViewState extends State<FooterView> with RouteAware {
                                       height: 16,
                                       width: 16,
                                     ),
-                                    const Gap(4),
+                              const Gap(4),
                               GradientText(
                                 'Events',
                                 style: const TextStyle(
                                   fontSize: 10.0,
                                 ),
                                 colors: _navigationMenuIndex == 2
-                                    ? [
-                                        borderDown,
-                                        borderTop
-                                      ]
-                                    : [white,white],
+                                    ? [borderDown, borderTop]
+                                    : [white, white],
                               ),
                             ],
                           ),
@@ -211,8 +216,14 @@ class _FooterViewState extends State<FooterView> with RouteAware {
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: Material(
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        _navigationMenuIndex = 3;
+                      });
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.2,
                       color: Colors.black,
                       child: Center(
                         child: GestureDetector(
@@ -224,7 +235,7 @@ class _FooterViewState extends State<FooterView> with RouteAware {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                               _navigationMenuIndex == 3
+                              _navigationMenuIndex == 3
                                   ? SvgPicture.asset(
                                       'assets/images/profile.svg',
                                       fit: BoxFit.scaleDown,
@@ -237,18 +248,15 @@ class _FooterViewState extends State<FooterView> with RouteAware {
                                       height: 16,
                                       width: 16,
                                     ),
-                                    const Gap(4),
+                              const Gap(4),
                               GradientText(
                                 'Me',
                                 style: const TextStyle(
                                   fontSize: 10.0,
                                 ),
                                 colors: _navigationMenuIndex == 3
-                                    ? [
-                                        borderDown,
-                                        borderTop
-                                      ]
-                                    : [white,white],
+                                    ? [borderDown, borderTop]
+                                    : [white, white],
                               ),
                             ],
                           ),
