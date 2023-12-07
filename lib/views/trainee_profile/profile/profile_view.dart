@@ -14,14 +14,24 @@ class TraineeProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(
+      autoRemove: false,
         builder: (controller) => controller.currentUser != null
             ? Scaffold(
+              appBar: AppBar(
+                automaticallyImplyLeading: false,
+                forceMaterialTransparency: true,
+                centerTitle: true,
+                title: Text('Account', style: TextStyle(
+              fontFamily: "Poppins",
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.w700,
+            ),),
+              ),
                 body: SafeArea(
                   child: Column(
                     children: [
-                      TopScreenBar(
-                        mytext: 'Account',
-                      ),
+                      
                       Flexible(
                         child: SizedBox(
                           height: MediaQuery.of(context).size.height * 0.9,
@@ -77,7 +87,9 @@ class TraineeProfileView extends StatelessWidget {
                                       ),
                                       ProfileTile(
                                         img: 'assets/images/report.svg',
-                                        ontap: () {},
+                                        ontap: () {
+                                          Get.toNamed(AppRoutes.reports);
+                                        },
                                         text: 'Report a problem',
                                       ),
                                       ProfileTile(

@@ -21,7 +21,8 @@ class EventDetailsCard extends StatelessWidget {
       this.price,
       this.startTime,
       this.category,
-      this.name});
+      this.name,
+      this.eventimg});
   final address;
   final startTime;
   final endTime;
@@ -31,6 +32,7 @@ class EventDetailsCard extends StatelessWidget {
   final price;
   final name;
   final category;
+  final eventimg;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -117,9 +119,7 @@ class EventDetailsCard extends StatelessWidget {
               height: 200,
               padding: EdgeInsets.only(left: 20, right: 20),
               width: MediaQuery.sizeOf(context).width,
-              child: Image.asset(
-                'assets/images/cardImage.png',
-              ),
+              child: Image.network(eventimg),
             ),
             Padding(
               padding: const EdgeInsets.only(
@@ -132,30 +132,21 @@ class EventDetailsCard extends StatelessWidget {
                     children: [
                       SvgPicture.asset('assets/images/location.svg',
                           fit: BoxFit.scaleDown, height: 24, width: 24),
-                      Padding(
+                      Container(
+                        width: MediaQuery.of(context).size.width*0.7,
                         padding: const EdgeInsets.only(left: 8, bottom: 3),
                         child: Text(
-                          'Dubai',
+                          address,
+                          maxLines: 2,
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.w600,
                             fontSize: 14,
+                            
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10, bottom: 3),
-                        child: Text(
-                          'Street 2367, Zaied Hotiel',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                          ),
-                        ),
-                      )
                     ],
                   ),
                   Row(
@@ -166,7 +157,7 @@ class EventDetailsCard extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 8, bottom: 6),
                         child: Text(
-                          'from 3 : 00 to 05 : 00 pm',
+                          'from $startTime to $endTime',
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Montserrat',
@@ -184,7 +175,7 @@ class EventDetailsCard extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 8, bottom: 6),
                         child: Text(
-                          '23/11/2023',
+                          date,
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Montserrat',
@@ -203,7 +194,7 @@ class EventDetailsCard extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 8, bottom: 6),
                         child: Text(
-                          'Total People amount: 3/34',
+                          'Total People amount: 0/$capcity',
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Montserrat',
@@ -226,7 +217,7 @@ class EventDetailsCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        ' 150.00 AED',
+                        ' $price AED',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'Montserrat',

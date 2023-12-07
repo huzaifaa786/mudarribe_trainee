@@ -527,7 +527,7 @@ class ChatPageState extends State<ChatPage> {
               )),
           title: Container(
             constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width * 0.6),
+                maxWidth: MediaQuery.of(context).size.width * 0.7),
             child: Row(
               children: [
                 CircleAvatar(
@@ -540,13 +540,18 @@ class ChatPageState extends State<ChatPage> {
                   ),
                 )),
                 Gap(12),
-                Text(
-                  widget.arguments.peerNickname,
-                  style: TextStyle(
-                    fontFamily: "Poppins",
-                    color: white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  child: Text(
+                    widget.arguments.peerNickname,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontFamily: "Poppins",
+                      color: white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ],

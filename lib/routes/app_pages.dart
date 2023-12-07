@@ -24,6 +24,8 @@ import 'package:mudarribe_trainee/views/footer/footer_view.dart';
 import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
+import 'package:mudarribe_trainee/views/trainee_profile/report/report_problem_binding.dart';
+import 'package:mudarribe_trainee/views/trainee_profile/report/report_problem_view.dart';
 import 'package:mudarribe_trainee/views/trainee_profile/saved/saved_binding.dart';
 import 'package:mudarribe_trainee/views/trainee_profile/saved/saved_view.dart';
 import 'package:mudarribe_trainee/views/trainee_profile/profile/profile_binding.dart';
@@ -139,9 +141,14 @@ class AppPages {
       binding: NutritionplanBinding(),
     ),
      GetPage(
-      name: AppRoutes.Videoplay,
+      name: AppRoutes.videoplay,
       page: () => const VideoPlay(),
       binding: VideoPlayBinding(),
+     ),
+     GetPage(
+      name: AppRoutes.reports,
+      page: () => const ReportProblemView(),
+      binding: ReportProblemBinding(),
      ),
     GetPage(
       name: AppRoutes.changepassword,

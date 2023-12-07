@@ -56,7 +56,7 @@ class HomeView extends StatelessWidget {
                       ),
                     ),
                     Container(
-                        margin: const EdgeInsets.symmetric(vertical: 20),
+                        margin: const EdgeInsets.symmetric(vertical: 12),
                         height: 100,
                         child: ListView(
                             physics: BouncingScrollPhysics(),
@@ -109,19 +109,32 @@ class HomeView extends StatelessWidget {
                                       ],
                                     )))),
                     Container(
-                        margin: const EdgeInsets.symmetric(vertical: 20),
-                        height: 220,
-                        child: ListView(
-                            shrinkWrap: true,
-                            physics: BouncingScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            children: List.generate(
-                              3,
-                              (index) => Padding(
-                                padding: const EdgeInsets.only(right: 7.0),
-                                child: BannerCard(),
-                              ),
-                            ))),
+                      constraints:
+                          BoxConstraints(minHeight: 10, maxHeight: 220),
+                      child: FirestorePagination(
+                        shrinkWrap: true,
+                        isLive: true,
+                        limit: 6,
+                        onEmpty: Text(''),
+                        viewType: ViewType.list,
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        query: HomeApi.posterEventQuery,
+                        bottomLoader: CircularProgressIndicator(),
+                        itemBuilder: (context, documentSnapshot, index) {
+                          final eventData =
+                              documentSnapshot.data() as Map<String, dynamic>;
+                          Events banners = Events.fromMap(eventData);
+                          return BannerCard(
+                              endTime: banners.endTime,
+                              image: banners.imageUrl,
+                              price: banners.price,
+                              startTime: banners.startTime,
+                              title: banners.title);
+                        },
+                      ),
+                    ),
+                    Gap(12),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -152,8 +165,7 @@ class HomeView extends StatelessWidget {
                     GridView.builder(
                       physics: BouncingScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount:
-                          controller.showAllCards ? controller.cards.length : 6,
+                      itemCount: controller.showAllCards ? controller.cards.length : 6,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         crossAxisSpacing: 8.0,
@@ -200,6 +212,7 @@ class HomeView extends StatelessWidget {
                         ),
                       ],
                     ),
+                    Gap(8),
                     SizedBox(
                       height: 450,
                       child: FirestorePagination(
@@ -209,14 +222,14 @@ class HomeView extends StatelessWidget {
                         viewType: ViewType.list,
                         physics: BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
-                        query: PostApi.eventquery,
+                        query: HomeApi.eventquery,
                         bottomLoader: CircularProgressIndicator(),
                         itemBuilder: (context, documentSnapshot, index) {
                           final eventData =
                               documentSnapshot.data() as Map<String, dynamic>;
                           final trainerId = eventData['trainerId'];
                           return FutureBuilder<Trainer>(
-                            future: PostApi.fetchTrainerData(trainerId),
+                            future: HomeApi.fetchTrainerData(trainerId),
                             builder: (context, snapshot) {
                               if (snapshot.hasError) {
                                 return Text('');
@@ -226,27 +239,27 @@ class HomeView extends StatelessWidget {
                               }
                               Trainer trainerData = snapshot.data!;
                               Events events = Events.fromMap(eventData);
-                              CombinedEventData combineEvent = CombinedEventData(
-                                  trainer: trainerData, event: events);
+                              CombinedEventData combineEvent =
+                                  CombinedEventData(
+                                      trainer: trainerData, event: events);
                               return EventDetailsCard(
-                                category: combineEvent.trainer.category.join( ' & ' ),
-                                name: combineEvent.trainer.name,
-                                image: combineEvent.trainer.profileImageUrl,
-                              );
+                                  category:
+                                      combineEvent.trainer.category.join(' & '),
+                                  name: combineEvent.trainer.name,
+                                  image: combineEvent.trainer.profileImageUrl,
+                                  eventimg: combineEvent.event.imageUrl,
+                                  address: combineEvent.event.address,
+                                  startTime: combineEvent.event.startTime,
+                                  endTime: combineEvent.event.endTime,
+                                  date: combineEvent.event.date,
+                                  capcity: combineEvent.event.capacity,
+                                  price: combineEvent.event.price);
                             },
                           );
                         },
                       ),
                     ),
-                    // Container(
-                    //     margin: const EdgeInsets.symmetric(vertical: 15),
-                    //     height: 450,
-                    //     child: ListView(
-                    //         shrinkWrap: true,
-                    //         physics: BouncingScrollPhysics(),
-                    //         scrollDirection: Axis.horizontal,
-                    //         children: List.generate(
-                    //             4, (index) => EventDetailsCard()))),
+                    Gap(20),
                     Text(
                       'Posts',
                       style: TextStyle(
@@ -262,14 +275,14 @@ class HomeView extends StatelessWidget {
                       limit: 20,
                       physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.vertical,
-                      query: PostApi.postquery,
+                      query: HomeApi.postquery,
                       bottomLoader: CircularProgressIndicator(),
                       itemBuilder: (context, documentSnapshot, index) {
                         final postData =
                             documentSnapshot.data() as Map<String, dynamic>;
                         final trainerId = postData['trainerId'];
                         return FutureBuilder<Trainer>(
-                          future: PostApi.fetchTrainerData(trainerId),
+                          future: HomeApi.fetchTrainerData(trainerId),
                           builder: (context, snapshot) {
                             if (snapshot.hasError) {
                               return Text('');

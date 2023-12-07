@@ -39,7 +39,7 @@ class Events {
         imageUrl: map['imageUrl'],
         price: map['price'],
         startTime: map['startTime'],
-        title: map['price'],
+        title: map['title'],
         trainerId: map['trainerId']);
   }
 }

@@ -8,6 +8,7 @@ import 'package:mudarribe_trainee/views/Myplans/myplans_view.dart';
 import 'dart:ui' as ui;
 
 import 'package:mudarribe_trainee/views/home/home_view.dart';
+import 'package:mudarribe_trainee/views/trainee_profile/profile/profile_view.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class FooterView extends StatefulWidget {
@@ -57,7 +58,7 @@ class _FooterViewState extends State<FooterView> with RouteAware {
       const HomeView(),
       const MyplansView(),
       const HomeView(),
-      const HomeView(),
+      const TraineeProfileView(),
     ];
     return Directionality(
       textDirection: ui.TextDirection.ltr,
