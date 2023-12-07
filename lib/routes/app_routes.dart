@@ -17,6 +17,7 @@ class AppRoutes {
   static const packagecheckout = '/packagecheckout';
   static const exercises = '/exercises';
   static const exercises2 = '/exercises2';
+  static const report = '/report';
   static const ordercard = '/ordercard';
   static const mornningworkout = '/Mornningworkout';
   static const nutritionplan = '/Nutritionplan';

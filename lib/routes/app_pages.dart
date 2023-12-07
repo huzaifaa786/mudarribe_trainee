@@ -155,6 +155,11 @@ class AppPages {
       page: () => const ChangePasswordView(),
       binding: ChangePasswordBinding(),
     ),
+     GetPage(
+      name: AppRoutes.report,
+      page: () => const ReportProblemView(),
+      binding: ReportProblemBinding(),
+    ),
     // GetPage(
     //   name: AppRoutes.nutritionplan,
     //   page: () => const MyplansView(),

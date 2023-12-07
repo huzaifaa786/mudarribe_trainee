@@ -10,7 +10,7 @@ class InputField extends StatelessWidget {
     this.controller,
     this.hint,
     this.obscure = false,
-    this.maxlines = false,
+    this.maxlines = 1,
     this.readOnly = false,
     this.lable,
     this.validator,
@@ -34,6 +34,7 @@ class InputField extends StatelessWidget {
         padding: const EdgeInsets.only(top: 15, left: 0, right: 0),
         child: TextFormField(
             readOnly: readOnly,
+            maxLines: maxlines,
             obscureText: obscure,
             controller: controller,
             validator: validator,

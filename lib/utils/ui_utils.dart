@@ -37,7 +37,7 @@ class UiUtilites {
     );
   }
 
-  static successAlert(context) {
+  static successAlert(context,) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
