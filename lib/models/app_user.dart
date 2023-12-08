@@ -1,16 +1,19 @@
+// ignore_for_file: unnecessary_new, prefer_collection_literals, unnecessary_this
+
 class AppUser {
   late String id;
   late String userType;
   String? name;
   String? email;
-
-  AppUser({required this.id, this.name, this.email, required this.userType});
+  String? imageUrl;
+  AppUser({required this.id, this.name, this.email, required this.userType, this.imageUrl});
 
   AppUser.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
     userType = json['userType'];
+    imageUrl = json['profileImageUrl'];
   }
 
   Map<String, dynamic> toJson() {

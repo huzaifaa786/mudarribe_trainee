@@ -151,20 +151,19 @@ class AuthApi {
       final credentials =
           EmailAuthProvider.credential(email: user.email!, password: oldPass);
       try {
-        /*UserCredential userCredentials = */
-        await user
+        return await user
             .reauthenticateWithCredential(credentials)
             .then((value) async {
           if (value.user != null) {
-            await user.updatePassword(newPass).then((value) {
-              return 3;
-            }).catchError((error) {
-              return 2;
-            });
+            await user.updatePassword(newPass);
+            return 3;
+          } else {
+            return 2;
           }
+        }).catchError((error) {
+          return 2;
         });
       } catch (e) {
-        print("reauthenticateWithCredential: " + e.toString());
         return 0;
       }
     }

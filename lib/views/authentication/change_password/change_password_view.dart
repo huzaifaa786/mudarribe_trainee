@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:mudarribe_trainee/components/color_button.dart';
 import 'package:mudarribe_trainee/components/password_inputField.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
+import 'package:mudarribe_trainee/utils/ui_utils.dart';
 import 'package:mudarribe_trainee/views/authentication/change_password/change_password_contoller.dart';
 
 class ChangePasswordView extends StatefulWidget {
@@ -69,6 +70,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                             lable: 'Old password',
                             obscure: controller.obscureTextOldPassword,
                             toggle: controller.toggle2,
+                            controller: controller.oldpassword,
                           ),
                           SizedBox(
                             height: 18,
@@ -77,6 +79,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                             lable: 'New password',
                             obscure: controller.obscureTextPassword,
                             toggle: controller.toggle,
+                            controller: controller.newpassword,
                           ),
                           SizedBox(
                             height: 18,
@@ -85,32 +88,40 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                             lable: 'Confirm New Password',
                             obscure: controller.obscureTextCPassword,
                             toggle: controller.toggle1,
+                            controller: controller.confirmPassword,
                           ),
                           SizedBox(
-                            height: 50,
+                            height: 40,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset('assets/images/Vector (1).svg'),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                'Password Updated Successfully',
-                                style: TextStyle(color: Colors.green),
-                              ),
-                            ],
-                          ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.center,
+                          //   children: [
+                          //     SvgPicture.asset('assets/images/Vector (1).svg'),
+                          //     SizedBox(
+                          //       width: 5,
+                          //     ),
+                          //     Text(
+                          //       'Password Updated Successfully',
+                          //       style: TextStyle(color: Colors.green),
+                          //     ),
+                          //   ],
+                          // ),
                         ]),
                   ),
                   SizedBox(
                     height: 50,
                   ),
                   GradientButton(
-                    title: 'Confirm',
-                    onPressed: () {},
-                    selected: controller.selected == '' ? false : true,
+                    title: 'Submit',
+                      onPressed: controller.areFieldsFilled.value
+                          ? () {
+                              controller.changePassword();
+                            }
+                          : () {
+                              UiUtilites.errorSnackbar('Fill out all fields',
+                                  'Please fill all above fields');
+                            },
+                      selected: controller.areFieldsFilled.value,
                   )
                 ],
               ),

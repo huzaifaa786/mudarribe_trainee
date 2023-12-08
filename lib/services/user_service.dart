@@ -32,7 +32,8 @@ class UserService {
       } else {}
     });
   }
-    Future getAuthUser() async {
+
+  Future getAuthUser() async {
     final userId = _authApi.currentUser!.uid;
     final userAccount = await _databaseApi.getUserLogin(userId);
 
@@ -41,5 +42,12 @@ class UserService {
       return _currentUser;
     }
     return null;
+  }
+
+  Future<void> updateUser({
+    required id,
+    required user,
+  }) async {
+    await _databaseApi.updateUser(id, user);
   }
 }

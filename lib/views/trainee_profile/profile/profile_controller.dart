@@ -22,7 +22,6 @@ class ProfileController extends GetxController {
     final User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       currentUser = await _userService.getAuthUser();
-
       update();
     }
   }

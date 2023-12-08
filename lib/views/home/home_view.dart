@@ -21,11 +21,20 @@ import 'package:mudarribe_trainee/utils/colors.dart';
 import 'package:mudarribe_trainee/utils/fontWeight.dart';
 import 'package:mudarribe_trainee/views/home/home_controller.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
   @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  @override
   Widget build(BuildContext context) {
+    String selectedCategory = '';
+    String selectedGender = '';
+    String selectedLanguage = '';
+
     return GetBuilder<HomeController>(
       autoRemove: false,
       builder: (controller) => Scaffold(
@@ -39,7 +48,7 @@ class HomeView extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Row(
+                    Row(
                       children: [
                         SearchInput(),
                       ],
@@ -109,8 +118,7 @@ class HomeView extends StatelessWidget {
                                       ],
                                     )))),
                     Container(
-                      constraints:
-                          BoxConstraints(minHeight: 10, maxHeight: 220),
+                      constraints: BoxConstraints(minHeight: 0, maxHeight: 220),
                       child: FirestorePagination(
                         shrinkWrap: true,
                         isLive: true,
@@ -165,7 +173,8 @@ class HomeView extends StatelessWidget {
                     GridView.builder(
                       physics: BouncingScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: controller.showAllCards ? controller.cards.length : 6,
+                      itemCount:
+                          controller.showAllCards ? controller.cards.length : 6,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         crossAxisSpacing: 8.0,
@@ -213,12 +222,17 @@ class HomeView extends StatelessWidget {
                       ],
                     ),
                     Gap(8),
-                    SizedBox(
-                      height: 450,
+                    Container(
+                      constraints:
+                          BoxConstraints(minHeight: 10, maxHeight: 450),
                       child: FirestorePagination(
                         shrinkWrap: true,
                         isLive: false,
                         limit: 20,
+                        onEmpty: Text(
+                          'No event uploaded yet.',
+                          style: TextStyle(color: white.withOpacity(0.3)),
+                        ),
                         viewType: ViewType.list,
                         physics: BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,

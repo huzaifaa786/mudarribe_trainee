@@ -7,13 +7,23 @@ class DatabaseApi {
   static final _firestore = FirebaseFirestore.instance;
   final CollectionReference _usersCollection = _firestore.collection("users");
 
-
   Future<void> createUser(AppUser user) async {
     try {
       await _usersCollection.doc(user.id).set(user.toJson());
     } on PlatformException catch (e) {
       throw DatabaseApiException(
         title: 'Failed to create User',
+        message: e.message,
+      );
+    }
+  }
+
+  Future<void> updateUser(id, user) async {
+    try {
+      await _usersCollection.doc(id).update(user);
+    } on PlatformException catch (e) {
+      throw DatabaseApiException(
+        title: 'Failed to update User',
         message: e.message,
       );
     }

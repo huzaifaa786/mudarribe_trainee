@@ -20,37 +20,7 @@ class FooterView extends StatefulWidget {
 }
 
 class _FooterViewState extends State<FooterView> with RouteAware {
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
-  // final GlobalKey<ChatsFragmentState> chatFragmentState = GlobalKey<ChatsFragmentState>();
-
   int _navigationMenuIndex = 0;
-  bool _isScanning = false;
-
-  void _scanQR() {
-    setState(() {
-      _isScanning = true;
-    });
-  }
-
-  switchFragment(int index) {
-    setState(() {
-      _navigationMenuIndex = index;
-    });
-  }
-
-  checkForSelectedIndex() {
-    if (widget.selectedIndex != null) {
-      _navigationMenuIndex = widget.selectedIndex;
-    }
-  }
-
-  @override
-  void initState() {
-    checkForSelectedIndex();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     // ignore: no_leading_underscores_for_local_identifiers

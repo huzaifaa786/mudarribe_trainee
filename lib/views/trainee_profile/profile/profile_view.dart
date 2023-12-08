@@ -8,30 +8,33 @@ import 'package:mudarribe_trainee/components/profile_tile.dart';
 import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 import 'package:mudarribe_trainee/views/trainee_profile/profile/profile_controller.dart';
+
 class TraineeProfileView extends StatelessWidget {
   const TraineeProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(
-      autoRemove: false,
+        autoRemove: false,
         builder: (controller) => controller.currentUser != null
             ? Scaffold(
-              appBar: AppBar(
-                automaticallyImplyLeading: false,
-                forceMaterialTransparency: true,
-                centerTitle: true,
-                title: Text('Account', style: TextStyle(
-              fontFamily: "Poppins",
-              color: Colors.white,
-              fontSize: 24,
-              fontWeight: FontWeight.w700,
-            ),),
-              ),
+                appBar: AppBar(
+                  automaticallyImplyLeading: false,
+                  forceMaterialTransparency: true,
+                  centerTitle: true,
+                  title: Text(
+                    'Account',
+                    style: TextStyle(
+                      fontFamily: "Poppins",
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
                 body: SafeArea(
                   child: Column(
                     children: [
-                      
                       Flexible(
                         child: SizedBox(
                           height: MediaQuery.of(context).size.height * 0.9,
@@ -76,7 +79,9 @@ class TraineeProfileView extends StatelessWidget {
                                       ProfileTile(
                                         img: 'assets/images/person.svg',
                                         ontap: () {
-                                          Get.toNamed(AppRoutes.editProfile);
+                                          Get.toNamed(AppRoutes.editProfile)!
+                                              .then((value) =>
+                                                  controller.getAppUser());
                                         },
                                         text: 'Account Setting',
                                       ),

@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -73,8 +72,6 @@ class ReportProblemController extends GetxController {
     TraineeReport traineeReport;
 
     if (imageResult?.imageUrl != '') {
-      print(imageResult?.imageUrl);
-
       traineeReport = TraineeReport(
         id: reportId,
         title: report.text,
@@ -87,8 +84,6 @@ class ReportProblemController extends GetxController {
         id: reportId,
         title: report.text,
         traineeId: user!.uid,
-        // imageUrl: null, // or any default value for imageUrl
-        // imageFileName: null, // or any default value for imageFileName
       );
     }
 
@@ -98,8 +93,6 @@ class ReportProblemController extends GetxController {
   }
 
   Future getAppUser() async {
-     user = FirebaseAuth.instance.currentUser;
-    
-    
+    user = FirebaseAuth.instance.currentUser;
   }
 }
