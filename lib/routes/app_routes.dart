@@ -25,5 +25,6 @@ class AppRoutes {
   static const changepassword = '/changepassword';
   static const plans = '/plans';
   static const reports = '/reports';
+  static const stories = '/stories';
 
 }

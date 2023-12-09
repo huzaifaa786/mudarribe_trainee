@@ -17,6 +17,7 @@ import 'package:mudarribe_trainee/models/event_data_combined.dart';
 import 'package:mudarribe_trainee/models/post_data_combined.dart';
 import 'package:mudarribe_trainee/models/post.dart';
 import 'package:mudarribe_trainee/models/trainer.dart';
+import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 import 'package:mudarribe_trainee/utils/fontWeight.dart';
 import 'package:mudarribe_trainee/views/home/home_controller.dart';
@@ -77,30 +78,37 @@ class _HomeViewState extends State<HomeView> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        Container(
-                                          height: 70,
-                                          width: 80,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: const GradientBoxBorder(
-                                              gradient: LinearGradient(colors: [
-                                                Color(4290773187),
-                                                Color(4285693389),
-                                                Color(4278253801),
-                                                Color(4278253801)
-                                              ]),
-                                              width: 1,
+                                        InkWell(
+                                          onTap: () {
+                                            Get.toNamed(AppRoutes.stories);
+                                          },
+                                          child: Container(
+                                            height: 70,
+                                            width: 80,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: const GradientBoxBorder(
+                                                gradient: LinearGradient(
+                                                    colors: [
+                                                      Color(4290773187),
+                                                      Color(4285693389),
+                                                      Color(4278253801),
+                                                      Color(4278253801)
+                                                    ]),
+                                                width: 1,
+                                              ),
                                             ),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(3.5),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                image: DecorationImage(
-                                                  image: AssetImage(
-                                                      "assets/images/user.jpg"),
-                                                  fit: BoxFit.cover,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(3.5),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  image: DecorationImage(
+                                                    image: AssetImage(
+                                                        "assets/images/user.jpg"),
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
                                               ),
                                             ),
