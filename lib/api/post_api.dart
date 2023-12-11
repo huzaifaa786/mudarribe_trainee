@@ -2,10 +2,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import 'package:mudarribe_trainee/models/trainer.dart';
+import 'package:mudarribe_trainee/models/trainer_story.dart';
 
 class HomeApi {
   static var postquery = FirebaseFirestore.instance
       .collection('trainer_posts')
+      .orderBy('id', descending: true);
+
+  static var trainerquery = FirebaseFirestore.instance
+      .collection('users')
+      .where('userType', isEqualTo: 'trainer')
       .orderBy('id', descending: true);
 
   static Future<Trainer> fetchTrainerData(String trainerId) async {
@@ -16,6 +22,19 @@ class HomeApi {
 
     final trainerData = trainerSnapshot.data() as Map<String, dynamic>;
     return Trainer.fromMap(trainerData);
+  }
+
+  static Future<TrainerStory> fetchTrainerStoryData(
+      String trainerId) async {
+    final storySnapshot = await FirebaseFirestore.instance
+        .collection('trainer_stories')
+        .where('trainerId', isEqualTo: trainerId)
+        .limit(1)
+        .get();
+    final storyData = storySnapshot.docs[0];
+    
+
+    return TrainerStory.fromJson(storyData.data() as Map<String, dynamic>);
   }
 
   static var eventquery = FirebaseFirestore.instance

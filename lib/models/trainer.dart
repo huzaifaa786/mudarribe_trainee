@@ -14,7 +14,7 @@ class Trainer {
   factory Trainer.fromMap(Map<String, dynamic> map) {
     return Trainer(
       id: map['id'],
-      name: map['name'],
+      name: map['name'] ,
       profileImageUrl: map['profileImageUrl'],
       category: map['categories'],
     );

@@ -12,17 +12,19 @@ import 'package:intl/intl.dart';
 import 'package:mudarribe_trainee/api/post_api.dart';
 import 'package:mudarribe_trainee/components/banner_card.dart';
 import 'package:mudarribe_trainee/components/category_card.dart';
-import 'package:mudarribe_trainee/components/color_button.dart';
+
 import 'package:mudarribe_trainee/components/eventDetailsCard.dart';
 import 'package:mudarribe_trainee/components/main_topbar.dart';
 import 'package:firebase_pagination/firebase_pagination.dart';
 import 'package:mudarribe_trainee/components/post_card.dart';
 import 'package:mudarribe_trainee/components/searchInput.dart';
+
 import 'package:mudarribe_trainee/models/event.dart';
 import 'package:mudarribe_trainee/models/event_data_combined.dart';
 import 'package:mudarribe_trainee/models/post_data_combined.dart';
 import 'package:mudarribe_trainee/models/post.dart';
 import 'package:mudarribe_trainee/models/trainer.dart';
+import 'package:mudarribe_trainee/models/trainer_story.dart';
 import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 import 'package:mudarribe_trainee/utils/fontWeight.dart';
@@ -83,65 +85,95 @@ class _HomeViewState extends State<HomeView> {
                       ),
                     ),
                     Container(
-                        margin: const EdgeInsets.symmetric(vertical: 12),
-                        height: 100,
-                        child: ListView(
-                            physics: BouncingScrollPhysics(),
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            children: List.generate(
-                                10,
-                                (index) => Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            Get.toNamed(AppRoutes.stories);
-                                          },
+                      margin: const EdgeInsets.symmetric(vertical: 12),
+                      constraints: BoxConstraints(maxHeight: 100, minHeight: 0),
+                      child: FirestorePagination(
+                        shrinkWrap: true,
+                        isLive: true,
+                        limit: 6,
+                        onEmpty: Text(''),
+                        viewType: ViewType.list,
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        query: HomeApi.trainerquery,
+                        bottomLoader: CircularProgressIndicator(),
+                        itemBuilder: (context, documentSnapshot, index) {
+                          final trainerData =
+                              documentSnapshot.data() as Map<String, dynamic>;
+                          Trainer trainer = Trainer.fromMap(trainerData);
+                          return FutureBuilder<TrainerStory?>(
+                              future: HomeApi.fetchTrainerStoryData(trainer.id),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasError) {
+                                  return Text('');
+                                }
+                                if (!snapshot.hasData) {
+                                  return Text('');
+                                }
+                                return InkWell(
+                                  onTap: () {
+                                    Get.toNamed(AppRoutes.stories,arguments: trainer.id);
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        height: 70,
+                                        width: 80,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: const GradientBoxBorder(
+                                            gradient: LinearGradient(colors: [
+                                              Color(4290773187),
+                                              Color(4285693389),
+                                              Color(4278253801),
+                                              Color(4278253801)
+                                            ]),
+                                            width: 1,
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(3.5),
                                           child: Container(
-                                            height: 70,
-                                            width: 80,
                                             decoration: BoxDecoration(
                                               shape: BoxShape.circle,
-                                              border: const GradientBoxBorder(
-                                                gradient: LinearGradient(
-                                                    colors: [
-                                                      Color(4290773187),
-                                                      Color(4285693389),
-                                                      Color(4278253801),
-                                                      Color(4278253801)
-                                                    ]),
-                                                width: 1,
-                                              ),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(3.5),
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  image: DecorationImage(
-                                                    image: AssetImage(
-                                                        "assets/images/user.jpg"),
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
+                                              image: DecorationImage(
+                                                image: NetworkImage(
+                                                    trainer.profileImageUrl),
+                                                fit: BoxFit.cover,
                                               ),
                                             ),
                                           ),
                                         ),
-                                        Text(
-                                          'hamad_01',
-                                          style: const TextStyle(
-                                            color: white,
-                                            fontSize: 12,
-                                            fontFamily: 'Poppins',
-                                            fontWeight: weight500,
+                                      ),
+                                      SizedBox(
+                                        width: 80,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 12.0,
+                                          ),
+                                          child: Text(
+                                            trainer.name,
+                                            style: const TextStyle(
+                                                color: white,
+                                                fontSize: 12,
+                                                fontFamily: 'Poppins',
+                                                fontWeight: weight500,
+                                                overflow:
+                                                    TextOverflow.ellipsis),
                                           ),
                                         ),
-                                      ],
-                                    )))),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              });
+                        },
+                      ),
+                     ),
                     Container(
                       constraints: BoxConstraints(minHeight: 0, maxHeight: 220),
                       child: FirestorePagination(

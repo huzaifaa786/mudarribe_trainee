@@ -6,7 +6,12 @@ class AppUser {
   String? name;
   String? email;
   String? imageUrl;
-  AppUser({required this.id, this.name, this.email, required this.userType, this.imageUrl});
+  AppUser(
+      {required this.id,
+      this.name,
+      this.email,
+      required this.userType,
+      this.imageUrl});
 
   AppUser.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -24,5 +29,15 @@ class AppUser {
     data['userType'] = this.userType;
 
     return data;
+  }
+
+  factory AppUser.fromMap(Map<String, dynamic> map) {
+    return AppUser(
+      id: map['id'],
+      userType: map['userType'],
+      name: map['name'],
+      email: map['email'],
+      imageUrl: map['profileImageUrl'],
+    );
   }
 }
