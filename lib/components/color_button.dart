@@ -9,19 +9,24 @@ class GradientButton extends StatelessWidget {
     @required this.title,
     @required this.onPressed,
     this.selected = false,
+    this.buttonwidth = 0.99,
+    this.buttonHeight = 53.0
   }) : super(key: key);
 
   final title;
   final onPressed;
   final bool selected;
+  final buttonwidth;
+  final buttonHeight;
+
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onPressed,
       child: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: 53,
+        width: MediaQuery.of(context).size.width * buttonwidth,
+        height: buttonHeight,
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(

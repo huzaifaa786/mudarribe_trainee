@@ -30,21 +30,17 @@ class _SavedViewsState extends State<SavedViews> {
     return GetBuilder<SavedController>(
       builder: (controller) => Scaffold(
         appBar: AppBar(
-          toolbarHeight: 80,
           backgroundColor: Colors.black,
           leading: IconButton(
-            icon: SvgPicture.asset(
-              'assets/images/arrowleft.svg',
-              fit: BoxFit.scaleDown,
-            ),
+            icon: Icon(Icons.arrow_back_ios_new,color: white),
             onPressed: () {
-              // Handle back button press
+              Get.back();
             },
           ),
           title: Text(
             'Saved',
             style: TextStyle(
-              color: Colors.white,
+              color: white,
               fontSize: 24,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w700,

@@ -11,18 +11,25 @@ class PostCard extends StatelessWidget {
       this.userimg,
       this.username,
       this.postdescription,
-      this.postimg});
+      this.postimg,
+      this.time,
+      this.postId,
+      this.save,
+      this.onsaved});
   final userimg;
   final username;
+  final onsaved;
   final postdescription;
   final postimg;
+  final time;
+  final postId;
+  final save;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       margin: EdgeInsets.only(bottom: 12),
-      // height: 584,
       padding: EdgeInsets.only(top: 20, bottom: 20),
       decoration: BoxDecoration(
         color: bgContainer,
@@ -57,9 +64,7 @@ class PostCard extends StatelessWidget {
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(25),
-                          child: CachedNetworkImage(
-                            imageUrl: userimg
-                          ),
+                          child: CachedNetworkImage(imageUrl: userimg),
                           // Image.network(userimg),
                         )),
                     Padding(
@@ -78,10 +83,24 @@ class PostCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsets.only(right: 13),
-                  child: Image.asset('assets/images/bookmark-light.png'),
-                ),
+                InkWell(
+                  hoverColor: white,
+                  onTap: onsaved,
+                  child: Padding(
+                    padding: EdgeInsets.all(13),
+                    child: save == false
+                        ? Image.asset('assets/images/bookmark1.png')
+                        : Image.asset('assets/images/bookmark-light.png'),
+                  ),
+                )
+                // : InkWell(
+                //     onTap: onsaved,
+                //     child: Padding(
+                //       padding: EdgeInsets.all(13),
+                //       child:
+                //           Image.asset('assets/images/bookmark-light.png'),
+                //     ),
+                //   ),
               ],
             ),
           ),
@@ -96,15 +115,12 @@ class PostCard extends StatelessWidget {
               // width: 370,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child:CachedNetworkImage(
-                            imageUrl: postimg,
-                                placeholder: (context, url) => Center(child: CircularProgressIndicator()),
-        errorWidget: (context, url, error) => Icon(Icons.error),
-                          ),
-                //  Image.network(
-                //   postimg,
-                //   fit: BoxFit.fill,
-                // ),
+                child: CachedNetworkImage(
+                  imageUrl: postimg,
+                  placeholder: (context, url) =>
+                      Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
               ),
               decoration: BoxDecoration(
                 color: bgContainer,
@@ -156,7 +172,7 @@ class PostCard extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  '2 h',
+                  time,
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.5),
                     fontSize: 12,

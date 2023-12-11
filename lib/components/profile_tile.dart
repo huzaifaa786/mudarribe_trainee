@@ -7,7 +7,8 @@ import 'package:mudarribe_trainee/utils/colors.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class ProfileTile extends StatelessWidget {
-  const ProfileTile({super.key, this.ontap, this.text, this.img ,this.logout = false});
+  const ProfileTile(
+      {super.key, this.ontap, this.text, this.img, this.logout = false});
   final img;
   final text;
   final ontap;
@@ -30,20 +31,23 @@ class ProfileTile extends StatelessWidget {
                   fit: BoxFit.scaleDown,
                 ),
                 Gap(12),
-                GradientText(text,
-                    style: TextStyle(
-                        fontSize: 16.0,
-                        fontFamily: "Poppins",
-                        fontWeight: FontWeight.w500),
-                    colors: [borderDown, borderTop]),
+                GradientText(
+                  text,
+                  style: TextStyle(
+                      fontSize: 16.0,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w500),
+                  colors: [borderDown, borderTop],
+                ),
               ],
             ),
-            logout == false?
-            SvgPicture.asset(
-              'assets/images/arrow_forward.svg',
-              height: 20,
-              fit: BoxFit.scaleDown,
-            ):Container(),
+            logout == false
+                ? SvgPicture.asset(
+                    'assets/images/arrow_forward.svg',
+                    height: 20,
+                    fit: BoxFit.scaleDown,
+                  )
+                : Container(),
           ],
         ),
       ),

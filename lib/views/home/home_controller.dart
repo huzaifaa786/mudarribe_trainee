@@ -1,15 +1,35 @@
 // ignore_for_file: unused_field
 import 'package:get/get.dart';
 
+enum Languages {
+  Italian,
+  French,
+  English,
+  Arabic,
+  German,
+  Spanish,
+}
+
+enum Gender {
+  Male,
+  Female
+}
+
 class HomeController extends GetxController {
   static HomeController instance = Get.find();
   late int activeMeterIndex;
+  // bool show = false;
   // Input Toggle button function
   bool showAllCards = false;
   showAllCategory() {
     showAllCards = !showAllCards;
     update();
   }
+
+  // ontap() {
+    // show = !show;
+  //   update();
+  // }
 
   List<Map<String, String>> cards = [
     {

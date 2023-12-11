@@ -1,12 +1,18 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_full_hex_values_for_flutter_colors
 
+import 'dart:ui';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:intl/intl.dart';
 import 'package:mudarribe_trainee/api/post_api.dart';
 import 'package:mudarribe_trainee/components/banner_card.dart';
 import 'package:mudarribe_trainee/components/category_card.dart';
+import 'package:mudarribe_trainee/components/color_button.dart';
 import 'package:mudarribe_trainee/components/eventDetailsCard.dart';
 import 'package:mudarribe_trainee/components/main_topbar.dart';
 import 'package:firebase_pagination/firebase_pagination.dart';
@@ -29,12 +35,11 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  Languages _selectedOption = Languages.Italian;
+  Gender gender = Gender.Male;
+
   @override
   Widget build(BuildContext context) {
-    String selectedCategory = '';
-    String selectedGender = '';
-    String selectedLanguage = '';
-
     return GetBuilder<HomeController>(
       autoRemove: false,
       builder: (controller) => Scaffold(
@@ -49,8 +54,20 @@ class _HomeViewState extends State<HomeView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SearchInput(),
+                        // InkWell(
+                        //     onTap: () {
+                        //       controller.ontap();
+                        //     },
+                        //     child: Padding(
+                        //       padding: const EdgeInsets.all(8),
+                        //       child: Icon(
+                        //         Icons.menu,
+                        //         color: white,
+                        //       ),
+                        //     ))
                       ],
                     ),
                     const Padding(
@@ -292,9 +309,9 @@ class _HomeViewState extends State<HomeView> {
                       query: HomeApi.postquery,
                       bottomLoader: CircularProgressIndicator(),
                       itemBuilder: (context, documentSnapshot, index) {
-                        final postData =
+                        final postDatas =
                             documentSnapshot.data() as Map<String, dynamic>;
-                        final trainerId = postData['trainerId'];
+                        final trainerId = postDatas['trainerId'];
                         return FutureBuilder<Trainer>(
                           future: HomeApi.fetchTrainerData(trainerId),
                           builder: (context, snapshot) {
@@ -305,14 +322,63 @@ class _HomeViewState extends State<HomeView> {
                               return Text('');
                             }
                             Trainer trainerData = snapshot.data!;
-                            Post posts = Post.fromMap(postData);
+                            Post posts = Post.fromMap(postDatas);
                             CombinedData postdata =
                                 CombinedData(trainer: trainerData, post: posts);
-                            return PostCard(
-                              userimg: postdata.trainer.profileImageUrl,
-                              username: postdata.trainer.name,
-                              postimg: postdata.post.imageUrl,
-                              postdescription: postdata.post.caption,
+                            String time;
+                            int timestamp = int.parse(posts.postId);
+                            DateTime dateTime =
+                                DateTime.fromMillisecondsSinceEpoch(timestamp);
+                            DateTime now = DateTime.now();
+                            Duration difference = now.difference(dateTime);
+                            if (difference.inSeconds < 60) {
+                              time = 'just now';
+                            } else if (difference.inMinutes < 60) {
+                              time = '${difference.inMinutes}m ago';
+                            } else if (difference.inHours < 24) {
+                              time = '${difference.inHours}h ago';
+                            } else {
+                              time = DateFormat('dd MMM yyyy').format(dateTime);
+                            }
+                            return FutureBuilder<QuerySnapshot>(
+                              future: FirebaseFirestore.instance
+                                  .collection('savedPost')
+                                  .where('userId',
+                                      isEqualTo: FirebaseAuth
+                                          .instance.currentUser!.uid)
+                                  .where('postId',
+                                      isEqualTo: postdata.post.postId)
+                                  .get(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData) {
+                                  return Text('');
+                                } else if (snapshot.hasError) {
+                                  return Text('');
+                                } else {
+                                  final docs = snapshot.data!.docs;
+                                  bool saved = docs.isNotEmpty ? true : false;
+                                  return PostCard(
+                                    userimg: postdata.trainer.profileImageUrl,
+                                    username: postdata.trainer.name,
+                                    postimg: postdata.post.imageUrl,
+                                    postdescription: postdata.post.caption,
+                                    time: time,
+                                    save: saved,
+                                    postId: postdata.post.postId,
+                                    onsaved: () {
+                                      setState(() {
+                                        saved = !saved;
+                                      });
+                                      if (saved) {
+                                        HomeApi.postSaved(postdata.post.postId);
+                                      } else {
+                                        HomeApi.postUnsaved(
+                                            postdata.post.postId);
+                                      }
+                                    },
+                                  );
+                                }
+                              },
                             );
                           },
                         );
@@ -323,8 +389,141 @@ class _HomeViewState extends State<HomeView> {
               ],
             ),
           ),
+          // controller.show == true
+          //     ? Positioned(
+          //         top: 65,
+          //         right: 20,
+          //         child: BackdropFilter(
+          //           filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 6.0),
+          //           child: Container(
+          //             decoration: BoxDecoration(
+          //                 color: Colors.black87,
+          //                 borderRadius: BorderRadius.circular(15)),
+          //             child: Container(
+          //               padding: EdgeInsets.all(15),
+          //               width: 200,
+          //               color: Colors.transparent,
+          //               child: Column(
+          //                 crossAxisAlignment: CrossAxisAlignment.start,
+          //                 children: [
+          //                   Text(
+          //                     'Languages',
+          //                     style: TextStyle(
+          //                         fontSize: 16,
+          //                         fontWeight: FontWeight.w600,
+          //                         color: white),
+          //                   ),
+          //                   Column(
+          //                       crossAxisAlignment:
+          //                           CrossAxisAlignment.start,
+          //                       children: _buildRadioButtons()),
+          //                   Text(
+          //                     'Gender',
+          //                     style: TextStyle(
+          //                         fontSize: 16,
+          //                         fontWeight: FontWeight.w600,
+          //                         color: white),
+          //                   ),
+          //                   Column(
+          //                       crossAxisAlignment:
+          //                           CrossAxisAlignment.start,
+          //                       children: _buildGenderButtons()),
+          //                   Align(
+          //                     alignment: Alignment.centerRight,
+          //                     child: GradientButton(
+          //                       title: 'Search',
+          //                       onPressed: () {},
+          //                       selected: true,
+          //                       buttonwidth: 0.3,
+          //                       buttonHeight: 40.0,
+          //                     ),
+          //                   )
+          //                 ],
+          //               ),
+          //             ),
+          //           ),
+          //         ))
+          //     : Container()
+          //   ],
+          // ),
         ),
       )),
     );
+  }
+
+  List<Widget> _buildRadioButtons() {
+    List<Widget> radioButtons = [];
+    for (Languages option in Languages.values) {
+      radioButtons.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Transform.scale(
+                scale: 1.2,
+                child: Radio(
+                  value: option,
+                  groupValue: _selectedOption,
+                  fillColor:
+                      MaterialStateColor.resolveWith((states) => borderDown),
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedOption = value!;
+                    });
+                  },
+                )),
+            Text(
+              option.toString().split('.').last,
+              style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: white),
+            ),
+            Text(
+              '',
+            ),
+          ],
+        ),
+      );
+    }
+    return radioButtons;
+  }
+
+  List<Widget> _buildGenderButtons() {
+    List<Widget> radioButtons = [];
+    for (Gender option in Gender.values) {
+      radioButtons.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Transform.scale(
+                scale: 1.2,
+                child: Radio(
+                  value: option,
+                  groupValue: gender,
+                  fillColor:
+                      MaterialStateColor.resolveWith((states) => borderDown),
+                  onChanged: (value) {
+                    setState(() {
+                      gender = value!;
+                    });
+                  },
+                )),
+            Text(
+              option.toString().split('.').last,
+              style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: white),
+            ),
+            Text(
+              '',
+            ),
+          ],
+        ),
+      );
+    }
+    return radioButtons;
   }
 }

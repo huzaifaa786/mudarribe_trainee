@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import 'package:mudarribe_trainee/models/trainer.dart';
 
@@ -34,4 +35,28 @@ class HomeApi {
           isGreaterThanOrEqualTo:
               DateFormat('dd/MM/y').format(DateTime.now()).toString())
       .orderBy('date', descending: false);
+
+  static postSaved(postId) async {
+    String id = DateTime.now().millisecondsSinceEpoch.toString();
+    await FirebaseFirestore.instance.collection('savedPost').doc(id).set({
+      "id": id,
+      'postId': postId,
+      "userId": FirebaseAuth.instance.currentUser!.uid,
+    });
+  }
+
+  static postUnsaved(postId) async {
+    final querySnapshot = await FirebaseFirestore.instance
+        .collection('savedPost')
+        .where('userId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where('postId', isEqualTo: postId)
+        .get();
+    if (querySnapshot.docs.isNotEmpty) {
+      final docId = querySnapshot.docs[0].id;
+      await FirebaseFirestore.instance
+          .collection('savedPost')
+          .doc(docId)
+          .delete();
+    }
+  }
 }

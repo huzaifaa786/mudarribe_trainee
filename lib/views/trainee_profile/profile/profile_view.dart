@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:mudarribe_trainee/components/appbar.dart';
 import 'package:mudarribe_trainee/components/profile_tile.dart';
 import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
@@ -54,15 +54,27 @@ class TraineeProfileView extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          child: Image.asset(
-                                            'assets/images/cardimg1.png',
-                                            fit: BoxFit.cover,
-                                            height: 90,
-                                            width: 90,
-                                          )),
+                                      controller.currentUser!.imageUrl == null
+                                          ? ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              child: Image.asset(
+                                                'assets/images/cardimg1.png',
+                                                fit: BoxFit.cover,
+                                                height: 90,
+                                                width: 90,
+                                              ))
+                                          : ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              child: CachedNetworkImage(
+                                                imageUrl: controller
+                                                    .currentUser!.imageUrl
+                                                    .toString(),
+                                                fit: BoxFit.cover,
+                                                height: 90,
+                                                width: 90,
+                                              )),
                                       Text(
                                         controller.currentUser!.name!,
                                         style: const TextStyle(
@@ -87,7 +99,9 @@ class TraineeProfileView extends StatelessWidget {
                                       ),
                                       ProfileTile(
                                         img: 'assets/images/saved.svg',
-                                        ontap: () {},
+                                        ontap: () {
+                                          Get.toNamed(AppRoutes.saved);
+                                        },
                                         text: 'Saved',
                                       ),
                                       ProfileTile(
