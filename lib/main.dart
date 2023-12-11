@@ -10,7 +10,6 @@ import 'package:mudarribe_trainee/views/authentication/change_password/change_pa
 import 'package:mudarribe_trainee/views/authentication/signin/signin_binding.dart';
 import 'package:mudarribe_trainee/views/authentication/signin/signin_view.dart';
 import 'package:mudarribe_trainee/views/chat/controller.dart';
-
 import 'package:mudarribe_trainee/views/events/allevents/allevents_view.dart';
 import 'package:mudarribe_trainee/views/events/eventsdetail/eventsDetail_view.dart';
 import 'package:mudarribe_trainee/views/events/myevents/myEvents_view.dart';
