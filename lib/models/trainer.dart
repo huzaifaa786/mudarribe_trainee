@@ -2,6 +2,7 @@ class Trainer {
   final String id;
   final String name;
   final String profileImageUrl;
+  final String? bio;
   final List category;
 
   Trainer({
@@ -9,6 +10,7 @@ class Trainer {
     required this.name,
     required this.profileImageUrl,
     required this.category,
+    required this.bio,
   });
 
   factory Trainer.fromMap(Map<String, dynamic> map) {
@@ -17,6 +19,7 @@ class Trainer {
       name: map['name'] ,
       profileImageUrl: map['profileImageUrl'],
       category: map['categories'],
+      bio: map['bio'] ?? '',
     );
   }
 }

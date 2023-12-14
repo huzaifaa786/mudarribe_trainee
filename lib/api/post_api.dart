@@ -11,8 +11,7 @@ class HomeApi {
 
   static var trainerquery = FirebaseFirestore.instance
       .collection('users')
-      .where('userType', isEqualTo: 'trainer')
-      .orderBy('id', descending: true);
+      .where('userType', isEqualTo: 'trainer');
 
   static Future<Trainer> fetchTrainerData(String trainerId) async {
     final trainerSnapshot = await FirebaseFirestore.instance
@@ -24,24 +23,25 @@ class HomeApi {
     return Trainer.fromMap(trainerData);
   }
 
-  static Future<TrainerStory> fetchTrainerStoryData(
-      String trainerId) async {
+  static Future<TrainerStory?> fetchTrainerStoryData(String trainerId) async {
     final storySnapshot = await FirebaseFirestore.instance
         .collection('trainer_stories')
         .where('trainerId', isEqualTo: trainerId)
         .limit(1)
         .get();
-    final storyData = storySnapshot.docs[0];
-    
 
-    return TrainerStory.fromJson(storyData.data() as Map<String, dynamic>);
+    if (storySnapshot.docs.length != 0) {
+      final storyData = storySnapshot.docs[0];
+
+      return TrainerStory.fromJson(storyData.data() as Map<String, dynamic>);
+    }
   }
 
   static var eventquery = FirebaseFirestore.instance
       .collection('trainer_events')
       .where('date',
           isGreaterThan:
-              DateFormat('dd/MM/y').format(DateTime.now()).toString())
+              DateFormat('dd/MM/y').format(DateTime.now()).toString()).where('eventStatus', isEqualTo: 'open')
       .orderBy('date', descending: true)
       .limit(6);
 
@@ -74,6 +74,29 @@ class HomeApi {
       final docId = querySnapshot.docs[0].id;
       await FirebaseFirestore.instance
           .collection('savedPost')
+          .doc(docId)
+          .delete();
+    }
+  }
+  static eventSaved(eventId) async {
+    String id = DateTime.now().millisecondsSinceEpoch.toString();
+    await FirebaseFirestore.instance.collection('savedEvent').doc(id).set({
+      "id": id,
+      'eventId': eventId,
+      "userId": FirebaseAuth.instance.currentUser!.uid,
+    });
+  }
+
+  static eventUnsaved(eventId) async {
+    final querySnapshot = await FirebaseFirestore.instance
+        .collection('savedEvent')
+        .where('userId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where('eventId', isEqualTo: eventId)
+        .get();
+    if (querySnapshot.docs.isNotEmpty) {
+      final docId = querySnapshot.docs[0].id;
+      await FirebaseFirestore.instance
+          .collection('savedEvent')
           .doc(docId)
           .delete();
     }

@@ -15,6 +15,7 @@ class PostCard extends StatelessWidget {
       this.time,
       this.postId,
       this.save,
+      this.onProfileImageTap,
       this.onsaved});
   final userimg;
   final username;
@@ -24,6 +25,7 @@ class PostCard extends StatelessWidget {
   final time;
   final postId;
   final save;
+  final onProfileImageTap;
 
   @override
   Widget build(BuildContext context) {
@@ -46,27 +48,30 @@ class PostCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                        height: 50,
-                        width: 50,
-                        padding: EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: GradientBoxBorder(
-                            gradient: LinearGradient(colors: const [
-                              gradientred,
-                              borderTop,
-                              borderDown,
-                              borderDown
-                            ]),
-                            width: 1,
+                    InkWell(
+                      onTap: onProfileImageTap,
+                      child: Container(
+                          height: 50,
+                          width: 50,
+                          padding: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: GradientBoxBorder(
+                              gradient: LinearGradient(colors: const [
+                                gradientred,
+                                borderTop,
+                                borderDown,
+                                borderDown
+                              ]),
+                              width: 1,
+                            ),
                           ),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(25),
-                          child: CachedNetworkImage(imageUrl: userimg),
-                          // Image.network(userimg),
-                        )),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(25),
+                            child: CachedNetworkImage(imageUrl: userimg),
+                            // Image.network(userimg),
+                          )),
+                    ),
                     Padding(
                       padding: EdgeInsets.only(
                         left: 8,
