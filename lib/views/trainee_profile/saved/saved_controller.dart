@@ -15,4 +15,6 @@ class SavedController extends GetxController {
     print(indexs);
     update();
   }
+
+  
 }

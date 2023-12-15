@@ -3,34 +3,27 @@
 import 'package:flutter/material.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 
-class packagecheckedbox extends StatefulWidget {
-  packagecheckedbox({
+class PackageCheckedBox extends StatelessWidget {
+  PackageCheckedBox({
     Key? key,
     this.value,
     this.groupvalue,
     this.onpress,
-    this.onchaged,
+    this.onchanged,
     this.image,
-   
-    
   }) : super(
           key: key,
         );
   final value;
   final onpress;
   final groupvalue;
-  final onchaged;
+  final onchanged;
   final image;
-  
-  @override
-  State<packagecheckedbox> createState() => _CheckedboxState();
-}
 
-class _CheckedboxState extends State<packagecheckedbox> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: widget.onchaged,
+      onTap: onchanged,
       child: Container(
         width: MediaQuery.of(context).size.width,
         child: ListTile(
@@ -39,15 +32,13 @@ class _CheckedboxState extends State<packagecheckedbox> {
             child: Transform.scale(
                 scale: 1.2,
                 child: Radio(
-                    value: widget.value.toString(),
-                    groupValue: widget.groupvalue.toString(),
-                    fillColor: MaterialStateColor.resolveWith(
-                        (states) => borderDown),
-                    onChanged: (value) {
-                      widget.onchaged();
-                    })),
+                    value: value.toString(),
+                    groupValue: groupvalue.toString(),
+                    activeColor: borderDown,
+                    fillColor:
+                        MaterialStateColor.resolveWith((states) => borderDown),
+                    onChanged: onchanged)),
           ),
-          
           dense: true,
           contentPadding: EdgeInsets.only(left: 0.0, right: 0.0),
         ),

@@ -22,7 +22,9 @@ class EventDetailsCard extends StatelessWidget {
       this.startTime,
       this.category,
       this.name,
-      this.eventimg});
+      this.eventimg,
+      this.isSaved,
+      this.onSave});
   final address;
   final startTime;
   final endTime;
@@ -33,6 +35,8 @@ class EventDetailsCard extends StatelessWidget {
   final name;
   final category;
   final eventimg;
+  final isSaved;
+  final onSave;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -109,22 +113,26 @@ class EventDetailsCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Image.asset(
-                    'assets/images/bookmark1.png',
+                  InkWell(
+                    onTap: onSave,
+                    child: isSaved == false
+                        ? Image.asset('assets/images/bookmark1.png')
+                        : Image.asset('assets/images/bookmark-light.png'),
                   ),
                 ],
               ),
             ),
             Container(
-              height: 200,
-              padding: EdgeInsets.only(left: 20, right: 20),
+              height: 190,
+              padding: EdgeInsets.only(left: 20, right: 20, top: 7.0),
               width: MediaQuery.sizeOf(context).width,
-              child: Image.network(eventimg),
+              child: Image.network(
+                eventimg,
+                fit: BoxFit.cover,
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                left: 20,
-              ),
+              padding: const EdgeInsets.only(left: 20, top: 7.0),
               child: Column(
                 children: [
                   Row(
@@ -133,7 +141,7 @@ class EventDetailsCard extends StatelessWidget {
                       SvgPicture.asset('assets/images/location.svg',
                           fit: BoxFit.scaleDown, height: 24, width: 24),
                       Container(
-                        width: MediaQuery.of(context).size.width*0.7,
+                        width: MediaQuery.of(context).size.width * 0.7,
                         padding: const EdgeInsets.only(left: 8, bottom: 3),
                         child: Text(
                           address,
@@ -143,7 +151,6 @@ class EventDetailsCard extends StatelessWidget {
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.w600,
                             fontSize: 14,
-                            
                           ),
                         ),
                       ),

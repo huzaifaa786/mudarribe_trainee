@@ -2,6 +2,7 @@ class Trainer {
   final String id;
   final String name;
   final String profileImageUrl;
+  final String? bio;
   final List category;
   final List languages;
   final String gender;
@@ -15,6 +16,7 @@ class Trainer {
     required this.gender,
     required this.languages,
     this.isSaved = false,
+    required this.bio,
   });
 
   factory Trainer.fromMap(Map<String, dynamic> map) {
@@ -25,6 +27,7 @@ class Trainer {
       category: map['categories'],
       gender: map['gender'] ?? '',
       languages: map['languages'] ?? [],
+      bio: map['bio'] ?? '',
     );
   }
 }

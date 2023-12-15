@@ -34,7 +34,6 @@ class TrainerStoryContoller extends GetxController {
       } else if (difference.inHours < 24) {
         time = '${difference.inHours}h ago'.obs;
       } else {
-      
         await _homeApi.deleteStory(story.id);
         time = 'DontShow'.obs;
         print(time.value);
@@ -46,8 +45,10 @@ class TrainerStoryContoller extends GetxController {
             controller: storyController,
             roundedBottom: false,
             roundedTop: false));
+        update();
       }
     }
+    // if(stories.length != 0)
     time = stories.first.view.key.toString().obs;
     update();
   }
@@ -63,17 +64,21 @@ class TrainerStoryContoller extends GetxController {
     RegExp regExp = RegExp(r'(\d+)\s*([a-z]+)\s*ago');
 
     // Match the regular expression against the input string
-    Match match = regExp.firstMatch(input)!;
+    if (input != '') {
+      Match match = regExp.firstMatch(input)!;
 
-    // Extract hours and unit from the matched result
-    if (!match.isBlank!) {
-      String hours = match.group(1)!;
-      String unit = match.group(2)!;
+      // Extract hours and unit from the matched result
+      if (!match.isBlank!) {
+        String hours = match.group(1)!;
+        String unit = match.group(2)!;
 
-      return '$hours$unit ago';
+        return '$hours$unit ago';
+      } else {
+        // Return a default value or handle the case when no match is found
+        return 'Invalid format';
+      }
     } else {
-      // Return a default value or handle the case when no match is found
-      return 'Invalid format';
+      return '';
     }
   }
 }

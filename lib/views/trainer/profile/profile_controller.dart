@@ -34,16 +34,27 @@ class TrainerprofileController extends GetxController {
     isFollowing.value = !isFollowing.value;
   }
 
-  PackageType? mytype;
-  toggleplan(PackageType value) {
-    mytype = value;
+  String? selectedPlan = '';
+  toggleplan(value) {
+    selectedPlan = value;
+    update();
+  }
+  String? selectedPrice;
+  toggleprice(value) {
+    selectedPrice = value;
     update();
   }
 
   @override
   void onInit() {
-    mytype = PackageType.monthBoth;
+    
     update();
     super.onInit();
+  }
+
+    Future getTrainerData(id) async {
+
+    update();
+  
   }
 }

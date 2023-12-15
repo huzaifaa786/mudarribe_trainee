@@ -1,13 +1,30 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_pagination/firebase_pagination.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:gradient_borders/gradient_borders.dart';
+import 'package:mudarribe_trainee/api/post_api.dart';
+import 'package:mudarribe_trainee/api/trainer_profile_api.dart';
+import 'package:mudarribe_trainee/components/chat_me_card.dart';
+import 'package:mudarribe_trainee/components/color_button.dart';
 import 'package:mudarribe_trainee/components/eventDetailsCard.dart';
 import 'package:mudarribe_trainee/components/packagecheckbox.dart';
+import 'package:mudarribe_trainee/components/trainer_package_card.dart';
+import 'package:mudarribe_trainee/components/trainer_profile_card.dart';
+import 'package:mudarribe_trainee/models/event.dart';
+import 'package:mudarribe_trainee/models/event_data_combined.dart';
+import 'package:mudarribe_trainee/models/post.dart';
+import 'package:mudarribe_trainee/models/trainer.dart';
+import 'package:mudarribe_trainee/models/trainer_package.dart';
 import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mudarribe_trainee/views/chat/chat_page.dart';
 import 'package:mudarribe_trainee/views/trainer/profile/profile_controller.dart';
 
 class TrainerprofileView extends StatefulWidget {
@@ -20,10 +37,11 @@ class TrainerprofileView extends StatefulWidget {
 enum PackageType { monthBoth, month1, month2 }
 
 class _TrainerprofileViewState extends State<TrainerprofileView> {
-  final TrainerprofileController controller = TrainerprofileController.instance;
+  String trainerId = '';
 
   @override
   Widget build(BuildContext context) {
+    trainerId = Get.arguments;
     return GetBuilder<TrainerprofileController>(
       builder: (controller) => Scaffold(
         appBar: AppBar(
@@ -33,6 +51,61 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
             color: white,
           ),
         ),
+        bottomNavigationBar: controller.indexs == 2 &&
+                controller.selectedPlan != null &&
+                controller.selectedPrice != null
+            ? Container(
+                height: MediaQuery.of(context).size.height * 0.12,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.black,
+                ),
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(''),
+                          Row(
+                            children: [
+                              Text(
+                                controller.selectedPrice ?? '',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700,
+                                    color: whitewithopacity1),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 10, left: 6),
+                                child: Text(
+                                  'AED',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700,
+                                      color: whitewithopacity1),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Gap(5),
+                      GradientButton(
+                        title: 'Subscribe',
+                        onPressed: () {
+                          Get.offNamed(AppRoutes.packagecheckout);
+                        },
+                        selected: true,
+                        buttonHeight: MediaQuery.of(context).size.height * 0.07,
+                      )
+                    ],
+                  ),
+                ))
+            : Text(''),
         body: SafeArea(
             child: Padding(
           padding:
@@ -48,125 +121,124 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                          height: 92,
-                          width: 90,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: const GradientBoxBorder(
-                              gradient: LinearGradient(colors: [
-                                Color(4290773187),
-                                Color(4285693389),
-                                Color(4278253801)
-                              ]),
-                              width: 2,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Image.asset('assets/images/profile.png',
-                                fit: BoxFit.fill),
-                          )),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 12),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                  FutureBuilder<Trainer?>(
+                      future: TrainerProfileApi.fetchTrainerData(trainerId),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          return Text('');
+                        }
+                        if (!snapshot.hasData) {
+                          return Text('');
+                        }
+                        Trainer trainer = snapshot.data!;
+                        return Column(
                           children: [
-                            Row(
-                              children: [
-                                Text(
-                                  'Salim Ahmed',
-                                  style: TextStyle(
-                                      color: white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 7),
-                                  child: Image.asset(
-                                    'assets/images/verified_tick.png',
-                                    width: 20,
-                                    height: 20,
-                                  ),
-                                )
-                              ],
+                            TrainerProfileCard(
+                              userimg: trainer.profileImageUrl,
+                              username: trainer.name,
+                              bio: trainer.bio,
+                              categories: trainer.category.join(' & '),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 8, bottom: 8),
-                              child: Text(
-                                'Body Building& lifting trainer',
-                                style: TextStyle(
-                                    color: profilesubheading,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400),
+                              padding: const EdgeInsets.only(
+                                  left: 15, right: 15, bottom: 10, top: 35),
+                              child: Divider(
+                                thickness: 1,
+                                color: dividercolor,
                               ),
                             ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.66,
-                              child: Text(
-                                'Body Building & lifting  trainer, let me help you to get your dream body!  ',
-                                style: TextStyle(
-                                    color: white,
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w400),
-                                maxLines: 2,
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                FutureBuilder<QuerySnapshot>(
+                                    future: TrainerProfileApi.checkFollowing(
+                                        trainerId),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasError) {
+                                        return Text('');
+                                      }
+                                      if (!snapshot.hasData) {
+                                        return Text('');
+                                      }
+                                      final docs = snapshot.data!.docs;
+                                      RxBool isFollowing = docs.isNotEmpty
+                                          ? true.obs
+                                          : false.obs;
+
+                                      return Obx(
+                                        () => GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                isFollowing =
+                                                    isFollowing == true.obs
+                                                        ? false.obs
+                                                        : true.obs;
+                                              });
+                                              if (isFollowing.value) {
+                                                TrainerProfileApi.followTrainer(
+                                                    trainerId);
+                                              }
+                                              if (!isFollowing.value) {
+                                                TrainerProfileApi
+                                                    .unfollowTrainer(trainerId);
+                                              }
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.only(top: 10),
+                                              width: 264,
+                                              height: 40,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadiusDirectional
+                                                          .circular(5),
+                                                  gradient: LinearGradient(
+                                                    begin:
+                                                        Alignment(1.00, -0.03),
+                                                    end: Alignment(-1, 0.03),
+                                                    colors: isFollowing.value
+                                                        ? [
+                                                            Colors.black,
+                                                            Colors.black
+                                                          ]
+                                                        : [
+                                                            Color(0xFF58E0FF),
+                                                            Color(0xFF727DCD)
+                                                          ],
+                                                  )),
+                                              child: Text(
+                                                isFollowing.value
+                                                    ? 'Following'
+                                                    : 'Follow',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            )),
+                                      );
+                                    }),
+                                InkWell(
+                                  onTap: () {
+                                    Get.off(() => ChatPage(
+                                        arguments: ChatPageArguments(
+                                            peerId: trainer.id,
+                                            peerAvatar: trainer.profileImageUrl,
+                                            peerNickname: trainer.name)));
+                                  },
+                                  child: SvgPicture.asset(
+                                    'assets/images/chat.svg',
+                                    width: 32,
+                                    height: 33,
+                                    fit: BoxFit.scaleDown,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
-                        ),
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 15, right: 15, bottom: 10, top: 35),
-                    child: Divider(
-                      thickness: 1,
-                      color: dividercolor,
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Obx(() => GestureDetector(
-                          onTap: () {
-                            controller.toggleFollow();
-                          },
-                          child: Container(
-                            padding: EdgeInsets.only(top: 10),
-                            width: 264,
-                            height: 40,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadiusDirectional.circular(5),
-                                gradient: LinearGradient(
-                                  begin: Alignment(1.00, -0.03),
-                                  end: Alignment(-1, 0.03),
-                                  colors: controller.isFollowing.value
-                                      ? [Colors.black, Colors.black]
-                                      : [Color(0xFF58E0FF), Color(0xFF727DCD)],
-                                )),
-                            child: Text(
-                              controller.isFollowing.value
-                                  ? 'Following'
-                                  : 'Follow',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ))),
-                      SvgPicture.asset(
-                        'assets/images/chat.svg',
-                        width: 32,
-                        height: 33,
-                        fit: BoxFit.scaleDown,
-                      ),
-                    ],
-                  ),
+                        );
+                      }),
                   Padding(
                     padding: const EdgeInsets.only(top: 30, bottom: 30),
                     child: ToggleButtons(
@@ -175,11 +247,14 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
                               child: Text(
                                 'Posts',
                                 style: TextStyle(
-                                  color: white,
+                                  color: controller.indexs == 0
+                                      ? white
+                                      : Colors.grey,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -207,7 +282,9 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                                 child: Text(
                                   'Events',
                                   style: TextStyle(
-                                    color: white,
+                                    color: controller.indexs == 1
+                                        ? white
+                                        : Colors.grey,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -229,11 +306,14 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                               height: 18,
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
                               child: Text(
                                 'Packages',
                                 style: TextStyle(
-                                  color: white,
+                                  color: controller.indexs == 2
+                                      ? white
+                                      : Colors.grey,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -253,669 +333,257 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                     ),
                   ),
                   controller.indexs == 0
-                      ? GridView.builder(
-                        shrinkWrap: true,
-                        gridDelegate:
-                            SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                        ),
-                        itemCount: controller.gridItems.length,
-                        itemBuilder: (context, index) {
-                          return Image.asset(
-                            controller.gridItems[index],
-                            fit: BoxFit.cover,
-                          );
-                        },
-                      )
+                      ? FutureBuilder<List<Post>>(
+                          future: TrainerProfileApi.getTrainerPosts(trainerId),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) {
+                              return Text('');
+                            }
+                            if (!snapshot.hasData) {
+                              return Center(
+                                heightFactor: 15,
+                                child: Text(
+                                  'No Posts Found !',
+                                  style:
+                                      TextStyle(color: white.withOpacity(0.7)),
+                                ),
+                              );
+                            }
+                            List<Post> posts = snapshot.data!;
+                            return GridView.builder(
+                              physics: BouncingScrollPhysics(),
+                              shrinkWrap: true,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                              ),
+                              itemCount: posts.length,
+                              itemBuilder: (context, index) {
+                                return CachedNetworkImage(
+                                  imageUrl: posts[index].imageUrl,
+                                  fit: BoxFit.cover,
+                                );
+                              },
+                            );
+                          })
                       : controller.indexs == 1
                           ? Container(
-                              height: MediaQuery.of(context).size.height * 0.44,
-                              child: ListView(
-                                children: [
-                                  EventDetailsCard(),
-                                  EventDetailsCard(),
-                                ],
+                              constraints:
+                                  BoxConstraints(minHeight: 10, maxHeight: 450),
+                              child: FirestorePagination(
+                                shrinkWrap: true,
+                                isLive: false,
+                                limit: 20,
+                                onEmpty: Center(
+                                  heightFactor: 15,
+                                  child: Text(
+                                    'No Events Found !',
+                                    style: TextStyle(
+                                        color: white.withOpacity(0.7)),
+                                  ),
+                                ),
+                                viewType: ViewType.list,
+                                physics: BouncingScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                query: TrainerProfileApi.fetchTrainerEvents(
+                                    trainerId),
+                                bottomLoader: CircularProgressIndicator(),
+                                itemBuilder:
+                                    (context, documentSnapshot, index) {
+                                  final eventData = documentSnapshot.data()
+                                      as Map<String, dynamic>;
+                                  final trainerId = eventData['trainerId'];
+                                  return FutureBuilder<Trainer>(
+                                    future: HomeApi.fetchTrainerData(trainerId),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasError) {
+                                        return Text('');
+                                      }
+                                      if (!snapshot.hasData) {
+                                        return Text('');
+                                      }
+                                      Trainer trainerData = snapshot.data!;
+                                      Events events = Events.fromMap(eventData);
+                                      CombinedEventData combineEvent =
+                                          CombinedEventData(
+                                              trainer: trainerData,
+                                              event: events);
+                                      return FutureBuilder<QuerySnapshot>(
+                                          future: FirebaseFirestore.instance
+                                              .collection('savedEvent')
+                                              .where('userId',
+                                                  isEqualTo: FirebaseAuth
+                                                      .instance
+                                                      .currentUser!
+                                                      .uid)
+                                              .where('eventId',
+                                                  isEqualTo: events.eventId)
+                                              .get(),
+                                          builder: (context, snapshot) {
+                                            if (!snapshot.hasData) {
+                                              return Text('');
+                                            } else if (snapshot.hasError) {
+                                              return Text('');
+                                            } else {
+                                              final docs = snapshot.data!.docs;
+                                              bool saved = docs.isNotEmpty
+                                                  ? true
+                                                  : false;
+
+                                              return EventDetailsCard(
+                                                category: combineEvent
+                                                    .trainer.category
+                                                    .join(' & '),
+                                                name: combineEvent.trainer.name,
+                                                image: combineEvent
+                                                    .trainer.profileImageUrl,
+                                                eventimg:
+                                                    combineEvent.event.imageUrl,
+                                                address:
+                                                    combineEvent.event.address,
+                                                startTime: combineEvent
+                                                    .event.startTime,
+                                                endTime:
+                                                    combineEvent.event.endTime,
+                                                date: combineEvent.event.date,
+                                                capcity:
+                                                    combineEvent.event.capacity,
+                                                price: combineEvent.event.price,
+                                                isSaved: saved,
+                                                onSave: () {
+                                                  setState(() {
+                                                    saved = !saved;
+                                                  });
+                                                  if (saved) {
+                                                    HomeApi.eventSaved(
+                                                        events.eventId);
+                                                  } else {
+                                                    HomeApi.eventUnsaved(
+                                                        events.eventId);
+                                                  }
+                                                },
+                                              );
+                                            }
+                                          });
+                                    },
+                                  );
+                                },
                               ),
                             )
-                          : Container(
-                              height: MediaQuery.of(context).size.height * 0.44,
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      height: MediaQuery.of(context).size.height *
-                                          0.3,
-                                      child: SingleChildScrollView(
-                                        child: Column(
-                                          children: [
-                                            Stack(children: [
-                                              GestureDetector(
-                                                onTap: () async {
-                                                  await controller.toggleplan(
-                                                      PackageType.monthBoth);
-                                                  setState(() {});
-                                                },
-                                                child: Container(
-                                                    height: 118,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      color: Colors.black,
-                                                      border: controller.mytype ==
-                                                              PackageType
-                                                                  .monthBoth
-                                                          ? Border.all(
-                                                              color: Colors.white)
-                                                          : null,
-                                                    ),
-                                                    width: MediaQuery.of(context)
-                                                        .size
-                                                        .width,
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 70,
-                                                              top: 10,
-                                                              right: 30),
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            children: [
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .only(
-                                                                        top: 10),
-                                                                child: Row(
-                                                                  children: [
-                                                                    Image.asset(
-                                                                      'assets/images/packageplanimage.png',
-                                                                      height: 19,
-                                                                      width: 20,
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: const EdgeInsets
-                                                                          .only(
-                                                                          left: 5,
-                                                                          right:
-                                                                              5),
-                                                                      child: Text(
-                                                                        '+',
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                white,
-                                                                            fontSize:
-                                                                                20,
-                                                                            fontWeight:
-                                                                                FontWeight.w700),
-                                                                      ),
-                                                                    ),
-                                                                    Image.asset(
-                                                                        'assets/images/packageplanimage1.png',
-                                                                        height:
-                                                                            18,
-                                                                        width:
-                                                                            20),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Row(
-                                                                children: [
-                                                                  Text(
-                                                                    '150.44',
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            20,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w700,
-                                                                        color:
-                                                                            whitewithopacity1),
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsets
-                                                                        .only(
-                                                                            top:
-                                                                                10,
-                                                                            left:
-                                                                                6),
-                                                                    child: Text(
-                                                                      'AED',
-                                                                      style: TextStyle(
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontWeight:
-                                                                              FontWeight
-                                                                                  .w700,
-                                                                          color:
-                                                                              whitewithopacity1),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    top: 5,
-                                                                    bottom: 5),
-                                                            child: Text(
-                                                              '1  month Plan',
-                                                              style: TextStyle(
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                  color:
-                                                                      whitewithopacity1),
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                              'Included Exercises & Nutrition Plan',
-                                                              style: TextStyle(
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                  color:
-                                                                      whitewithopacity1)),
-                                                        ],
-                                                      ),
-                                                    )),
-                                              ),
-                                              Positioned(
-                                                  top: 0,
-                                                  right: 140,
-                                                  child: packagecheckedbox(
-                                                    groupvalue: controller.mytype,
-                                                    value: PackageType.monthBoth,
-                                                    onchaged: () async {
-                                                      await controller.toggleplan(
-                                                          PackageType.monthBoth);
-                                                      setState(() {});
-                                                    },
-                                                  ))
-                                            ]),
-                                            Stack(children: [
-                                              GestureDetector(
-                                                onTap: () async {
-                                                  await controller.toggleplan(
-                                                      PackageType.month1);
-                                                  setState(() {});
-                                                },
-                                                child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      top: 10, bottom: 10),
-                                                  child: Container(
-                                                      height: 118,
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                10),
-                                                        color: Colors.black,
-                                                        border: controller
-                                                                    .mytype ==
-                                                                PackageType.month1
-                                                            ? Border.all(
-                                                                color:
-                                                                    Colors.white)
-                                                            : null,
-                                                      ),
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .width,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets.only(
-                                                                left: 70,
-                                                                top: 10,
-                                                                right: 30),
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .end,
-                                                              children: [
-                                                                Text(
-                                                                  '150.44',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          20,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w700,
-                                                                      color:
-                                                                          whitewithopacity1),
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsets
-                                                                      .only(
-                                                                          top: 10,
-                                                                          left:
-                                                                              6),
-                                                                  child: Text(
-                                                                    'AED',
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w700,
-                                                                        color:
-                                                                            whitewithopacity1),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      top: 5,
-                                                                      bottom: 15),
-                                                              child: Row(
-                                                                children: [
-                                                                  Image.asset(
-                                                                    'assets/images/packageplanimage.png',
-                                                                    height: 19,
-                                                                    width: 20,
-                                                                  ),
-                                                                  Padding(
-                                                                    padding:
-                                                                        const EdgeInsets
-                                                                            .only(
-                                                                            left:
-                                                                                10),
-                                                                    child: Text(
-                                                                      '1  month Plan',
-                                                                      style: TextStyle(
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontWeight:
-                                                                              FontWeight
-                                                                                  .w600,
-                                                                          color:
-                                                                              whitewithopacity1),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                                'Included Exercises  Plan only',
-                                                                style: TextStyle(
-                                                                    fontSize: 12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    color:
-                                                                        whitewithopacity1)),
-                                                          ],
-                                                        ),
-                                                      )),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                  top: 10.0,
-                                                  right: 140,
-                                                  child: packagecheckedbox(
-                                                    groupvalue: controller.mytype,
-                                                    value: PackageType.month1,
-                                                    onchaged: () async {
-                                                      await controller.toggleplan(
-                                                          PackageType.month1);
-                                                      setState(() {});
-                                                    },
-                                                  ))
-                                            ]),
-                                            Stack(children: [
-                                              GestureDetector(
-                                                onTap: () async {
-                                                  await controller.toggleplan(
-                                                      PackageType.month2);
-                                                  setState(() {});
-                                                },
-                                                child: Container(
-                                                    height: 118,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      color: Colors.black,
-                                                      border: controller.mytype ==
-                                                              PackageType.month2
-                                                          ? Border.all(
-                                                              color: Colors.white)
-                                                          : null,
-                                                    ),
-                                                    width: MediaQuery.of(context)
-                                                        .size
-                                                        .width,
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 70,
-                                                              top: 10,
-                                                              right: 30),
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                '150.44',
-                                                                style: TextStyle(
-                                                                    fontSize: 20,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w700,
-                                                                    color:
-                                                                        whitewithopacity1),
-                                                              ),
-                                                              Padding(
-                                                                padding: EdgeInsets
-                                                                    .only(
-                                                                        top: 10,
-                                                                        left: 6),
-                                                                child: Text(
-                                                                  'AED',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          12,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w700,
-                                                                      color:
-                                                                          whitewithopacity1),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    top: 5,
-                                                                    bottom: 15),
-                                                            child: Row(
-                                                              children: [
-                                                                Image.asset(
-                                                                    'assets/images/packageplanimage1.png',
-                                                                    height: 18,
-                                                                    width: 20),
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                          left:
-                                                                              10),
-                                                                  child: Text(
-                                                                    '1  month Plan',
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w600,
-                                                                        color:
-                                                                            whitewithopacity1),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                              'Included Exercises & Nutrition Plan',
-                                                              style: TextStyle(
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                  color:
-                                                                      whitewithopacity1)),
-                                                        ],
-                                                      ),
-                                                    )),
-                                              ),
-                                              Positioned(
-                                                  top: 1.0,
-                                                  right: 140,
-                                                  child: packagecheckedbox(
-                                                    groupvalue: controller.mytype,
-                                                    value: PackageType.month2,
-                                                    onchaged: () async {
-                                                      await controller.toggleplan(
-                                                          PackageType.month2);
-                                                      setState(() {});
-                                                    },
-                                                  ))
-                                            ]),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 15),
-                                      child: Container(
-                                        height: 53,
-                                        width: MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadiusDirectional.circular(
-                                                    5),
-                                            gradient: LinearGradient(
-                                              begin: Alignment(1.00, -0.03),
-                                              end: Alignment(-1, 0.03),
-                                              colors: [
-                                                Color(0xFF58E0FF),
-                                                Color(0xFF727DCD)
-                                              ],
-                                            )),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(top: 12),
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              Get.toNamed(
-                                                  AppRoutes.packagecheckout);
-                                            },
-                                            child: Text(
-                                              'Subscribe',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w700,
-                                              ),
-                                            ),
+                          : Column(
+                              children: [
+                                FutureBuilder<List<TrainerPackage>>(
+                                    future:
+                                        TrainerProfileApi.getTrainerPackages(
+                                            trainerId),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasError) {
+                                        return Text('');
+                                      }
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          heightFactor: 15,
+                                          child: Text(
+                                            'No Package Found !',
+                                            style: TextStyle(
+                                                color: white.withOpacity(0.7)),
                                           ),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 40, bottom: 35),
-                                      child: Row(children: <Widget>[
-                                        Expanded(
-                                            child: Container(
-                                                margin: EdgeInsets.only(
-                                                    left: 10, right: 10),
-                                                child: Divider(
-                                                    color: dividercolor))),
-                                        Text(
-                                          "Or ",
-                                          style: const TextStyle(
-                                              fontFamily: "Poppins",
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                              color: white),
-                                        ),
-                                        Expanded(
-                                            child: Container(
-                                                margin: EdgeInsets.only(
-                                                    left: 10, right: 10),
-                                                child: Divider(
-                                                    color: dividercolor))),
-                                      ]),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          bottom: 10, left: 5, right: 5),
-                                      child: Container(
-                                        height: 93,
-                                        width: MediaQuery.sizeOf(context).width,
-                                        decoration: BoxDecoration(
-                                          color: bgContainer,
-                                          borderRadius: BorderRadius.circular(10),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.grey.withOpacity(0.5),
-                                              spreadRadius: 0,
-                                              blurRadius: 4,
-                                              offset: Offset(1, 2),
-                                            ),
-                                          ],
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 15, top: 20, right: 15),
-                                              child: Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
-                                                    children: [
-                                                      ClipOval(
-                                                        child: Container(
-                                                          width: 50,
-                                                          height: 50,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            shape:
-                                                                BoxShape.circle,
-                                                            border:
-                                                                const GradientBoxBorder(
-                                                              gradient:
-                                                                  LinearGradient(
-                                                                colors: [
-                                                                  Color.fromARGB(
-                                                                      255,
-                                                                      184,
-                                                                      66,
-                                                                      186),
-                                                                  Color.fromARGB(
-                                                                      255,
-                                                                      111,
-                                                                      127,
-                                                                      247),
-                                                                ],
-                                                              ),
-                                                              width: 2,
-                                                            ),
-                                                            image:
-                                                                DecorationImage(
-                                                              image: AssetImage(
-                                                                  'assets/images/profile.jpg'),
-                                                              fit: BoxFit.contain,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets.only(
-                                                                top: 2.0,
-                                                                left: 10.4),
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Text(
-                                                              'Ahmed_67',
-                                                              style: TextStyle(
-                                                                fontSize: 12,
-                                                                fontFamily:
-                                                                    'Montserrat',
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700,
-                                                                color:
-                                                                    Colors.white,
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      top: 10),
-                                                              child: Text(
-                                                                'Chat With me for a personal plan',
-                                                                style: TextStyle(
-                                                                  fontSize: 12,
-                                                                  fontFamily:
-                                                                      'Montserrat',
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  color: Colors
-                                                                      .white
-                                                                      .withOpacity(
-                                                                          0.6000000238418579),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  SvgPicture.asset(
-                                                    'assets/images/chat.svg',
-                                                    width: 32,
-                                                    height: 33,
-                                                    fit: BoxFit.scaleDown,
-                                                  ),
-                                                ],
+                                        );
+                                      }
+                                      List<TrainerPackage> packages =
+                                          snapshot.data!;
+
+                                      return ListView.builder(
+                                        physics: BouncingScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount: packages.length,
+                                        itemBuilder: (context, index) {
+                                          return TrainerPackageCard(
+                                            name: packages[index].name,
+                                            description:
+                                                packages[index].discription,
+                                            price: packages[index].price,
+                                            category: packages[index].category,
+                                            id: packages[index].id,
+                                            selectedPlan:
+                                                controller.selectedPlan,
+                                            onTap: () async {
+                                              await controller.toggleplan(
+                                                  packages[index].id);
+                                              await controller.toggleprice(
+                                                  packages[index].price);
+                                              setState(() {});
+                                            },
+                                          );
+                                        },
+                                      );
+                                    }),
+                                controller.indexs == 2 &&
+                                        controller.selectedPlan != null &&
+                                        controller.selectedPrice != null
+                                    ? Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 40, bottom: 35),
+                                            child: Row(children: <Widget>[
+                                              Expanded(
+                                                  child: Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 10, right: 10),
+                                                      child: Divider(
+                                                          color:
+                                                              dividercolor))),
+                                              Text(
+                                                "Or ",
+                                                style: const TextStyle(
+                                                    fontFamily: "Poppins",
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: white),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                                              Expanded(
+                                                  child: Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 10, right: 10),
+                                                      child: Divider(
+                                                          color:
+                                                              dividercolor))),
+                                            ]),
+                                          ),
+                                          FutureBuilder<Trainer?>(
+                                              future: TrainerProfileApi
+                                                  .fetchTrainerData(trainerId),
+                                              builder: (context, snapshot) {
+                                                if (snapshot.hasError) {
+                                                  return Text('');
+                                                }
+                                                if (!snapshot.hasData) {
+                                                  return Text('');
+                                                }
+                                                Trainer trainer =
+                                                    snapshot.data!;
+                                                return ChatMeCard(
+                                                  userimg:
+                                                      trainer.profileImageUrl,
+                                                  username: trainer.name,
+                                                  chatText:
+                                                      'Chat With me for a personal plan',
+                                                  onChatClick: () {
+                                                    Get.off(() => ChatPage(
+                                                        arguments: ChatPageArguments(
+                                                            peerId: trainer.id,
+                                                            peerAvatar: trainer
+                                                                .profileImageUrl,
+                                                            peerNickname:
+                                                                trainer.name)));
+                                                  },
+                                                );
+                                              }),
+                                        ],
+                                      )
+                                    : Text(''),
+                              ],
                             ),
                 ],
               ),

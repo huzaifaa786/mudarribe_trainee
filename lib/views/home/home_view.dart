@@ -103,6 +103,7 @@ class _HomeViewState extends State<HomeView> {
                         itemBuilder: (context, documentSnapshot, index) {
                           final trainerData =
                               documentSnapshot.data() as Map<String, dynamic>;
+
                           Trainer trainer = Trainer.fromMap(trainerData);
                           return FutureBuilder<TrainerStory?>(
                               future: HomeApi.fetchTrainerStoryData(trainer.id),
@@ -324,18 +325,53 @@ class _HomeViewState extends State<HomeView> {
                               CombinedEventData combineEvent =
                                   CombinedEventData(
                                       trainer: trainerData, event: events);
-                              return EventDetailsCard(
-                                  category:
-                                      combineEvent.trainer.category.join(' & '),
-                                  name: combineEvent.trainer.name,
-                                  image: combineEvent.trainer.profileImageUrl,
-                                  eventimg: combineEvent.event.imageUrl,
-                                  address: combineEvent.event.address,
-                                  startTime: combineEvent.event.startTime,
-                                  endTime: combineEvent.event.endTime,
-                                  date: combineEvent.event.date,
-                                  capcity: combineEvent.event.capacity,
-                                  price: combineEvent.event.price);
+                              return FutureBuilder<QuerySnapshot>(
+                                  future: FirebaseFirestore.instance
+                                      .collection('savedEvent')
+                                      .where('userId',
+                                          isEqualTo: FirebaseAuth
+                                              .instance.currentUser!.uid)
+                                      .where('eventId',
+                                          isEqualTo: events.eventId)
+                                      .get(),
+                                  builder: (context, snapshot) {
+                                    if (!snapshot.hasData) {
+                                      return Text('');
+                                    } else if (snapshot.hasError) {
+                                      return Text('');
+                                    } else {
+                                      final docs = snapshot.data!.docs;
+                                      bool saved =
+                                          docs.isNotEmpty ? true : false;
+
+                                      return EventDetailsCard(
+                                        category: combineEvent.trainer.category
+                                            .join(' & '),
+                                        name: combineEvent.trainer.name,
+                                        image: combineEvent
+                                            .trainer.profileImageUrl,
+                                        eventimg: combineEvent.event.imageUrl,
+                                        address: combineEvent.event.address,
+                                        startTime: combineEvent.event.startTime,
+                                        endTime: combineEvent.event.endTime,
+                                        date: combineEvent.event.date,
+                                        capcity: combineEvent.event.capacity,
+                                        price: combineEvent.event.price,
+                                        isSaved: saved,
+                                        onSave: () {
+                                          setState(() {
+                                            saved = !saved;
+                                          });
+                                          if (saved) {
+                                            HomeApi.eventSaved(events.eventId);
+                                          } else {
+                                            HomeApi.eventUnsaved(
+                                                events.eventId);
+                                          }
+                                        },
+                                      );
+                                    }
+                                  });
                             },
                           );
                         },
@@ -409,6 +445,10 @@ class _HomeViewState extends State<HomeView> {
                                   final docs = snapshot.data!.docs;
                                   bool saved = docs.isNotEmpty ? true : false;
                                   return PostCard(
+                                    onProfileImageTap: () {
+                                      Get.toNamed(AppRoutes.trainerprofile,
+                                          arguments: postdata.trainer.id);
+                                    },
                                     userimg: postdata.trainer.profileImageUrl,
                                     username: postdata.trainer.name,
                                     postimg: postdata.post.imageUrl,
