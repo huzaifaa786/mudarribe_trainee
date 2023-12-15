@@ -37,7 +37,7 @@ class UiUtilites {
     );
   }
 
-  static successAlert(context,) {
+  static successAlert(context,title) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -86,7 +86,7 @@ class UiUtilites {
                       height: 50, width: 50),
                   Gap(10),
                   Text(
-                    "Changes Are Saved!",
+                    title,
                     style: const TextStyle(
                       fontFamily: "Montserrat",
                       fontSize: 12,

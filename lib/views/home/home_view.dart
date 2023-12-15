@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_full_hex_values_for_flutter_colors
 
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -301,8 +299,10 @@ class _HomeViewState extends State<HomeView> {
                           final eventData =
                               documentSnapshot.data() as Map<String, dynamic>;
                           final trainerId = eventData['trainerId'];
-                          return FutureBuilder<Trainer>(
-                            future: HomeApi.fetchTrainerData(trainerId),
+                          Events events = Events.fromMap(eventData);
+                          return FutureBuilder<CombinedEventData>(
+                            future: HomeApi.fetchCombineEventData(
+                                trainerId, events),
                             builder: (context, snapshot) {
                               if (snapshot.hasError) {
                                 return Text('');
@@ -310,11 +310,9 @@ class _HomeViewState extends State<HomeView> {
                               if (!snapshot.hasData) {
                                 return Text('');
                               }
-                              Trainer trainerData = snapshot.data!;
-                              Events events = Events.fromMap(eventData);
-                              CombinedEventData combineEvent =
-                                  CombinedEventData(
-                                      trainer: trainerData, event: events);
+
+                              CombinedEventData combineEvent = snapshot.data!;
+
                               return FutureBuilder<QuerySnapshot>(
                                   future: FirebaseFirestore.instance
                                       .collection('savedEvent')
@@ -348,6 +346,7 @@ class _HomeViewState extends State<HomeView> {
                                         capcity: combineEvent.event.capacity,
                                         price: combineEvent.event.price,
                                         isSaved: saved,
+                                        eventId: combineEvent.event.eventId,
                                         onSave: () {
                                           setState(() {
                                             saved = !saved;

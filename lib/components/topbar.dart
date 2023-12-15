@@ -14,7 +14,7 @@ class TopBar extends StatelessWidget {
       child: Row(
         children: [
           GestureDetector(
-            onTap: (){
+            onTap: () {
               Get.back();
             },
             child: SvgPicture.asset(
@@ -28,8 +28,8 @@ class TopBar extends StatelessWidget {
               style: const TextStyle(
                 color: Colors.white,
                 fontFamily: "Poppins",
-fontSize: 20,
-fontWeight: FontWeight.w700,
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
               ))
         ],
       ),

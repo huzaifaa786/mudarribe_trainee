@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
+import 'package:mudarribe_trainee/api/attenddee_api.dart';
+import 'package:mudarribe_trainee/models/event.dart';
+import 'package:mudarribe_trainee/models/event_data_combined.dart';
+import 'package:mudarribe_trainee/models/event_other_data.dart';
 import 'package:mudarribe_trainee/models/trainer.dart';
 import 'package:mudarribe_trainee/models/trainer_story.dart';
 
@@ -21,6 +25,21 @@ class HomeApi {
 
     final trainerData = trainerSnapshot.data() as Map<String, dynamic>;
     return Trainer.fromMap(trainerData);
+  }
+    static Future<CombinedEventData> fetchCombineEventData(
+      String trainerId, Events event) async {
+    final attendeeApi = AttendeeApi();
+    final trainerSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(trainerId)
+        .get();
+
+    final trainerData = trainerSnapshot.data() as Map<String, dynamic>;
+    Trainer trainer = Trainer.fromMap(trainerData);
+    EventOtherData eventOtherData =
+        await attendeeApi.geteventAttendees(event.eventId);
+    return CombinedEventData(
+        trainer: trainer, event: event, eventOtherData: eventOtherData);
   }
 
   static Future<TrainerStory?> fetchTrainerStoryData(String trainerId) async {
