@@ -1,35 +1,38 @@
-// ignore_for_file: unused_field
+// ignore_for_file: unused_field, constant_identifier_names
 import 'package:get/get.dart';
 
 enum Languages {
+  English,
   Italian,
   French,
-  English,
   Arabic,
   German,
   Spanish,
 }
 
-enum Gender {
-  Male,
-  Female
+enum Gender { male, female }
+
+enum Categories {
+  body_Building,
+  Yoga,
+  Boxing,
+  Basketball,
+  Fitness,
+  Tennis,
+  Swimming,
+  medical_Fitness,
+  Lifting,
 }
 
 class HomeController extends GetxController {
   static HomeController instance = Get.find();
   late int activeMeterIndex;
-  // bool show = false;
   // Input Toggle button function
   bool showAllCards = false;
   showAllCategory() {
     showAllCards = !showAllCards;
     update();
   }
-
-  // ontap() {
-    // show = !show;
-  //   update();
-  // }
 
   List<Map<String, String>> cards = [
     {
@@ -110,6 +113,16 @@ class HomeController extends GetxController {
       'beginX': '0.95',
       'beginY': '-0.32',
       'endX': '-0.95',
+      'endY': '0.32'
+    },
+    {
+      'title': 'Lifting',
+      'image': 'assets/images/tumble.png',
+      'firstColor': '0xFF9113DE',
+      'secondColor': '0xFFFF9541',
+      'beginX': '0.5',
+      'beginY': '-0.32',
+      'endX': '-0.5',
       'endY': '0.32'
     },
   ];

@@ -14,7 +14,7 @@ class ChatApi {
         Map<String, dynamic> companyData =
             userSnapshot.data() as Map<String, dynamic>;
         companyData['trainerId'] = document['trainerId'];
-        companyData['seen'] = document['trainerSeen'];
+        companyData['seen'] = document['userSeen'];
         companyData['time'] = document['timestamp'];
         companyDataWithID.add(companyData);
       }
@@ -27,6 +27,4 @@ class ChatApi {
       .where('userId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
       .orderBy('timestamp', descending: true)
       .snapshots();
-
-      
 }

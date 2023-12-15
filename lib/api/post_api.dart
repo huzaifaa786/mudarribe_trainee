@@ -48,10 +48,10 @@ class HomeApi {
         .where('trainerId', isEqualTo: trainerId)
         .limit(1)
         .get();
-
-    if (storySnapshot.docs.length != 0) {
+    if (storySnapshot.docs.isNotEmpty) {
       final storyData = storySnapshot.docs[0];
 
+      print(storyData);
       return TrainerStory.fromJson(storyData.data() as Map<String, dynamic>);
     }
   }

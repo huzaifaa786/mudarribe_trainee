@@ -26,6 +26,7 @@ import 'package:mudarribe_trainee/models/trainer_story.dart';
 import 'package:mudarribe_trainee/routes/app_routes.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 import 'package:mudarribe_trainee/utils/fontWeight.dart';
+import 'package:mudarribe_trainee/views/categories/categories_result_view.dart';
 import 'package:mudarribe_trainee/views/home/home_controller.dart';
 
 class HomeView extends StatefulWidget {
@@ -36,9 +37,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  Languages _selectedOption = Languages.Italian;
-  Gender gender = Gender.Male;
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -57,7 +55,11 @@ class _HomeViewState extends State<HomeView> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SearchInput(),
+                        SearchInput(
+                          ontap: () {
+                            Get.toNamed(AppRoutes.search);
+                          },
+                        ),
                         // InkWell(
                         //     onTap: () {
                         //       controller.ontap();
@@ -84,17 +86,18 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 12),
-                      constraints: BoxConstraints(maxHeight: 100, minHeight: 0),
+                      constraints: BoxConstraints(minHeight: 0, maxHeight: 100),
                       child: FirestorePagination(
                         shrinkWrap: true,
                         isLive: true,
                         limit: 6,
-                        onEmpty: Text(''),
+                        onEmpty: Text('', style: TextStyle(color: white)),
                         viewType: ViewType.list,
                         physics: BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
                         query: HomeApi.trainerquery,
-                        bottomLoader: CircularProgressIndicator(),
+                        bottomLoader:
+                            Center(child: CircularProgressIndicator()),
                         itemBuilder: (context, documentSnapshot, index) {
                           final trainerData =
                               documentSnapshot.data() as Map<String, dynamic>;
@@ -238,17 +241,24 @@ class _HomeViewState extends State<HomeView> {
                         mainAxisSpacing: 8.0,
                       ),
                       itemBuilder: (context, index) {
-                        return CategoryCard(
-                          title: controller.cards[index]['title'],
-                          image: controller.cards[index]['image'],
-                          firstColor: Color(int.parse(
-                              controller.cards[index]['firstColor']!)),
-                          secondColor: Color(int.parse(
-                              controller.cards[index]['secondColor']!)),
-                          beginX: controller.cards[index]['beginX'],
-                          beginY: controller.cards[index]['beginY'],
-                          endX: controller.cards[index]['endX'],
-                          endY: controller.cards[index]['endY'],
+                        return GestureDetector(
+                          onTap: () {
+                            Get.toNamed(AppRoutes.catigories,
+                                arguments: MyArguments(
+                                    controller.cards[index]['title']!));
+                          },
+                          child: CategoryCard(
+                            title: controller.cards[index]['title'],
+                            image: controller.cards[index]['image'],
+                            firstColor: Color(int.parse(
+                                controller.cards[index]['firstColor']!)),
+                            secondColor: Color(int.parse(
+                                controller.cards[index]['secondColor']!)),
+                            beginX: controller.cards[index]['beginX'],
+                            beginY: controller.cards[index]['beginY'],
+                            endX: controller.cards[index]['endX'],
+                            endY: controller.cards[index]['endY'],
+                          ),
                         );
                       },
                     ),
@@ -469,141 +479,8 @@ class _HomeViewState extends State<HomeView> {
               ],
             ),
           ),
-          // controller.show == true
-          //     ? Positioned(
-          //         top: 65,
-          //         right: 20,
-          //         child: BackdropFilter(
-          //           filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 6.0),
-          //           child: Container(
-          //             decoration: BoxDecoration(
-          //                 color: Colors.black87,
-          //                 borderRadius: BorderRadius.circular(15)),
-          //             child: Container(
-          //               padding: EdgeInsets.all(15),
-          //               width: 200,
-          //               color: Colors.transparent,
-          //               child: Column(
-          //                 crossAxisAlignment: CrossAxisAlignment.start,
-          //                 children: [
-          //                   Text(
-          //                     'Languages',
-          //                     style: TextStyle(
-          //                         fontSize: 16,
-          //                         fontWeight: FontWeight.w600,
-          //                         color: white),
-          //                   ),
-          //                   Column(
-          //                       crossAxisAlignment:
-          //                           CrossAxisAlignment.start,
-          //                       children: _buildRadioButtons()),
-          //                   Text(
-          //                     'Gender',
-          //                     style: TextStyle(
-          //                         fontSize: 16,
-          //                         fontWeight: FontWeight.w600,
-          //                         color: white),
-          //                   ),
-          //                   Column(
-          //                       crossAxisAlignment:
-          //                           CrossAxisAlignment.start,
-          //                       children: _buildGenderButtons()),
-          //                   Align(
-          //                     alignment: Alignment.centerRight,
-          //                     child: GradientButton(
-          //                       title: 'Search',
-          //                       onPressed: () {},
-          //                       selected: true,
-          //                       buttonwidth: 0.3,
-          //                       buttonHeight: 40.0,
-          //                     ),
-          //                   )
-          //                 ],
-          //               ),
-          //             ),
-          //           ),
-          //         ))
-          //     : Container()
-          //   ],
-          // ),
         ),
       )),
     );
-  }
-
-  List<Widget> _buildRadioButtons() {
-    List<Widget> radioButtons = [];
-    for (Languages option in Languages.values) {
-      radioButtons.add(
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Transform.scale(
-                scale: 1.2,
-                child: Radio(
-                  value: option,
-                  groupValue: _selectedOption,
-                  fillColor:
-                      MaterialStateColor.resolveWith((states) => borderDown),
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedOption = value!;
-                    });
-                  },
-                )),
-            Text(
-              option.toString().split('.').last,
-              style: TextStyle(
-                  fontFamily: "Poppins",
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: white),
-            ),
-            Text(
-              '',
-            ),
-          ],
-        ),
-      );
-    }
-    return radioButtons;
-  }
-
-  List<Widget> _buildGenderButtons() {
-    List<Widget> radioButtons = [];
-    for (Gender option in Gender.values) {
-      radioButtons.add(
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Transform.scale(
-                scale: 1.2,
-                child: Radio(
-                  value: option,
-                  groupValue: gender,
-                  fillColor:
-                      MaterialStateColor.resolveWith((states) => borderDown),
-                  onChanged: (value) {
-                    setState(() {
-                      gender = value!;
-                    });
-                  },
-                )),
-            Text(
-              option.toString().split('.').last,
-              style: TextStyle(
-                  fontFamily: "Poppins",
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: white),
-            ),
-            Text(
-              '',
-            ),
-          ],
-        ),
-      );
-    }
-    return radioButtons;
   }
 }
