@@ -12,6 +12,7 @@ class BasicLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) => background
       ? Material(
+        color: Colors.black,
           child: progressIndicator,
         )
       : progressIndicator;

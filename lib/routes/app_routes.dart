@@ -26,5 +26,6 @@ class AppRoutes {
   static const plans = '/plans';
   static const reports = '/reports';
   static const stories = '/stories';
+  static const search = '/search';
 
 }

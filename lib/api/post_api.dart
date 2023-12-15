@@ -24,17 +24,18 @@ class HomeApi {
     return Trainer.fromMap(trainerData);
   }
 
-  static Future<TrainerStory> fetchTrainerStoryData(
-      String trainerId) async {
+  static Future<TrainerStory?> fetchTrainerStoryData(String trainerId) async {
     final storySnapshot = await FirebaseFirestore.instance
         .collection('trainer_stories')
         .where('trainerId', isEqualTo: trainerId)
         .limit(1)
         .get();
-    final storyData = storySnapshot.docs[0];
-    
+    if (storySnapshot.docs.isNotEmpty) {
+      final storyData = storySnapshot.docs[0];
 
-    return TrainerStory.fromJson(storyData.data() as Map<String, dynamic>);
+      print(storyData);
+      return TrainerStory.fromJson(storyData.data() as Map<String, dynamic>);
+    }
   }
 
   static var eventquery = FirebaseFirestore.instance

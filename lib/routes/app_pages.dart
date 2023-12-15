@@ -13,6 +13,7 @@ import 'package:mudarribe_trainee/views/authentication/signin/signin_binding.dar
 import 'package:mudarribe_trainee/views/authentication/signin/signin_view.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_binding.dart';
 import 'package:mudarribe_trainee/views/authentication/signup/signup_view.dart';
+import 'package:mudarribe_trainee/views/categories/categories_binding.dart';
 import 'package:mudarribe_trainee/views/categories/categories_result_view.dart';
 import 'package:mudarribe_trainee/views/events/eventsdetail/eventsDetail_view.dart';
 import 'package:mudarribe_trainee/views/exesrcontent/exercises.dart';
@@ -22,6 +23,8 @@ import 'package:mudarribe_trainee/views/home/home_binding.dart';
 import 'package:mudarribe_trainee/views/home/home_view.dart';
 import 'package:mudarribe_trainee/views/footer/footer_view.dart';
 import 'package:mudarribe_trainee/views/onboardings/onboarding_view.dart';
+import 'package:mudarribe_trainee/views/search_trainer/search_trainer.dart';
+import 'package:mudarribe_trainee/views/search_trainer/search_trianer_controller.dart';
 import 'package:mudarribe_trainee/views/splash/splash_binding.dart';
 import 'package:mudarribe_trainee/views/splash/splash_view.dart';
 import 'package:mudarribe_trainee/views/story/story_binding.dart';
@@ -71,7 +74,8 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.catigories,
-      page: () => const CategoriesResultView(),
+      page: () => CategoriesResultView(),
+      binding: CategoriesBinding(),
     ),
     GetPage(
       name: AppRoutes.trainerprofile,
@@ -147,6 +151,11 @@ class AppPages {
       name: AppRoutes.nutritionplan,
       page: () => const NutritionplanView(),
       binding: NutritionplanBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.search,
+      page: () => const SerachView(),
+      binding: SearchBinding(),
     ),
      GetPage(
       name: AppRoutes.videoplay,
