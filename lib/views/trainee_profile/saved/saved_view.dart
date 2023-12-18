@@ -173,6 +173,7 @@ class _SavedViewsState extends State<SavedViews> {
                                             bool saved =
                                                 docs.isNotEmpty ? true : false;
                                             return EventDetailsCard(
+                                              eventId: combineEvent.event.eventId,
                                               category: combineEvent
                                                   .trainer.category
                                                   .join(' & '),

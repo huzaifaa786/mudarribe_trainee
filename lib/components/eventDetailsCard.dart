@@ -21,6 +21,7 @@ class EventDetailsCard extends StatelessWidget {
       this.price,
       this.startTime,
       this.category,
+      this.eventId,
       this.name,
       this.eventimg,
       this.isSaved,
@@ -37,6 +38,7 @@ class EventDetailsCard extends StatelessWidget {
   final eventimg;
   final isSaved;
   final onSave;
+  final eventId;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -241,7 +243,8 @@ class EventDetailsCard extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Get.toNamed(AppRoutes.eventcheckout);
+                            Get.toNamed(AppRoutes.eventcheckout,
+                                arguments: eventId);
                           },
                           child: GradientText1(
                             text: 'Join Event',

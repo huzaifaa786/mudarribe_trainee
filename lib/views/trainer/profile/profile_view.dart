@@ -393,8 +393,10 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                                   final eventData = documentSnapshot.data()
                                       as Map<String, dynamic>;
                                   final trainerId = eventData['trainerId'];
-                                  return FutureBuilder<Trainer>(
-                                    future: HomeApi.fetchTrainerData(trainerId),
+                                  Events events = Events.fromMap(eventData);
+                                  return FutureBuilder<CombinedEventData>(
+                                    future: HomeApi.fetchCombineEventData(
+                                        trainerId, events),
                                     builder: (context, snapshot) {
                                       if (snapshot.hasError) {
                                         return Text('');
@@ -402,12 +404,9 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                                       if (!snapshot.hasData) {
                                         return Text('');
                                       }
-                                      Trainer trainerData = snapshot.data!;
-                                      Events events = Events.fromMap(eventData);
+
                                       CombinedEventData combineEvent =
-                                          CombinedEventData(
-                                              trainer: trainerData,
-                                              event: events);
+                                          snapshot.data!;
                                       return FutureBuilder<QuerySnapshot>(
                                           future: FirebaseFirestore.instance
                                               .collection('savedEvent')
@@ -431,6 +430,8 @@ class _TrainerprofileViewState extends State<TrainerprofileView> {
                                                   : false;
 
                                               return EventDetailsCard(
+                                                eventId:
+                                                    combineEvent.event.eventId,
                                                 category: combineEvent
                                                     .trainer.category
                                                     .join(' & '),

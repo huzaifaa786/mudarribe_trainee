@@ -5,8 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 import 'package:mudarribe_trainee/views/Myplans/myplans_view.dart';
+import 'package:mudarribe_trainee/views/events/allevents/allevents_view.dart';
 import 'dart:ui' as ui;
-
 import 'package:mudarribe_trainee/views/home/home_view.dart';
 import 'package:mudarribe_trainee/views/trainee_profile/profile/profile_view.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
@@ -23,11 +23,11 @@ class _FooterViewState extends State<FooterView> with RouteAware {
   int _navigationMenuIndex = 0;
   @override
   Widget build(BuildContext context) {
-    // ignore: no_leading_underscores_for_local_identifiers
+   
     var _fragments = [
       const HomeView(),
       const MyplansView(),
-      const HomeView(),
+      const AllEventsView(),
       const TraineeProfileView(),
     ];
     return Directionality(
