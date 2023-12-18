@@ -1,11 +1,17 @@
-// ignore_for_file: prefer_final_fields, sort_child_properties_last, prefer_const_constructors, avoid_unnecessary_containers, prefer_is_empty, prefer_interpolation_to_compose_strings, avoid_print
+// ignore_for_file: prefer_final_fields, sort_child_properties_last, prefer_const_constructors, avoid_unnecessary_containers, prefer_is_empty, prefer_interpolation_to_compose_strings, avoid_print, prefer_const_literals_to_create_immutables
 
 import 'dart:async';
 import 'dart:io';
+import 'package:mudarribe_trainee/views/chat/chat_plan_card.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:mudarribe_trainee/views/chat/full_photo_page.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -15,6 +21,7 @@ import 'package:mudarribe_trainee/models/message_chat.dart';
 import 'package:mudarribe_trainee/utils/colors.dart';
 import 'package:mudarribe_trainee/views/chat/constants.dart';
 import 'package:mudarribe_trainee/views/chat/controller.dart';
+import 'package:mudarribe_trainee/views/chat/pdf_view.dart';
 import 'package:provider/provider.dart';
 import 'dart:ui' as ui;
 import 'widgets.dart';
@@ -38,6 +45,7 @@ class ChatPageState extends State<ChatPage> {
   String groupChatId = "";
 
   File? imageFile;
+  File? pdfFile;
   bool isLoading = false;
   bool isShowSticker = false;
   String imageUrl = "";
@@ -155,6 +163,44 @@ class ChatPageState extends State<ChatPage> {
         });
         uploadFile();
       }
+    }
+  }
+
+  Future getPdf() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
+    print(result);
+    if (result != null) {
+      List<File> pickedFiles = result.paths.map((path) => File(path!)).toList();
+      if (pickedFiles.isNotEmpty) {
+        pdfFile = pickedFiles.first;
+        String? fileName = result.files.first.name;
+        setState(() {
+          isLoading = true;
+        });
+        uploadPdf(pdfFile!, fileName);
+        // Process your PDF file (e.g., uploadFile(pdfFile))
+      }
+    }
+  }
+
+  Future uploadPdf(File pdfFile, String fileName) async {
+    UploadTask uploadTask = chatProvider.uploadPdf(pdfFile, fileName);
+    try {
+      TaskSnapshot snapshot = await uploadTask;
+      String pdfUrl = await snapshot.ref.getDownloadURL();
+      print(pdfUrl);
+      setState(() {
+        isLoading = false;
+        onSendMessage(pdfUrl, TypeMessage.document);
+      });
+    } on FirebaseException catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print(e);
     }
   }
 
@@ -278,14 +324,14 @@ class ChatPageState extends State<ChatPage> {
                                 clipBehavior: Clip.hardEdge,
                               ),
                               onPressed: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => FullPhotoPage(
-                                //       url: messageChat.content,
-                                //     ),
-                                //   ),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => FullPhotoPage(
+                                      url: messageChat.content,
+                                    ),
+                                  ),
+                                );
                               },
                               style: ButtonStyle(
                                   padding:
@@ -294,7 +340,63 @@ class ChatPageState extends State<ChatPage> {
                             ),
                             margin: EdgeInsets.only(bottom: 10, right: 10),
                           )
-                        : SizedBox()
+                        : messageChat.type == TypeMessage.document
+                            ? InkWell(
+                                onTap: () {
+                                  String remotePDFpath;
+                                  createFileOfPdfUrl(messageChat.content)
+                                      .then((f) {
+                                    setState(() {
+                                      remotePDFpath = f.path;
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              PDFScreen(path: remotePDFpath),
+                                        ),
+                                      );
+                                    });
+                                  });
+                                },
+                                child: Container(
+                                  width: 250,
+                                  height: 60,
+                                  margin: EdgeInsets.only(left: 10, bottom: 10),
+                                  decoration: BoxDecoration(
+                                      color: white,
+                                      borderRadius: BorderRadius.circular(8)),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.all(8),
+                                          margin: EdgeInsets.only(
+                                              right: 4, left: 4),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(45),
+                                            gradient: LinearGradient(
+                                              begin: Alignment.topLeft,
+                                              end: Alignment.bottomRight,
+                                              colors: [borderTop, borderDown],
+                                              stops: [0.0, 1.0],
+                                            ),
+                                          ),
+                                          child: SvgPicture.asset(
+                                            'assets/images/document.svg',
+                                            fit: BoxFit.scaleDown,
+                                          )),
+                                      SizedBox(
+                                        width: 200,
+                                        child: Text(
+                                          messageChat.content,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            : SizedBox()
               ],
               mainAxisAlignment: MainAxisAlignment.end,
             ),
@@ -363,14 +465,14 @@ class ChatPageState extends State<ChatPage> {
                       ? Container(
                           child: Text(
                             messageChat.content,
-                            style: TextStyle(color: Colors.black),
+                            style: TextStyle(color: white),
                           ),
                           padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                           constraints: BoxConstraints(
                             maxWidth: 200,
                           ),
                           decoration: BoxDecoration(
-                              color: Colors.grey[300],
+                              color: bgContainer,
                               borderRadius: BorderRadius.circular(8)),
                           margin: EdgeInsets.only(left: 10),
                         )
@@ -430,13 +532,13 @@ class ChatPageState extends State<ChatPage> {
                                   clipBehavior: Clip.hardEdge,
                                 ),
                                 onPressed: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) => FullPhotoPage(
-                                  //         url: messageChat.content),
-                                  //   ),
-                                  // );
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => FullPhotoPage(
+                                          url: messageChat.content),
+                                    ),
+                                  );
                                 },
                                 style: ButtonStyle(
                                     padding:
@@ -445,7 +547,250 @@ class ChatPageState extends State<ChatPage> {
                               ),
                               margin: EdgeInsets.only(left: 10),
                             )
-                          : SizedBox()
+                          : messageChat.type == TypeMessage.document
+                              ? InkWell(
+                                  onTap: () {
+                                    String remotePDFpath;
+                                    createFileOfPdfUrl(messageChat.content)
+                                        .then((f) {
+                                      setState(() {
+                                        remotePDFpath = f.path;
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                PDFScreen(path: remotePDFpath),
+                                          ),
+                                        );
+                                      });
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 250,
+                                    height: 60,
+                                    margin:
+                                        EdgeInsets.only(left: 10, bottom: 10),
+                                    decoration: BoxDecoration(
+                                        color: bgContainer,
+                                        borderRadius: BorderRadius.circular(8)),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                            padding: EdgeInsets.all(8),
+                                            margin: EdgeInsets.only(
+                                                right: 4, left: 4),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(45),
+                                              gradient: LinearGradient(
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.bottomRight,
+                                                colors: [borderTop, borderDown],
+                                                stops: [0.0, 1.0],
+                                              ),
+                                            ),
+                                            child: SvgPicture.asset(
+                                              'assets/images/document.svg',
+                                              fit: BoxFit.scaleDown,
+                                            )),
+                                        SizedBox(
+                                          width: 200,
+                                          child: Text(
+                                            messageChat.content,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(color: white),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              : messageChat.type == TypeMessage.myplan
+                                  ? Container(
+                                      width: 250,
+                                      margin:
+                                          EdgeInsets.only(left: 10, bottom: 10),
+                                      padding: EdgeInsets.all(12),
+                                      decoration: BoxDecoration(
+                                          color: bgContainer,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 10,
+                                                height: 10,
+                                                decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    color: borderDown),
+                                              ),
+                                              Gap(12),
+                                              Text(
+                                                "Personal Plan",
+                                                style: const TextStyle(
+                                                    fontFamily: "Poppins",
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: white),
+                                              )
+                                            ],
+                                          ),
+                                          Gap(12),
+                                          Row(
+                                            children: [
+                                              Material(
+                                                child: Image.network(
+                                                  widget.arguments.peerAvatar,
+                                                  loadingBuilder:
+                                                      (BuildContext context,
+                                                          Widget child,
+                                                          ImageChunkEvent?
+                                                              loadingProgress) {
+                                                    if (loadingProgress == null)
+                                                      return child;
+                                                    return Center(
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        color: Colors.grey[300],
+                                                        value: loadingProgress
+                                                                    .expectedTotalBytes !=
+                                                                null
+                                                            ? loadingProgress
+                                                                    .cumulativeBytesLoaded /
+                                                                loadingProgress
+                                                                    .expectedTotalBytes!
+                                                            : null,
+                                                      ),
+                                                    );
+                                                  },
+                                                  errorBuilder: (context,
+                                                      object, stackTrace) {
+                                                    return Icon(
+                                                      Icons.account_circle,
+                                                      size: 35,
+                                                      color: Colors.grey[300],
+                                                    );
+                                                  },
+                                                  width: 35,
+                                                  height: 35,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(18),
+                                                ),
+                                                clipBehavior: Clip.hardEdge,
+                                              ),
+                                              Gap(12),
+                                              SizedBox(
+                                                width: 150,
+                                                child: Text(
+                                                  widget.arguments.peerNickname,
+                                                  style: const TextStyle(
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: white),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Gap(16),
+                                          Row(
+                                            children: [
+                                              ElevatedButton(
+                                                style: ButtonStyle(
+                                                  shape:
+                                                      MaterialStateProperty.all<
+                                                          RoundedRectangleBorder>(
+                                                    RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5.0)),
+                                                  ),
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all<
+                                                              Color>(
+                                                          Colors.transparent),
+                                                  minimumSize:
+                                                      MaterialStateProperty.all(
+                                                          Size(100, 30)),
+                                                ),
+                                                onPressed: () {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return Dialog(
+                                                        child: ChatPlanPopUpCard(
+                                                            img: widget
+                                                                .arguments
+                                                                .peerAvatar,
+                                                            name: widget
+                                                                .arguments
+                                                                .peerNickname,
+                                                            price: messageChat
+                                                                .content
+                                                                .split("~~")[1]
+                                                                .split(":")[1],
+                                                            title: messageChat
+                                                                .content
+                                                                .split("~~")[0]
+                                                                .split(":")[1],
+                                                            category: messageChat
+                                                                .content
+                                                                .split("~~")[2]
+                                                                .split(":")[1]),
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                                child: Text(
+                                                  'View Plan',
+                                                  style: TextStyle(
+                                                    fontFamily: "Poppins",
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: white,
+                                                  ),
+                                                ),
+                                              ),
+                                              ElevatedButton(
+                                                style: ButtonStyle(
+                                                  shape:
+                                                      MaterialStateProperty.all<
+                                                          RoundedRectangleBorder>(
+                                                    RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5.0)),
+                                                  ),
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all<
+                                                          Color>(borderDown),
+                                                  minimumSize:
+                                                      MaterialStateProperty.all(
+                                                          Size(100, 30)),
+                                                ),
+                                                onPressed: () {},
+                                                child: Text(
+                                                  'Checkout',
+                                                  style: TextStyle(
+                                                    fontFamily: "Poppins",
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: white,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  : SizedBox()
                 ],
               ),
 
@@ -598,7 +943,10 @@ class ChatPageState extends State<ChatPage> {
             child: Container(
               child: IconButton(
                 icon: Icon(Icons.more_vert),
-                onPressed: getImage,
+                // onPressed: getImage,
+                onPressed: () {
+                  _showBottomSheet(context);
+                },
                 color: white,
               ),
             ),
@@ -625,14 +973,25 @@ class ChatPageState extends State<ChatPage> {
 
           // Button send message
           Material(
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 8),
-              child: IconButton(
-                icon: Icon(Icons.send),
-                onPressed: () =>
-                    onSendMessage(textEditingController.text, TypeMessage.text),
-                color: borderDown,
-              ),
+            child: InkWell(
+              onTap: () =>
+                  onSendMessage(textEditingController.text, TypeMessage.text),
+              child: Container(
+                  padding: EdgeInsets.all(8),
+                  margin: EdgeInsets.only(right: 8, left: 8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(45),
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [borderTop, borderDown],
+                      stops: [0.0, 1.0],
+                    ),
+                  ),
+                  child: SvgPicture.asset(
+                    'assets/images/send.svg',
+                    fit: BoxFit.scaleDown,
+                  )),
             ),
             color: Colors.black,
           ),
@@ -684,6 +1043,122 @@ class ChatPageState extends State<ChatPage> {
               child: CircularProgressIndicator(),
             ),
     );
+  }
+
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (BuildContext builder) {
+        return Container(
+          width: double.infinity,
+          // You can customize the appearance of your bottom sheet here
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              ElevatedButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            topRight: Radius.circular(5))),
+                  ),
+                  minimumSize:
+                      MaterialStateProperty.all(Size(double.infinity, 50)),
+                ),
+                onPressed: getImage,
+                child: Text(
+                  'Photos',
+                  style: TextStyle(
+                    fontFamily: "Poppins",
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xff0f0a06),
+                  ),
+                ),
+              ),
+              Container(
+                  width: double.infinity,
+                  color: bgContainer.withOpacity(0.45),
+                  height: 0.5),
+              ElevatedButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(5),
+                            bottomRight: Radius.circular(5))),
+                  ),
+                  minimumSize:
+                      MaterialStateProperty.all(Size(double.infinity, 50)),
+                ),
+                onPressed: getPdf,
+                child: Text(
+                  'Document',
+                  style: TextStyle(
+                    fontFamily: "Poppins",
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xff0f0a06),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0)),
+                  ),
+                  minimumSize:
+                      MaterialStateProperty.all(Size(double.infinity, 50)),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(
+                    fontFamily: "Poppins",
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xff0f0a06),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future<File> createFileOfPdfUrl(pdf) async {
+    Completer<File> completer = Completer();
+    print("Start download file from internet!");
+    try {
+      // "https://berlin2017.droidcon.cod.newthinking.net/sites/global.droidcon.cod.newthinking.net/files/media/documents/Flutter%20-%2060FPS%20UI%20of%20the%20future%20%20-%20DroidconDE%2017.pdf";
+      // final url = "https://pdfkit.org/docs/guide.pdf";
+      final url = pdf;
+      final filename = url.substring(url.lastIndexOf("/") + 1);
+      var request = await HttpClient().getUrl(Uri.parse(url));
+      var response = await request.close();
+      var bytes = await consolidateHttpClientResponseBytes(response);
+      var dir = await getApplicationDocumentsDirectory();
+      print("Download files");
+      print("${dir.path}/$filename");
+      File file = File("${dir.path}/$filename");
+
+      await file.writeAsBytes(bytes, flush: true);
+      completer.complete(file);
+    } catch (e) {
+      throw Exception('Error parsing asset file!');
+    }
+
+    return completer.future;
   }
 }
 
